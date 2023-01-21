@@ -15,16 +15,16 @@ class User(db.Model, UserMixin):
     pm_tagline = db.Column(db.String(255))
     profile_img = db.Column(db.String(255))
     property_type = db.Column(db.String(255), nullable=False)
-    pm_rate = db.Column(db.Integer(2))
+    pm_rate = db.Column(db.Integer)
     phone_number = db.Column(db.String(10), unique=True)
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(2), nullable=False)
     zipcode = db.Column(db.String(5), nullable=False)
-    avg_rating = db.Column(db.Decimal(10,2))
+    avg_rating = db.Column(db.String(3))
     hashed_password = db.Column(db.String(255), nullable=False)
 
 #relationships
-    user_reviews = db.relationship(db.Review, back_populates="user", cascade='all,delete')
+    user_reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
 
 
 

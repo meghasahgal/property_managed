@@ -1,0 +1,85 @@
+const store = {
+	session: {
+		user: {
+			id: 1,
+			username: "Demo",
+			email: "demo@aa.io",
+			pm_tagline: "Best Property Manager Ever!",
+			profile_img: "www.property2.com",
+			property_type: "Residential",
+			phone_number: "5102998877",
+			city: "Newark",
+            state: "CA",
+			avgRating: 4.8,
+			zipcode: "94560",
+		},
+	},
+	users: {
+		1: {
+			id: 1,
+			username: "Demo",
+			email: "demo@aa.io",
+			pm_tagline: "Best Property Manager Ever!",
+			profile_img: "www.property2.com",
+			property_type: "Residential",
+			phone_number: 5102998877,
+			location: "Newark, CA",
+			avgRating: 4.8,
+			zipcode: "94560",
+		},
+	},
+	reviews: {
+		1: {
+			id: 1,
+			user_id: 1,
+			review_body: "Great and attentive service!",
+			stars: 4.8,
+		},
+	},
+
+	messages: {
+		1: {
+			sender_id: 1,
+			recipient_id: 2,
+			message_body: "Hello! How are you?",
+			created_at: "2015-02-10 11:40:20",
+			updated_at: "2015-02-10 11:40:20",
+		},
+		2: {
+			sender_id: 2,
+			recipient_id: 1,
+			message_body: "Doing well, thank you!",
+			created_at: "2015-02-10 11:41:20",
+			updated_at: "2015-02-10 11:42:20",
+		},
+	},
+
+    leads:{
+        1:{
+            user_id: 1,
+            quantity: 2,
+            price: 1.99,
+        },
+
+    },
+
+    serious_inquiries:{
+        1:{
+            user_id: 1,
+            lead_id: 1
+        }
+    },
+
+    payments:{
+        1: {
+            user_id: 1,
+            first_name: "Mister",
+            last_name: "Wonderful",
+            payment_type: "Credit Card",
+            provider: "Visa",
+            account_number: "1111222233334444",
+            expiration: "122424"
+        }
+    }
+
+};

@@ -23,6 +23,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
 #relationships
+    user_reviews = db.relationship(db.Review, back_populates="user", cascade='all,delete')
+
 
 
     @property
@@ -40,5 +42,29 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'pmTagline': self.pm_tagline,
+            'profileImg': self.profile_img,
+            'propertyType': self.property_type,
+            'phoneNumber': self.phone_number,
+            'city': self.city,
+            'state': self.state,
+            'zipcode': self.zipcode,
+            'avgRating': self.avg_rating,
+            'reviews':[review.to_dict_basic() for review in self.user_reviews],
+            # 'orders': [order.to_dict_basic() for order in self.user_orders],
+            # 'creditCards': [payment.to_dict_basic() for payment in self.user_credit_cards],
+        }
+
+    def to_dict_basic(self):
+        return {
+            'username': self.username,
+            'email': self.email,
+            'category': self.category,
+            'phoneNumber': self.phone_number,
+            'profileImg': self.profile_img,
+            'city': self.city,
+            'state': self.state,
+            'avgRating': self.avg_rating
+
         }

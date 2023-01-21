@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     pm_tagline = db.Column(db.String(255))
     profile_img = db.Column(db.String(255))
     property_type = db.Column(db.String(255), nullable=False)
+    pm_rate = db.Column(db.Integer(2))
     phone_number = db.Column(db.String(10), unique=True)
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(2), nullable=False)

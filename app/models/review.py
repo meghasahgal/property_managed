@@ -9,6 +9,7 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    reviewer_id = db.Column(db.Integer, nullable=False) #need to join on something here
     stars = db.Column(db.String(10), nullable=False)
     review_body = db.Column(db.String(255), nullable=False)
 
@@ -24,6 +25,7 @@ def to_dict(self):
             'stars': self.stars,
             'reviewBody': self.review_body,
             'userId': self.user_id,
+            'reviewerId': self.reviewer_id,
             'user': self.user.to_dict_basic()
         }
 
@@ -32,7 +34,8 @@ def to_dict_basic(self):
             'stars': self.stars,
             'reviewBody': self.review_body,
             'userId': self.user_id,
+            'reviewerId': self.reviewer_id,
         }
 
 def __repr__(self):
-        return f"<User id: {self.id}, description: {self.description}, user_id: {self.user_id}>"
+        return f"<Review id: {self.id}, reviewBody: {self.review_body}, user_id: {self.user_id}>"

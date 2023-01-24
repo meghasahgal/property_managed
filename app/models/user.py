@@ -24,9 +24,10 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
 #relationships
-    user_reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
-
-
+    reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
+    # leads = db.relationship('Lead', back_populates="user_leads", cascade='all,delete')
+    recipients = db.relationship('Message',foreign_keys='Message.sender_id', back_populates="sender")
+    senders = db.relationship('Message',foreign_keys='Message.recipient_id', back_populates="recipient")
 
     @property
     def password(self):
@@ -52,7 +53,8 @@ class User(db.Model, UserMixin):
             'state': self.state,
             'zipcode': self.zipcode,
             'avgRating': self.avg_rating,
-            'reviews':[review.to_dict_basic() for review in self.user_reviews],
+            'reviews':[review.to_dict_basic() for review in self.reviews],
+            # 'leads': [lead.to_dict_basic() for lead in self.leads]
             # 'orders': [order.to_dict_basic() for order in self.user_orders],
             # 'creditCards': [payment.to_dict_basic() for payment in self.user_credit_cards],
         }

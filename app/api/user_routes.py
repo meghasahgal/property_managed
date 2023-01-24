@@ -23,3 +23,13 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+
+# User profiles can be retrieved
+# GET api/users
+# User can create their profile based on user id
+# POST api/users
+# Logged in user can edit their profile based on user id
+# PUT api/users/:id
+# Logged in user can delete their profile based on user id
+# DELETE api/users/:id

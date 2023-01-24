@@ -14,28 +14,29 @@ class Review(db.Model):
     review_body = db.Column(db.String(255), nullable=False)
 
 #relationships
-    user = db.relationship('User', back_populates='user_reviews')
+    user = db.relationship('User', back_populates='reviews')
 
 
 #normalization
 
-def to_dict(self):
-        return {
-            'id': self.id,
-            'stars': self.stars,
-            'reviewBody': self.review_body,
-            'userId': self.user_id,
-            'reviewerId': self.reviewer_id,
-            'user': self.user.to_dict_basic()
-        }
+    def to_dict(self):
+            return {
+                'id': self.id,
+                'stars': self.stars,
+                'reviewBody': self.review_body,
+                'userId': self.user_id,
+                'reviewerId': self.reviewer_id,
+                'user': self.user.to_dict_basic()
+            }
 
-def to_dict_basic(self):
-        return {
-            'stars': self.stars,
-            'reviewBody': self.review_body,
-            'userId': self.user_id,
-            'reviewerId': self.reviewer_id,
-        }
+    def to_dict_basic(self):
+            return {
+                'stars': self.stars,
+                'reviewBody': self.review_body,
+                'userId': self.user_id,
+                'reviewerId': self.reviewer_id,
 
-def __repr__(self):
-        return f"<Review id: {self.id}, reviewBody: {self.review_body}, user_id: {self.user_id}>"
+            }
+
+    def __repr__(self):
+            return f"<Review id: {self.id}, reviewBody: {self.review_body}, user_id: {self.user_id}>"

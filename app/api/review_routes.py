@@ -29,7 +29,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 # User can update a review that they created
 # PUT api/reviews/:id
-@review_routes.route('<int:id>')
+@review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_review(id):
     review = Review.query.get(id)

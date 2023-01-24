@@ -11,8 +11,8 @@ class Message(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     message_body = db.Column(db.String(255))
-    created_at = db.Column(db.Date, nullable=False)
-    updated_at = db.Column(db.Date)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime)
 
 #relationships
     sender = db.relationship("User", foreign_keys=[sender_id], back_populates='recipients')

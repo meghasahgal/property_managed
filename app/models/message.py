@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from datetime import datetime
 
 class Message(db.Model):
     __tablename__ = 'messages'
@@ -11,8 +11,8 @@ class Message(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     message_body = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime, nullable=False)
-    updated_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
 #relationships
     sender = db.relationship("User", foreign_keys=[sender_id], back_populates='recipients')

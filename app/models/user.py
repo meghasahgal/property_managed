@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     pm_tagline = db.Column(db.String(255))
+    is_pm = db.Column(db.Boolean, nullable=False, default=False)
     profile_img = db.Column(db.String(255))
     property_type = db.Column(db.String(255), nullable=False)
     pm_rate = db.Column(db.Integer)
@@ -46,6 +47,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'pmTagline': self.pm_tagline,
+            'isPm': self.is_pm,
             'profileImg': self.profile_img,
             'propertyType': self.property_type,
             'phoneNumber': self.phone_number,
@@ -65,11 +67,11 @@ class User(db.Model, UserMixin):
         return {
             'username': self.username,
             'email': self.email,
-            'category': self.category,
             'phoneNumber': self.phone_number,
             'profileImg': self.profile_img,
+            'isPm': self.is_pm,
             'city': self.city,
             'state': self.state,
-            'avgRating': self.avg_rating
+            'avgRating': self.avg_rating,
 
         }

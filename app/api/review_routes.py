@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Review, db
 from app.forms import ReviewForm
@@ -28,7 +28,7 @@ def validation_errors_to_error_messages(validation_errors):
 #     return {'reviews': [review.to_dict() for review in reviews]}
 
 # User can update a review that they created
-# PUT api/reviews/:id
+# PUT api/reviews/:id - works
 @review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_review(id):
@@ -38,7 +38,7 @@ def update_review(id):
     if form.data["reviewer_id"] != current_user.id:
         return {'error': "You are not authorized to edit this product"}, 401
 
-    # form['csrf_token'].data = request.cookies['csrf_token']
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         form.populate_obj(review)
         db.session.commit()
@@ -48,7 +48,7 @@ def update_review(id):
 
 
 # User can delete a review that they posted
-# DELETE api/reviews/:id
+# DELETE api/reviews/:id - works
 @review_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_review(id):

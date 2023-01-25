@@ -18,14 +18,14 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # GET all users
-@user_routes.route('/')
-@login_required
-def users():
-    """
-    Query for all users and returns them in a list of user dictionaries
-    """
-    users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+# @user_routes.route('/')
+# @login_required
+# def users():
+#     """
+#     Query for all users and returns them in a list of user dictionaries
+#     """
+#     users = User.query.all()
+#     return {'users': [user.to_dict() for user in users]}
 
 # GET user by ID
 @user_routes.route('/<int:id>')
@@ -38,13 +38,23 @@ def user(id):
     return user.to_dict()
 
 
-# User profiles can be retrieved
+# User property manager profiles can be retrieved
 # GET api/users
+
+@user_routes.route('/')
+@login_required
+def users():
+    """
+    Query for all users and returns them in a list of user dictionaries
+    """
+    users = User.query.filter(User.is_pm == True).all()
+    # users = User.query.all()
+    return {'users': [user.to_dict() for user in users]}
 
 
 # User can create their profile based on user id
-# POST api/users
-@user_routes.route('/<int:id>/profile', methods=['POST'])
+# POST api/users/:id/profile
+@user_routes.route('/<int:id>', methods=['POST'])
 @login_required
 def create_profile():
     form = ProfileForm()
@@ -63,7 +73,7 @@ def create_profile():
 
 
 # Logged in user can edit their profile based on user id
-# PUT api/users/:id
+# PUT api/users/:id/profile
 @user_routes.route('/<int:id>/profile', methods=['PUT','PATCH'])
 @login_required
 def edit_profile(id):
@@ -78,7 +88,7 @@ def edit_profile(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # Logged in user can delete their profile based on user id
-# DELETE api/users/:id
+# DELETE api/users/:id/profile
 @user_routes.route('/<int:id>/profile', methods=['DELETE'])
 @login_required
 def delete_profile(id):

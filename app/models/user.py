@@ -54,6 +54,8 @@ class User(db.Model, UserMixin):
             'zipcode': self.zipcode,
             'avgRating': self.avg_rating,
             'reviews':[review.to_dict_basic() for review in self.reviews],
+            'senders':[sender.to_dict_basic() for sender in self.senders],
+            'recipients': [recipient.to_dict_basic() for recipient in self.recipients]
             # 'leads': [lead.to_dict_basic() for lead in self.leads]
             # 'orders': [order.to_dict_basic() for order in self.user_orders],
             # 'creditCards': [payment.to_dict_basic() for payment in self.user_credit_cards],

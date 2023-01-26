@@ -20,10 +20,18 @@ class Message(db.Model):
 
 
 #normalization
-def to_dict(self):
-        return {
-            'id': self.id,
-            'senderId': self.sender_id,
-            'recipientId': self.recipient_id,
-            'messageBody': self.message_body,
-        }
+    def to_dict(self):
+            return {
+                'id': self.id,
+                'senderId': self.sender_id,
+                'senders': [sender.to_dict_basic() for sender in self.senders],
+                'recipientId': self.recipient_id,
+                'messageBody': self.message_body,
+            }
+    def to_dict_basic(self):
+            return{
+                'id': self.id,
+                'senderId': self.sender_id,
+                'recipientId': self.recipient_id,
+
+            }

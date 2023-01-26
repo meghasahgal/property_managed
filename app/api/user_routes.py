@@ -28,18 +28,18 @@ def validation_errors_to_error_messages(validation_errors):
 #     return {'users': [user.to_dict() for user in users]}
 
 # GET user by ID
-@user_routes.route('/<int:id>')
-@login_required
-def user(id):
-    """
-    Query for a user by id and returns that user in a dictionary
-    """
-    user = User.query.get(id)
-    return user.to_dict()
+# @user_routes.route('/<int:id>')
+# @login_required
+# def user(id):
+#     """
+#     Query for a user by id and returns that user in a dictionary
+#     """
+#     user = User.query.get(id)
+#     return user.to_dict()
 
 
 # User property manager profiles can be retrieved
-# GET api/users
+# GET api/users - ok
 
 @user_routes.route('/')
 @login_required
@@ -53,17 +53,19 @@ def users():
 
 
 # User can create their profile based on user id
-# POST api/users/:id/profile
+# POST api/users/:id
 @user_routes.route('/<int:id>', methods=['POST'])
 @login_required
-def create_profile():
+def create_profile(id):
     form = ProfileForm()
+    # print(form, "form")
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User.query.get(id)
+        # print(user, "user")
         form.populate_obj(user)
-
+        # print(form.data, "data")
         db.session.add(user)
         db.session.commit()
         return {user.id: user.to_dict()}
@@ -89,7 +91,7 @@ def edit_profile(id):
 
 # Logged in user can delete their profile based on user id
 # DELETE api/users/:id/profile
-@user_routes.route('/<int:id>/profile', methods=['DELETE'])
+@user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_profile(id):
     user = User.query.get(id)

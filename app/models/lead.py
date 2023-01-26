@@ -16,11 +16,11 @@ class Lead(db.Model):
 # user_leads = db.relationship('User', back_populates='leads')
 
 #normalization
-def to_dict(self):
-        return {
-            'id': self.id,
-            'userId': self.user_id,
-            'quantity': self.quantity,
-            'price': self.price,
-            # 'userLeads': self.user.to_dict_basic()
-        }
+    def to_dict(self):
+            return {
+                'id': self.id,
+                'userId': self.user_id,
+                'quantity': self.quantity,
+                'price': self.price,
+                # 'userLeads': self.user.to_dict_basic()
+            }

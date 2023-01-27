@@ -62,11 +62,40 @@ export const editUserThunk = (data) => async (dispatch) => {
 	}
 };
 
+// GET A PROFILE
+
+
+// CREATE A PROFILE based on userId /<int:id>/' - ok in postman
+export const createProfileThunk = (data) => async (dispatch) => {
+	const newProfile = JSON.stringify(data);
+	const response = await fetch(`/api/users/${data.user_id}/`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data)
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(loadUsers(data));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		console.log(data, "is data is here?")
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 // EDIT a USER PROFILE
 export const editProfileThunk = (data) => async (dispatch) => {
 	const editedUser = JSON.stringify(data);
     //****need to change URL here */
-	const res = await fetch(`/api/users/profile/${data.id}`, {
+	const res = await fetch(`/api/users/${data.id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",

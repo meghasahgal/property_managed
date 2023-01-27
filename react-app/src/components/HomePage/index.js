@@ -8,9 +8,14 @@ const HomePage = () => {
 
 	const sessionUser = useSelector((state) => state.session.user);
 	// console.log(sessionUser, "session user id");
-	const allUsersArray = useSelector((state) =>
-		Object.values(state.users.users)
-	);
+
+    const allUsersArray = useSelector((state) =>{
+        if(state?.users?.users){
+		return Object.values(state?.users?.users)
+    }
+    else return undefined
+    });
+
 
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
@@ -24,7 +29,8 @@ const HomePage = () => {
 						<div>
 							<img id="user-splash-img" src={user?.profileImg} />
 						</div>
-						{user.city}, {user.state}
+						{user.city}, {user.state} {" "} {user.avgRating}
+                        {/* <div>{user.avgRating}</div> */}
 					</div>
 				) : (
 					<div></div>

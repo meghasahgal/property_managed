@@ -23,8 +23,8 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
+          <NavLink to='/users/profile' exact={true} activeClassName='active'>
+            Profile
           </NavLink>
         </li>
         <li>

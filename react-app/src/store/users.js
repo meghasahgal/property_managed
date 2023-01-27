@@ -15,7 +15,8 @@ const deleteUser = (payload) => ({
 //thunks
 // GET ALL USERS (PM's)
 export const getAllUsersThunk = () => async (dispatch) => {
-	const res = await fetch("/api/users");
+	const res = await fetch("/api/users/");
+	// const res = await fetch("/api/users");
 
 	if (res.ok) {
 		const payload = await res.json();
@@ -62,7 +63,7 @@ export const editUserThunk = (data) => async (dispatch) => {
 };
 
 // EDIT a USER PROFILE
-export const editNewUserThunk = (data) => async (dispatch) => {
+export const editProfileThunk = (data) => async (dispatch) => {
 	const editedUser = JSON.stringify(data);
     //****need to change URL here */
 	const res = await fetch(`/api/users/profile/${data.id}`, {
@@ -88,7 +89,7 @@ export const editNewUserThunk = (data) => async (dispatch) => {
 };
 
 // DELETE a PROFILE
-export const deleteReviewThunk = (data) => async (dispatch) => {
+export const deleteProfileThunk = (data) => async (dispatch) => {
 	const response = await fetch(`/api/users/${data.id}`, {
 		method: "DELETE",
 	});

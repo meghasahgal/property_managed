@@ -45,7 +45,7 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def users():
     """
-    Query for all users and returns them in a list of user dictionaries
+    Query for all users that are PMs and returns them in a list of user dictionaries
     """
     users = User.query.filter(User.is_pm == True).all()
     # users = User.query.all()

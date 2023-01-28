@@ -36,7 +36,7 @@ def update_review(id):
     form = ReviewForm()
 
     if form.data["reviewer_id"] != current_user.id:
-        return {'error': "You are not authorized to edit this product"}, 401
+        return {'error': "You are not authorized to edit this review"}, 401
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

@@ -94,7 +94,6 @@ export const createProfileThunk = (data) => async (dispatch) => {
 // EDIT a USER PROFILE
 export const editProfileThunk = (data) => async (dispatch) => {
 	const editedUser = JSON.stringify(data);
-    //****need to change URL here */
 	const res = await fetch(`/api/users/${data.id}`, {
 		method: "PUT",
 		headers: {
@@ -133,7 +132,7 @@ const userReducer = (state = {}, action) => {
 		case LOAD_USERS:
 			return { ...newState, ...action.payload };
         case DELETE_USER:
-            delete newState[action.reviewId];
+            delete newState[action.profileId];
 			return newState;
 		default:
 			return state;

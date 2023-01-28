@@ -28,14 +28,16 @@ def validation_errors_to_error_messages(validation_errors):
 #     return {'users': [user.to_dict() for user in users]}
 
 # GET user by ID
-# @user_routes.route('/<int:id>')
-# @login_required
-# def user(id):
-#     """
-#     Query for a user by id and returns that user in a dictionary
-#     """
-#     user = User.query.get(id)
-#     return user.to_dict()
+@user_routes.route('/<int:id>')
+@login_required
+def user(id):
+    """
+    Query for a user by id and returns that user in a dictionary
+    """
+    user = User.query.get(id)
+    # return user.to_dict()
+    return {user.id: user.to_dict()}
+    # print(user, "user HerE")
 
 
 # User property manager profiles can be retrieved
@@ -52,7 +54,7 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-# User can create their profile based on user id
+# User can create their profile based on user id - works
 # POST api/users/:id
 @user_routes.route('/<int:id>', methods=['POST'])
 @login_required
@@ -74,13 +76,18 @@ def create_profile(id):
 
 
 
-# Logged in user can edit their profile based on user id
+# Logged in user can edit their profile based on user id - works
 # PUT api/users/:id/profile
-@user_routes.route('/<int:id>/profile', methods=['PUT','PATCH'])
+@user_routes.route('/<int:id>', methods=['PUT','PATCH'])
 @login_required
 def edit_profile(id):
     user= User.query.get(id)
     form = ProfileForm()
+
+    if form.data["user_id"] != current_user.id:
+        # print(form.data['user_id'], "userID")
+        # print(current_user.id, "current user")
+        return {'error': "You are not authorized to edit this profile"}, 401
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -120,7 +127,7 @@ def post_review(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-# User can get all reviews on a property manager
+# User can get all reviews on a property manager - works ok
 # GET api/users/:id/reviews
 @user_routes.route('/<int:id>/reviews', methods=['GET'])
 def get_all_reviews(id):

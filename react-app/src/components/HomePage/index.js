@@ -7,7 +7,6 @@ const HomePage = () => {
 	const dispatch = useDispatch();
 
 	const sessionUser = useSelector((state) => state.session.user);
-	// console.log(sessionUser, "session user id");
 
     const allUsersArray = useSelector((state) =>{
         if(state?.users?.users){
@@ -29,8 +28,13 @@ const HomePage = () => {
 						<div>
 							<img id="user-splash-img" src={user?.profileImg} />
 						</div>
-						{user.city}, {user.state} {" "} {user.avgRating}
-                        {/* <div>{user.avgRating}</div> */}
+						<Link className="user-link" to={`/users/${user.id}`}>
+							{user.username}
+						</Link>
+                        <div>
+						{user.city}, {user.state} {user.avgRating}
+						{/* <div>{user.avgRating}</div> */}
+                        </div>
 					</div>
 				) : (
 					<div></div>

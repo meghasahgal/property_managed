@@ -15,13 +15,15 @@ def user_exists(form, field):
     # Checks if email exists
     email = field.data
     user = User.query.filter(User.email == email).first()
+    print(user, "this is the user")
     if user:
         raise ValidationError('Email address is already in use.')
 
 
 class ProfileForm(FlaskForm):
-    username=StringField('username', validators=[DataRequired(),username_exists])
-    email = StringField('email', validators=[DataRequired(),user_exists])
+    user_id = IntegerField('user_id', validators=[DataRequired()])
+    username=StringField('username', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
     pm_tagline = StringField('pm_tagline', validators=[DataRequired()])
     profile_img=StringField('profile_img', validators=[URL(require_tld=True,message="Please provide a valid url")])
     property_type=SelectField('property_type', choices=[('Residential', 'Residential'),('Commercial', 'Commercial'), ('Retail', 'Retail'), ('Industrial', 'Industrial')],validators=[DataRequired()])

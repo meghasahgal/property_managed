@@ -28,6 +28,16 @@ export const getAllReviewsThunk = () => async (dispatch) => {
 	}
 };
 
+// GET reviews for a userId
+export const getReviewsByUserIdThunk = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}/reviews`);
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(loadReviews(data));
+		return data;
+	}
+};
+
 //GET specific review by reviewId
 export const getReviewByReviewIdThunk = (reviewId) => async (dispatch) => {
 	const response = await fetch(`/api/reviews/${reviewId}`);

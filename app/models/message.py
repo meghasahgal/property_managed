@@ -8,8 +8,8 @@ class Message(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    sender_id = db.Column(db.Integer, db.ForeignKey('users.id')) #took out nullable=false
+    recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'))  #took out nullable=false
     message_body = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)

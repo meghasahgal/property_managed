@@ -63,14 +63,20 @@ const UserById = () => {
 							></div>
 						</div>
 						<div>
+							{user.id === sessionUser?.id && (
+								<button>Edit Profile</button>
+							)}
+							{user.id === sessionUser?.id && (
+								<button>Delete Profile</button>
+							)}
+						</div>
+						<div>
 							<ReviewsByUserId user={user} />
 						</div>
-
-						{user.userId === sessionUser?.id && (
-							<button>Edit Review</button>
-						)}
-						{user.userId === sessionUser?.id && (
-							<button>Delete Review</button>
+					</div>
+					<div>
+						{user.id != sessionUser?.id && (
+							<button>Chat with Me!</button>
 						)}
 					</div>
 				</div>
@@ -81,54 +87,4 @@ const UserById = () => {
 
 export default UserById;
 
-// import { useSelector, useDispatch } from "react-redux";
-// import { useHistory, useParams } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import { getSpotById, deleteSpot } from "../../store/spot";
-// import EditSpotForm from "../EditSpotForm";
-// import ReviewsBySpotId from "../ReviewsBySpotId";
-// import CreateReviewForm from "../CreateReviewForm";
-// import "./SpotById.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
-// import AverageRatingCalc from "../AverageRatingCalc";
 
-// const SpotById = () => {
-// 	const history = useHistory();
-// 	const dispatch = useDispatch();
-// 	const { spotId } = useParams();
-// 	const spot = useSelector((state) => state.spots[spotId]);
-// 	const sessionUser = useSelector((state) => state.session.user);
-// 	const reviews = useSelector((state) => Object.values(state.reviews)); //all reviews array in store
-// 	const review = reviews.filter((review) => review.spotId == spotId); // all reviews for the specific spot
-
-// 	//map over reviews:
-// 	const allReviewsUserIds = review.map((review) => review.userId);
-
-// 	const star = <FontAwesomeIcon icon={faStar} />;
-
-// 	useEffect(() => {
-// 		dispatch(getSpotById(spotId));
-// 	}, [spotId]);
-
-// 	// handleDeleteClick // fixed by taking out the id in the redirect callbackroute
-// 	const handleDeleteClick = (id) => {
-// 		dispatch(deleteSpot(id));
-// 		history.push(`/spots`);
-// 	};
-
-// 	// //button to edit spot
-// 	const routeChangetoEditForm = () => {
-// 		let path = `/spots/${spotId}/edit`;
-// 		history.push(path);
-// 	};
-
-// 	// console.log(spotId)
-
-// 	const routeChangetoCreateReviewForm = () => {
-// 		let path = `/spots/${spotId}/reviews`;
-// 		history.push(path);
-// 	};
-
-//
-// export default SpotById;

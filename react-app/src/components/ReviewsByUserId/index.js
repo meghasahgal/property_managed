@@ -44,7 +44,7 @@ const ReviewsByUserId = () => {
 							</div>
 
 						</div>
-						{review.userId === sessionUser?.id && (
+						{review.reviewerId === sessionUser?.id && (
 							<button
 								// className="delete-spot-button"
 								// onClick={() => handleDeleteClick(review.id)}

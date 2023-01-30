@@ -11,6 +11,7 @@ import HomePage from "./components/HomePage";
 import { authenticate } from './store/session';
 import { getAllUsersThunk } from './store/users';
 import UserById from './components/UserById';
+import ReviewsByUserId from './components/ReviewsByUserId';
 import { getReviewsByUserIdThunk } from './store/reviews';
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
 				</ProtectedRoute>
+				{/* <ProtectedRoute path="/users/reviews" exact={true}>
+					<ReviewsByUserId />
+				</ProtectedRoute> */}
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<UserById />
 				</ProtectedRoute>

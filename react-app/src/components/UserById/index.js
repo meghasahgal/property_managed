@@ -62,9 +62,9 @@ const UserById = () => {
 								}}
 							></div>
 						</div>
-						{/* <div>
+						<div>
 							<ReviewsByUserId user={user} />
-						</div> */}
+						</div>
 
 						{user.userId === sessionUser?.id && (
 							<button>Edit Review</button>

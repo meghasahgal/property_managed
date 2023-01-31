@@ -7,18 +7,20 @@ import ReviewsByUserId from "../ReviewsByUserId";
 
 const UserById = () => {
 	const dispatch = useDispatch();
+	const history = useHistory()
 	const { userId } = useParams(); // userId of PM
 	console.log(userId, "userId")
 	const sessionUser = useSelector((state) => state.session.user);
-	// const user = useSelector((state) =>{
-	// 	if (state?.users[userId]){
-	// 		Object.values(state?.users[userId])
-	// 	} else return undefined;
-	// }
-	// );
 	const user = useSelector((state) => state.users[userId])
 	console.log("*******")
 	console.log(user, "THIS IS THE USER")
+
+	
+	const handleDeleteClick = (id) => {
+		dispatch(deleteProfileThunk(id));
+		history.push(`/users`);
+	};
+
 
 	// const allUsersArray = useSelector((state) => {
 	// 	if (state?.users?.users) {
@@ -86,5 +88,3 @@ const UserById = () => {
 };
 
 export default UserById;
-
-

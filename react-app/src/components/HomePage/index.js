@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsersThunk } from "../../store/users";
 
 const HomePage = () => {
 	const dispatch = useDispatch();
+    const history = useHistory();
 
 	const sessionUser = useSelector((state) => state.session.user);
 
@@ -22,6 +24,15 @@ const HomePage = () => {
 
 	return (
 		<>
+			{sessionUser?.id && (
+				<button
+					className="btn-create-profile"
+					onClick={() => history.push("/users/create")}
+				>
+					Create Profile
+				</button>
+			)}
+			<div></div>
 			{allUsersArray.map((user) =>
 				user && user.id ? (
 					<div key={user.id}>
@@ -31,10 +42,10 @@ const HomePage = () => {
 						<Link className="user-link" to={`/users/${user.id}`}>
 							{user.username}
 						</Link>
-                        <div>
-						{user.city}, {user.state} {user.avgRating}
-						{/* <div>{user.avgRating}</div> */}
-                        </div>
+						<div>
+							{user.city}, {user.state} {user.avgRating}
+							{/* <div>{user.avgRating}</div> */}
+						</div>
 					</div>
 				) : (
 					<div></div>

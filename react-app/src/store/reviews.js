@@ -9,10 +9,10 @@ const loadReviews = (payload) => {
 	};
 };
 
-const deleteReview = (payload) => {
+const deleteReview = (reviewId) => {
 	return {
 		type: DELETE_REVIEW,
-		payload,
+		reviewId,
 	};
 };
 
@@ -98,12 +98,12 @@ export const editReviewThunk = (review) => async (dispatch) => {
 };
 
 // DELETE a REVIEW
-export const deleteReviewThunk = (data) => async (dispatch) => {
-	const response = await fetch(`/api/reviews/${data.id}`, {
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+	const response = await fetch(`/api/reviews/${reviewId}`, {
 		method: "DELETE",
 	});
 	if (response.ok) {
-		dispatch(deleteReview(data.id));
+		dispatch(deleteReview(reviewId));
 	}
 };
 

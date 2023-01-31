@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
 #relationships
     reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
     # leads = db.relationship('Lead', back_populates="user_leads", cascade='all,delete')
-    recipients = db.relationship('Message',foreign_keys='Message.sender_id', back_populates="sender")
+    recipients = db.relationship('Message',foreign_keys='Message.sender_id', back_populates="sender") # try message.sender_id if not working
     senders = db.relationship('Message',foreign_keys='Message.recipient_id', back_populates="recipient")
 
     @property

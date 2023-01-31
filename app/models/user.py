@@ -50,6 +50,7 @@ class User(db.Model, UserMixin):
             'isPm': self.is_pm,
             'profileImg': self.profile_img,
             'propertyType': self.property_type,
+            'pmRate': self.pm_rate,
             'phoneNumber': self.phone_number,
             'city': self.city,
             'state': self.state,

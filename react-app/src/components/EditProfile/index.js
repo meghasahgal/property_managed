@@ -8,13 +8,15 @@ const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
+    console.log(userId, "USER ID")
 	const user = useSelector((state) => state.users[userId]);
 	//set state variables
 	const [username, setUsername] = useState(user?.username);
 	const [email, setEmail] = useState(user?.email);
 	const [pmTagline, setPmTagline] = useState(user?.pmTagline);
+	const [profileImage, setProfileImage] = useState(user?.profile_image);
 	const [propertyType, setPropertyType] = useState("");
-	const [pmRate, setPmRate] = useState("");
+	const [pmRate, setPmRate] = useState(user?.pmRate);
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
@@ -27,6 +29,7 @@ const EditProfile = () => {
 			setUsername(user.username);
 			setEmail(user.email);
 			setPmTagline(user.pmTagline);
+			setProfileImage(user.profileImage);
 			setPropertyType(user.propertyType);
 			setPmRate(user.pmRate);
 			setPhoneNumber(user.phoneNumber);
@@ -40,10 +43,11 @@ const EditProfile = () => {
 	const handleEdit = async (e) => {
 		e.preventDefault();
 		const editedProfile = {
-			user_id: userId,
+			id: userId,
 			username,
 			email,
 			pm_tagline: pmTagline,
+            profile_image: profileImage,
 			property_type: propertyType,
 			pm_rate: pmRate,
 			phone_number: phoneNumber,
@@ -56,12 +60,19 @@ const EditProfile = () => {
 		if (data) {
 			setErrors(data);
 		} else {
-			history.push("/users/{userId}");
+			history.push(`/users/${userId}`);
 		}
 	};
 
 	// const handleDelete = () =>
 	// 	dispatch(deleteProfileThunk(data.id));
+
+    const handleCancelClick = (e) => {
+		e.preventDefault();
+		history.push(`/users/${userId}`);
+		// hideForm();
+	};
+
 
 	return (
 		<>
@@ -94,6 +105,14 @@ const EditProfile = () => {
 					required
 					value={pmTagline}
 					onChange={(e) => setPmTagline(e.target.value)}
+				/>
+				<div>Profile Image</div>
+				<input
+					type="url"
+					placeholder="Update profile image"
+					required
+					value={profileImage}
+					onChange={(e) => setProfileImage(e.target.value)}
 				/>
 				<div>Property Type</div>
 				<input
@@ -143,6 +162,22 @@ const EditProfile = () => {
 					value={zipcode}
 					onChange={(e) => setZipcode(e.target.value)}
 				/>
+				<br></br>
+				<div></div>
+				<button
+					className="small-btn"
+					type="button"
+					onClick={handleCancelClick}
+				>
+					Cancel
+				</button>
+				<button
+					className="small-btn"
+					type="submit"
+					disabled={errors.length > 0}
+				>
+					Edit
+				</button>
 			</form>
 		</>
 	);

@@ -12,6 +12,7 @@ import { authenticate } from './store/session';
 import { getAllUsersThunk } from './store/users';
 import UserById from './components/UserById';
 import ReviewsByUserId from './components/ReviewsByUserId';
+import EditProfile from './components/EditProfile';
 import { getReviewsByUserIdThunk } from './store/reviews';
 
 function App() {
@@ -57,6 +58,10 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<UserById />
 				</ProtectedRoute>
+        <Route exact path="/users/:userId/edit">
+						<EditProfile />
+					</Route>
+
 			</Switch>
 		</BrowserRouter>
   );

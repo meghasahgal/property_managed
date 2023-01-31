@@ -7,21 +7,24 @@ import ReviewsByUserId from "../ReviewsByUserId";
 
 const UserById = () => {
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	console.log(userId, "userId")
+	console.log(userId, "userId");
 	const sessionUser = useSelector((state) => state.session.user);
-	const user = useSelector((state) => state.users[userId])
-	console.log("*******")
-	console.log(user, "THIS IS THE USER")
+	const user = useSelector((state) => state.users[userId]);
+	console.log("*******");
+	console.log(user, "THIS IS THE USER");
 
-	
 	const handleDeleteClick = (id) => {
 		dispatch(deleteProfileThunk(id));
 		history.push(`/users`);
 	};
 
-
+	// //button to edit profile
+	const routeChangetoEditForm = () => {
+		let path = `/users/${userId}/edit`;
+		history.push(path);
+	};
 	// const allUsersArray = useSelector((state) => {
 	// 	if (state?.users?.users) {
 	// 		return Object.values(state?.users?.users);
@@ -66,7 +69,12 @@ const UserById = () => {
 						</div>
 						<div>
 							{user.id === sessionUser?.id && (
-								<button>Edit Profile</button>
+								<button
+									className="change-profile-button"
+									onClick={routeChangetoEditForm}
+								>
+									Edit Profile
+								</button>
 							)}
 							{user.id === sessionUser?.id && (
 								<button>Delete Profile</button>

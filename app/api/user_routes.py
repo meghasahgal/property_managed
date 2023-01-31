@@ -84,7 +84,7 @@ def edit_profile(id):
     user= User.query.get(id)
     form = ProfileForm()
 
-    if form.data["user_id"] != current_user.id:
+    if form.data["id"] != current_user.id:
         # print(form.data['user_id'], "userID")
         # print(current_user.id, "current user")
         return {'error': "You are not authorized to edit this profile"}, 401

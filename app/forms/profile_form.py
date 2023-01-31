@@ -21,7 +21,7 @@ def user_exists(form, field):
 
 
 class ProfileForm(FlaskForm):
-    user_id = IntegerField('user_id', validators=[DataRequired()])
+    id = IntegerField('user_id', validators=[DataRequired()])
     username=StringField('username', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired()])
     pm_tagline = StringField('pm_tagline', validators=[DataRequired()])

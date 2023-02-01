@@ -14,7 +14,7 @@ const EditProfile = () => {
 	const [username, setUsername] = useState(user?.username);
 	const [email, setEmail] = useState(user?.email);
 	const [pmTagline, setPmTagline] = useState(user?.pmTagline);
-	const [profileImage, setProfileImage] = useState(user?.profile_image);
+	const [profileImg, setProfileImage] = useState(user?.profileImg);
 	const [propertyType, setPropertyType] = useState("");
 	const [pmRate, setPmRate] = useState(user?.pmRate);
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -23,13 +23,15 @@ const EditProfile = () => {
 	const [zipcode, setZipcode] = useState("");
 	const [errors, setErrors] = useState([]);
 
+                // 'profileImg': self.profile_img,
+
 	//A useEffect that calls all of the setState functions to update the fields
 	useEffect(() => {
 		if (user) {
 			setUsername(user.username);
 			setEmail(user.email);
 			setPmTagline(user.pmTagline);
-			setProfileImage(user.profileImage);
+			setProfileImage(user.profileImg);
 			setPropertyType(user.propertyType);
 			setPmRate(user.pmRate);
 			setPhoneNumber(user.phoneNumber);
@@ -47,7 +49,7 @@ const EditProfile = () => {
 			username,
 			email,
 			pm_tagline: pmTagline,
-            profile_image: profileImage,
+            profile_img: profileImg,
 			property_type: propertyType,
 			pm_rate: pmRate,
 			phone_number: phoneNumber,
@@ -85,7 +87,7 @@ const EditProfile = () => {
 				<div>Username</div>
 				<input
 					type="text"
-					placeholder="Update username"
+					placeholder={user?.username}
 					required
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
@@ -93,7 +95,7 @@ const EditProfile = () => {
 				<div>Email</div>
 				<input
 					type="text"
-					placeholder="Update email"
+					placeholder={user?.email}
 					required
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
@@ -101,7 +103,7 @@ const EditProfile = () => {
 				<div>Property Manager Tagline</div>
 				<input
 					type="text"
-					placeholder="Update tagline"
+					placeholder={user?.pmTagline}
 					required
 					value={pmTagline}
 					onChange={(e) => setPmTagline(e.target.value)}
@@ -109,15 +111,14 @@ const EditProfile = () => {
 				<div>Profile Image</div>
 				<input
 					type="url"
-					placeholder="Update profile image"
-					required
-					value={profileImage}
+					placeholder={user?.profileImg}
+					value={profileImg}
 					onChange={(e) => setProfileImage(e.target.value)}
 				/>
 				<div>Property Type</div>
 				<input
 					type="text"
-					placeholder="Update property type"
+					placeholder={user?.propertyType}
 					required
 					value={propertyType}
 					onChange={(e) => setPropertyType(e.target.value)}
@@ -125,7 +126,7 @@ const EditProfile = () => {
 				<div>Property Manager Rate</div>
 				<input
 					type="text"
-					placeholder="Update property manager rate"
+					placeholder={user?.pmRate}
 					required
 					value={pmRate}
 					onChange={(e) => setPmRate(e.target.value)}
@@ -133,7 +134,7 @@ const EditProfile = () => {
 				<div>Phone Number</div>
 				<input
 					type="text"
-					placeholder="Update property type"
+					placeholder={user?.phoneNumber}
 					required
 					value={phoneNumber}
 					onChange={(e) => setPhoneNumber(e.target.value)}
@@ -141,7 +142,7 @@ const EditProfile = () => {
 				<div>City</div>
 				<input
 					type="text"
-					placeholder="Update city"
+					placeholder={user?.city}
 					required
 					value={city}
 					onChange={(e) => setCity(e.target.value)}
@@ -149,7 +150,7 @@ const EditProfile = () => {
 				<div>State</div>
 				<input
 					type="text"
-					placeholder="Update state"
+					placeholder={user?.state}
 					required
 					value={state}
 					onChange={(e) => setState(e.target.value)}
@@ -157,7 +158,7 @@ const EditProfile = () => {
 				<div>Zipcode</div>
 				<input
 					type="text"
-					placeholder="Update zipcode"
+					placeholder={user?.zipcode}
 					required
 					value={zipcode}
 					onChange={(e) => setZipcode(e.target.value)}

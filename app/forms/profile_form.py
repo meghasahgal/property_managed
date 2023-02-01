@@ -25,7 +25,7 @@ class ProfileForm(FlaskForm):
     username=StringField('username', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired()])
     pm_tagline = StringField('pm_tagline', validators=[DataRequired()])
-    profile_img=StringField('profile_img', validators=[URL(require_tld=True,message="Please provide a valid url")])
+    profile_img=StringField('profile_img')
     property_type=SelectField('property_type', choices=[('Residential', 'Residential'),('Commercial', 'Commercial'), ('Retail', 'Retail'), ('Industrial', 'Industrial')],validators=[DataRequired()])
     pm_rate=IntegerField('pm_rate',validators=[DataRequired()])
     phone_number=StringField('phone_number', validators=[DataRequired()])

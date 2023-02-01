@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editReviewThunk } from "../../store/reviews";
+import { createReviewThunk} from "../st
 // have this render on the ReviewById component
 const EditReview = ({ review }) => {
 	const dispatch = useDispatch();
@@ -31,55 +31,55 @@ const EditReview = ({ review }) => {
 		} else {
 			history.push(`/users/${userId}`);
 		}
-    }
-        const handleCancelClick = (e) => {
-			e.preventDefault();
-			history.push(`/users/${userId}`);
-			// hideForm();
-		};
-
-		return (
-			<>
-				<form className="edit-profile-form" onSubmit={handleEdit}>
-					<div>
-						{errors.map((error, i) => (
-							<div key={i}>{error}</div>
-						))}
-					</div>
-					<div>Review</div>
-					<input
-						type="text"
-						placeholder={user?.reviewBody}
-						required
-						value={reviewBody}
-						onChange={(e) => setReviewBody(e.target.value)}
-					/>
-					<div>Rating</div>
-					<input
-						type="text"
-						placeholder={user?.stars}
-						required
-						value={stars}
-						onChange={(e) => setStars(e.target.value)}
-					/>
-
-					<br></br>
-					<div></div>
-					<button
-						className="small-btn"
-						type="button"
-						onClick={handleCancelClick}
-					>
-						Cancel
-					</button>
-					<button
-						className="small-btn"
-						type="submit"
-						disabled={errors.length > 0}
-					>
-						Edit
-					</button>
-				</form>
-			</>
-		);
 	};
+	const handleCancelClick = (e) => {
+		e.preventDefault();
+		history.push(`/users/${userId}`);
+		// hideForm();
+	};
+
+	return (
+		<>
+			<form className="edit-profile-form" onSubmit={handleEdit}>
+				<div>
+					{errors.map((error, i) => (
+						<div key={i}>{error}</div>
+					))}
+				</div>
+				<div>Review</div>
+				<input
+					type="text"
+					placeholder={user?.reviewBody}
+					required
+					value={reviewBody}
+					onChange={(e) => setReviewBody(e.target.value)}
+				/>
+				<div>Rating</div>
+				<input
+					type="text"
+					placeholder={user?.stars}
+					required
+					value={stars}
+					onChange={(e) => setStars(e.target.value)}
+				/>
+
+				<br></br>
+				<div></div>
+				<button
+					className="small-btn"
+					type="button"
+					onClick={handleCancelClick}
+				>
+					Cancel
+				</button>
+				<button
+					className="small-btn"
+					type="submit"
+					disabled={errors.length > 0}
+				>
+					Edit
+				</button>
+			</form>
+		</>
+	);
+};

@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
-import { getReviewsByUserIdThunk, deleteReviewThunk } from "../../store/reviews";
+import { getReviewsByUserIdThunk, deleteReviewThunk, editReviewThunk } from "../../store/reviews";
 
 const ReviewsByUserId = () => {
 	const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const ReviewsByUserId = () => {
 	// 		return Object.values(state?.reviews);
 	// 	} else return undefined;
 	// });
-	const sessionUser = useSelector((state) => state.session.user)
+	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
 	console.log("***********");
@@ -24,18 +24,28 @@ const ReviewsByUserId = () => {
 	const reviews = allReviews.filter((review) => review?.userId == userId); // all reviews for the specific user/PM
 	console.log("***********");
 	console.log(reviews, "filtered reviews");
-	const sessionUserReview = reviews.filter((review) => review.reviewerId == sessionUser.id); // review by the specific session user
-	console.log(sessionUserReview, "THIS IS THE SESSION USER's REVIEW")
+	const sessionUserReview = reviews.filter(
+		(review) => review.reviewerId == sessionUser.id
+	); // review by the specific session user
+	console.log(sessionUserReview, "THIS IS THE SESSION USER's REVIEW");
+
+	//get all reviewerIds related to the reviews:
+	//map over reviews:
+	const allReviewsReviewerIds = allReviews.map((review) => review.reviwerId);
 
 	//dispatch the thunk the get the reviews for the userId
 	useEffect(() => {
 		dispatch(getReviewsByUserIdThunk(userId));
 	}, []);
 
+	// dispatch the thunk to edit the review of the session user
+	const handleEdit = (sessionUserReview) => {
+		dispatch(editReviewThunk(sessionUserReview));
+	};
+
 	// dispatch another thunk to delete a review of the session user
 	const handleDelete = (sessionUserReview) =>
 		dispatch(deleteReviewThunk(sessionUserReview));
-
 
 	return (
 		<div>
@@ -46,11 +56,27 @@ const ReviewsByUserId = () => {
 					<div className="review-id" key={review.id}>
 						<div className="review-details">
 							<div className="review-font">
-								{review?.stars}{" "}
-								{review?.reviewBody}
+								{review?.stars} {review?.reviewBody}
 							</div>
-
 						</div>
+						{review.reviewerId != sessionUser?.id &&
+							sessionUser?.id != user.id &&
+							!allReviewsReviewerIds.includes(sessionUser?.id) &&(
+								<button
+									className="delete-review-button"
+									// onClick={() => handleEdit(review.id)}
+								>
+									Create Review
+								</button>
+							)}
+						{review.reviewerId === sessionUser?.id && (
+							<button
+								className="delete-review-button"
+								// onClick={() => handleEdit(review.id)}
+							>
+								Edit Review
+							</button>
+						)}
 						{review.reviewerId === sessionUser?.id && (
 							<button
 								className="delete-review-button"

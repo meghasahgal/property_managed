@@ -24,14 +24,14 @@ const HomePage = () => {
 
 	return (
 		<>
-			{sessionUser?.id && (
+			{/* {sessionUser?.id && (
 				<button
 					className="btn-create-profile"
 					onClick={() => history.push("/users/create")}
 				>
 					Create Profile
 				</button>
-			)}
+			)} */}
 			<div></div>
 			{allUsersArray.map((user) =>
 				user && user.id ? (

@@ -51,13 +51,15 @@ export const getReviewByReviewIdThunk = (reviewId) => async (dispatch) => {
 // CREATE A REVIEW based on userId /<int:id>/reviews'
 export const createReviewThunk = (data) => async (dispatch) => {
 	const newReview = JSON.stringify(data);
-	const response = await fetch(`/api/${data.user_id}/reviews`, {
+	console.log(newReview, "THIS IS THE NEW REVIEW")
+	const response = await fetch(`/api/users/${data.user_id}/reviews`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(data)
+		body: newReview
 	});
+	console.log(data.user_id, "this is the user id of the review")
 
 	if (response.ok) {
 		const data = await response.json();

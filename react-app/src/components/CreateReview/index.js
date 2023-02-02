@@ -2,35 +2,38 @@ import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createReviewThunk} from "../st
+import { createReviewThunk, editReviewThunk } from "../../store/reviews";
 // have this render on the ReviewById component
-const EditReview = ({ review }) => {
+const CreateReview = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+    const {userId} = useParams()
+    console.log(userId, "USER ID IN CREATE REVIEW; RESULT OF USEPARAMS")
+    const user = useSelector((state) => state.users[userId]);
+    const sessionUserId = useSelector((state) => state.session.user.id)
 	const [reviewBody, setReviewBody] = useState("");
 	const [stars, setStars] = useState("");
 	const [errors, setErrors] = useState([]);
-	// user_id = IntegerField('user_id', validators=[DataRequired()])
-	// reviewer_id = IntegerField('reviewer_id', validators=[DataRequired()])
-	// stars = IntegerField('rating', validators = [DataRequired()])
-	// review_body = TextAreaField('your review',validators =[DataRequired()])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const editedReview = {
-			id: review.id,
-			user_id: review.userId,
-			reviewer_id: review.reviewerId,
+		const newReview = {
+			user_id: userId,
+			reviewer_id: sessionUserId,
 			review_body: reviewBody,
 			stars,
 		};
-		let data = await dispatch(editReviewThunk(editedReview));
+		let data = await dispatch(createReviewThunk(newReview));
+        console.log("***************")
+        console.log(data, "data to dispatch")
 		if (data) {
 			setErrors(data);
 		} else {
 			history.push(`/users/${userId}`);
 		}
+         console.log("***************");
+			console.log(data, "data to dispatch");
 	};
 	const handleCancelClick = (e) => {
 		e.preventDefault();
@@ -40,7 +43,7 @@ const EditReview = ({ review }) => {
 
 	return (
 		<>
-			<form className="edit-profile-form" onSubmit={handleEdit}>
+			<form className="edit-profile-form" onSubmit={handleSubmit}>
 				<div>
 					{errors.map((error, i) => (
 						<div key={i}>{error}</div>
@@ -49,7 +52,7 @@ const EditReview = ({ review }) => {
 				<div>Review</div>
 				<input
 					type="text"
-					placeholder={user?.reviewBody}
+					placeholder="Enter your review"
 					required
 					value={reviewBody}
 					onChange={(e) => setReviewBody(e.target.value)}
@@ -57,7 +60,7 @@ const EditReview = ({ review }) => {
 				<div>Rating</div>
 				<input
 					type="text"
-					placeholder={user?.stars}
+					placeholder="Enter your rating"
 					required
 					value={stars}
 					onChange={(e) => setStars(e.target.value)}
@@ -77,9 +80,11 @@ const EditReview = ({ review }) => {
 					type="submit"
 					disabled={errors.length > 0}
 				>
-					Edit
+					Submit
 				</button>
 			</form>
 		</>
 	);
 };
+
+export default CreateReview;

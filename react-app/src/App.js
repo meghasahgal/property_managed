@@ -14,6 +14,7 @@ import UserById from "./components/UserById";
 import ReviewsByUserId from "./components/ReviewsByUserId";
 import EditProfile from "./components/EditProfile";
 import CreateProfile from "./components/CreateProfile";
+import CreateReview from "./components/CreateReview";
 import { getReviewsByUserIdThunk } from "./store/reviews";
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
 				</Route>
 				<Route exact path="/users/create">
 					<CreateProfile />
+				</Route>
+				<Route exact path="/users/:userId/reviews">
+					<CreateReview />
 				</Route>
 			</Switch>
 		</BrowserRouter>

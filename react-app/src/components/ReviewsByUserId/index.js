@@ -3,11 +3,17 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
-import { getReviewsByUserIdThunk, deleteReviewThunk, editReviewThunk } from "../../store/reviews";
+import {
+	getReviewsByUserIdThunk,
+	deleteReviewThunk,
+	editReviewThunk,
+} from "../../store/reviews";
 
 const ReviewsByUserId = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { userId } = useParams();
+
 	//all reviews array in store
 	// const allReviews = useSelector((state) => {
 	// 	if (state?.reviews) {
@@ -32,6 +38,10 @@ const ReviewsByUserId = () => {
 	//get all reviewerIds related to the reviews:
 	//map over reviews:
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviwerId);
+	console.log(
+		allReviewsReviewerIds,
+		"THESE ARE THE REVIEWER IDS of the REVIEWS"
+	);
 
 	//dispatch the thunk the get the reviews for the userId
 	useEffect(() => {
@@ -47,6 +57,16 @@ const ReviewsByUserId = () => {
 	const handleDelete = (sessionUserReview) =>
 		dispatch(deleteReviewThunk(sessionUserReview));
 
+	const routeChangetoCreateReviewForm = () => {
+		let path = `/users/${userId}/reviews`;
+		history.push(path);
+	};
+
+	const routeChangetoEditReviewForm = () => {
+		let path = `/users/${userId}/reviews`;
+		history.push(path);
+	};
+
 	return (
 		<div>
 			<div className="primary-text">Reviews</div>
@@ -59,12 +79,14 @@ const ReviewsByUserId = () => {
 								{review?.stars} {review?.reviewBody}
 							</div>
 						</div>
-						{review.reviewerId != sessionUser?.id &&
-							sessionUser?.id != user.id &&
-							!allReviewsReviewerIds.includes(sessionUser?.id) &&(
+						{sessionUser?.id != user.id &&
+							review.reviewerId != sessionUser?.id &&
+							!allReviewsReviewerIds.includes(
+								sessionUser?.id
+							) && (
 								<button
-									className="delete-review-button"
-									// onClick={() => handleEdit(review.id)}
+									className="create-review-button"
+									onClick={routeChangetoCreateReviewForm}
 								>
 									Create Review
 								</button>

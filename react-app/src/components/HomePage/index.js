@@ -24,18 +24,11 @@ const HomePage = () => {
 
 	return (
 		<>
-			{/* {sessionUser?.id && (
-				<button
-					className="btn-create-profile"
-					onClick={() => history.push("/users/create")}
-				>
-					Create Profile
-				</button>
-			)} */}
+
 			<div></div>
-			{allUsersArray.map((user) =>
-				user && user.id ? (
-					<div key={user.id}>
+			{allUsersArray?.map((user) =>
+				user && user?.id ? (
+					<div key={user?.id}>
 						<div>
 							<img id="user-splash-img" src={user?.profileImg} />
 						</div>

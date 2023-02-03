@@ -7,9 +7,9 @@ const loadUsers = (payload) => ({
 	payload,
 });
 
-const deleteUser = (payload) => ({
+const deleteUser = (userId) => ({
     type: DELETE_USER,
-    payload,
+    userId,
 })
 
 //thunks
@@ -68,7 +68,7 @@ export const editUserThunk = (data) => async (dispatch) => {
 // CREATE A PROFILE based on userId /<int:id>/' - ok in postman
 export const createProfileThunk = (data) => async (dispatch) => {
 	const newProfile = JSON.stringify(data);
-	const response = await fetch(`/api/users/${data.user_id}/`, {
+	const response = await fetch(`/api/users/${data.id}/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -117,14 +117,24 @@ export const editProfileThunk = (data) => async (dispatch) => {
 };
 
 // DELETE a PROFILE
-export const deleteProfileThunk = (data) => async (dispatch) => {
-	const response = await fetch(`/api/users/${data.id}`, {
+export const deleteProfileThunk = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}`, {
 		method: "DELETE",
 	});
 	if (response.ok) {
-		dispatch(deleteUser(data.id));
+		dispatch(deleteUser(userId));
 	}
 };
+
+// export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+// 	const response = await fetch(`/api/reviews/${reviewId}`, {
+// 		method: "DELETE",
+// 	});
+// 	if (response.ok) {
+// 		dispatch(deleteReview(reviewId));
+// 	}
+// };
+
 
 const userReducer = (state = {}, action) => {
 	let newState = { ...state };
@@ -132,7 +142,7 @@ const userReducer = (state = {}, action) => {
 		case LOAD_USERS:
 			return { ...newState, ...action.payload };
         case DELETE_USER:
-            delete newState[action.profileId];
+            delete newState[action.userId];
 			return newState;
 		default:
 			return state;

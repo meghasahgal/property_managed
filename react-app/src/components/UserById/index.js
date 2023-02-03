@@ -12,13 +12,22 @@ const UserById = () => {
 	console.log(userId, "userId");
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
-	console.log("*******");
-	console.log(user, "THIS IS THE USER");
+	// console.log("*******");
+	// console.log(user, "THIS IS THE USER");
 
-	const handleDeleteClick = (id) => {
-		dispatch(deleteProfileThunk(id));
+	const handleDeleteProfile = (userId) => {
+		dispatch(deleteProfileThunk(userId));
 		history.push(`/users`);
 	};
+
+	// const handleEdit = () => {
+	// 	const data = {
+	// 		id,
+	// 		text: editText,
+	// 	};
+
+	// 	dispatch(editTweetThunk(data));
+	// };
 
 	// //button to edit profile
 	const routeChangetoEditForm = () => {
@@ -43,7 +52,7 @@ const UserById = () => {
 
 	return (
 		<>
-			{user && (
+			{user && user.id && (
 				<div className="user-container-individual-user">
 					<div>
 						<img id="user-splash-img" src={user?.profileImg} />
@@ -77,7 +86,11 @@ const UserById = () => {
 								</button>
 							)}
 							{user.id === sessionUser?.id && (
-								<button>Delete Profile</button>
+								<button
+									onClick={() => handleDeleteProfile(user?.id)}
+								>
+									Delete Profile
+								</button>
 							)}
 						</div>
 						<div>

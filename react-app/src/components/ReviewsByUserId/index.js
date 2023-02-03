@@ -8,28 +8,24 @@ import {
 	deleteReviewThunk,
 	editReviewThunk,
 } from "../../store/reviews";
+import EditReview from "../EditReview";
 
-const ReviewsByUserId = () => {
+const ReviewsByUserId = ({reviewId, reviewerId}) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams();
 
-	//all reviews array in store
-	// const allReviews = useSelector((state) => {
-	// 	if (state?.reviews) {
-	// 		return Object.values(state?.reviews);
-	// 	} else return undefined;
-	// });
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
+	// console.log(user.id, "USER/PM ID IN REVIEWS BY ID")
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
-	console.log("***********");
-	console.log(allReviews, "THESE are all reviews");
+	// console.log("***********");
+	// console.log(allReviews, "THESE are all reviews");
 
 	// get all reviews for the property
 	const reviews = allReviews.filter((review) => review?.userId == userId); // all reviews for the specific user/PM
-	console.log("***********");
-	console.log(reviews, "filtered reviews");
+	// console.log("***********");
+	// console.log(reviews, "filtered reviews");
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	); // review by the specific session user
@@ -37,11 +33,11 @@ const ReviewsByUserId = () => {
 
 	//get all reviewerIds related to the reviews:
 	//map over reviews:
-	const allReviewsReviewerIds = allReviews.map((review) => review.reviwerId);
-	console.log(
-		allReviewsReviewerIds,
-		"THESE ARE THE REVIEWER IDS of the REVIEWS"
-	);
+	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
+	// console.log(
+	// 	allReviewsReviewerIds,
+	// 	"THESE ARE THE REVIEWER IDS of the REVIEWS"
+	// );
 
 	//dispatch the thunk the get the reviews for the userId
 	useEffect(() => {
@@ -63,7 +59,7 @@ const ReviewsByUserId = () => {
 	};
 
 	const routeChangetoEditReviewForm = () => {
-		let path = `/users/${userId}/reviews`;
+		let path = `/users/${userId}/reviews/edit`;
 		history.push(path);
 	};
 
@@ -79,29 +75,33 @@ const ReviewsByUserId = () => {
 								{review?.stars} {review?.reviewBody}
 							</div>
 						</div>
-						{sessionUser?.id != user.id &&
-							review.reviewerId != sessionUser?.id &&
-							!allReviewsReviewerIds.includes(
-								sessionUser?.id
-							) && (
+						{sessionUser?.id !== user.id &&
+							// review.reviewerId !== sessionUser?.id &&
+								!allReviewsReviewerIds.includes(
+									sessionUser?.id) &&(
+
+								// <EditReview review={review}/>, need to add a setState and set off an OnChange if want to do it other way
+								// {
 								<button
-									className="create-review-button"
+									className="change-review-button"
 									onClick={routeChangetoCreateReviewForm}
 								>
 									Create Review
 								</button>
+								// }
 							)}
 						{review.reviewerId === sessionUser?.id && (
 							<button
-								className="delete-review-button"
-								// onClick={() => handleEdit(review.id)}
+								className="change-review-button"
+								onClick={routeChangetoEditReviewForm}
+
 							>
 								Edit Review
 							</button>
 						)}
 						{review.reviewerId === sessionUser?.id && (
 							<button
-								className="delete-review-button"
+								className="change-review-button"
 								onClick={() => handleDelete(review.id)}
 							>
 								Delete Review
@@ -136,3 +136,21 @@ export default ReviewsByUserId;
 //         "userId": 2
 //     }
 // }
+
+// {sessionUserId === review.userId && (
+// 										<div>
+// 											<button
+// 												className={styles.primaryBtn}
+// 												onClick={() =>
+// 													setIsOpenEdit(true)
+// 												}
+// 											>
+// 												Edit Comment
+// 											</button>
+// 											{isOpenEdit && (
+// 												<ModalEditReview
+// 													setIsOpen={setIsOpenEdit}
+// 													review={review}
+// 												/>
+// 											)}
+// 											<button

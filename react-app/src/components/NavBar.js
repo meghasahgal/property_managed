@@ -47,7 +47,7 @@ const NavBar = () => {
 					{sessionUser?.id && (
 						<button
 							className="btn-create-profile"
-							onClick={() => history.push("/users/create")}
+							onClick={() => history.push(`/users/${sessionUser.id}/`)}
 						>
 							Become a Property Manager
 						</button>
@@ -62,3 +62,21 @@ const NavBar = () => {
 }
 
 export default NavBar;
+
+
+// {
+// 	sessionUser.shopName ? (
+// 		<li className="barLink">
+// 			<Link to={`/store/${sessionUser.id}`}>{sessionUser?.shopName}</Link>
+// 		</li>
+// 	) : (
+// 		<li className="barLink">
+// 			<button
+// 				className="navButton"
+// 				onClick={() => setIsOpenAddShop(true)}
+// 			>
+// 				Become a Vendor
+// 			</button>
+// 		</li>
+// 	);
+// }

@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createProfileThunk, editProfileThunk } from "../../store/users";
 
-const CreateProfile = ({userId}) =>{
+const CreateProfile = () =>{
 	const dispatch = useDispatch();
 	const history = useHistory();
-    const user = useSelector(state => state.users[userId])
+
+	const user = useSelector((state) => state.users[userId]);
+	const sessionUserId = useSelector((state) => state.session.user.id);
+	console.log(sessionUserId, "THIS IS THE SESSION USER ID IN CREATE PROFILE");
+	const sessionUsername = useSelector((state) => state.session.user.username);
+	const sessionUserEmail = useSelector((state) => state.session.user.email);
+	const { userId } = useParams(); // userId of PM/user
+
 	//set state variables
-	// const [username, setUsername] = useState();
-	// const [email, setEmail] = useState();
+	const [username, setUsername] = useState();
+	const [email, setEmail] = useState();
 	const [pmTagline, setPmTagline] = useState();
-	const [profileImg, setProfileImage] = useState()
+	const [profileImg, setProfileImage] = useState();
 	const [propertyType, setPropertyType] = useState();
 	const [pmRate, setPmRate] = useState();
 	const [phoneNumber, setPhoneNumber] = useState();
@@ -25,9 +32,9 @@ const CreateProfile = ({userId}) =>{
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const newProfile = {
-			id: user.id,
-			username: user.username,
-			email: user.email,
+			id: sessionUserId,
+			username: sessionUsername,
+			email: sessionUserEmail,
 			pm_tagline: pmTagline,
 			profile_img: profileImg,
 			property_type: propertyType,
@@ -37,6 +44,7 @@ const CreateProfile = ({userId}) =>{
 			state,
 			zipcode,
 		};
+		console.log(newProfile, "THIS IS THE NEW PROFILE DATA");
 
 		let data = await dispatch(editProfileThunk(newProfile));
 		if (data) {
@@ -45,11 +53,11 @@ const CreateProfile = ({userId}) =>{
 			history.push(`/users/${userId}`);
 		}
 	};
-	 const handleCancelClick = (e) => {
-			e.preventDefault();
-			history.push(`/users/${userId}`);
-			// hideForm();
-		};
+	const handleCancelClick = (e) => {
+		e.preventDefault();
+		history.push(`/users/${userId}`);
+		// hideForm();
+	};
 
 	return (
 		<>
@@ -59,11 +67,27 @@ const CreateProfile = ({userId}) =>{
 						<div key={i}>{error}</div>
 					))}
 				</div>
+				<div>Username</div>
+				<input
+					type="text"
+					placeholder={sessionUsername}
+					required
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
+				<div>Email</div>
+				<input
+					type="text"
+					placeholder={sessionUserEmail}
+					required
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
 
 				<div>Property Manager Tagline</div>
 				<input
 					type="text"
-					placeholder={user?.pmTagline}
+					placeholder="Enter your tagline"
 					required
 					value={pmTagline}
 					onChange={(e) => setPmTagline(e.target.value)}
@@ -71,14 +95,14 @@ const CreateProfile = ({userId}) =>{
 				<div>Profile Image</div>
 				<input
 					type="url"
-					placeholder={user?.profileImg}
+					placeholder="Enter a URL of a pic of yourself"
 					value={profileImg}
 					onChange={(e) => setProfileImage(e.target.value)}
 				/>
 				<div>Property Type</div>
 				<input
 					type="text"
-					placeholder={user?.propertyType}
+					placeholder="Enter the Property Type you Manage"
 					required
 					value={propertyType}
 					onChange={(e) => setPropertyType(e.target.value)}
@@ -86,7 +110,7 @@ const CreateProfile = ({userId}) =>{
 				<div>Property Manager Rate</div>
 				<input
 					type="text"
-					placeholder={user?.pmRate}
+					placeholder="Enter Your Rate"
 					required
 					value={pmRate}
 					onChange={(e) => setPmRate(e.target.value)}
@@ -94,7 +118,7 @@ const CreateProfile = ({userId}) =>{
 				<div>Phone Number</div>
 				<input
 					type="text"
-					placeholder={user?.phoneNumber}
+					placeholder="Enter Your Phone Number"
 					required
 					value={phoneNumber}
 					onChange={(e) => setPhoneNumber(e.target.value)}
@@ -102,7 +126,7 @@ const CreateProfile = ({userId}) =>{
 				<div>City</div>
 				<input
 					type="text"
-					placeholder={user?.city}
+					placeholder="Enter your City"
 					required
 					value={city}
 					onChange={(e) => setCity(e.target.value)}
@@ -110,7 +134,7 @@ const CreateProfile = ({userId}) =>{
 				<div>State</div>
 				<input
 					type="text"
-					placeholder={user?.state}
+					placeholder="Enter your State"
 					required
 					value={state}
 					onChange={(e) => setState(e.target.value)}
@@ -118,7 +142,7 @@ const CreateProfile = ({userId}) =>{
 				<div>Zipcode</div>
 				<input
 					type="text"
-					placeholder={user?.zipcode}
+					placeholder="Enter your Zipcode"
 					required
 					value={zipcode}
 					onChange={(e) => setZipcode(e.target.value)}
@@ -142,9 +166,6 @@ const CreateProfile = ({userId}) =>{
 			</form>
 		</>
 	);
-
-
-
 }
 
 export default CreateProfile;

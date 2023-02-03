@@ -8,7 +8,6 @@ const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-    console.log(userId, "USER ID in EDIT PROFILE")
 	const user = useSelector((state) => state.users[userId]);
 	//set state variables
 	const [username, setUsername] = useState(user?.username);
@@ -23,7 +22,6 @@ const EditProfile = () => {
 	const [zipcode, setZipcode] = useState("");
 	const [errors, setErrors] = useState([]);
 
-                // 'profileImg': self.profile_img,
 
 	//A useEffect that calls all of the setState functions to update the fields
 	useEffect(() => {

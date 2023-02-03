@@ -15,6 +15,7 @@ import ReviewsByUserId from "./components/ReviewsByUserId";
 import EditProfile from "./components/EditProfile";
 import CreateProfile from "./components/CreateProfile";
 import CreateReview from "./components/CreateReview";
+import EditReview from "./components/EditReview";
 import { getReviewsByUserIdThunk } from "./store/reviews";
 
 function App() {
@@ -56,14 +57,17 @@ function App() {
 				{/* <ProtectedRoute path="/users/reviews" exact={true}>
 					<ReviewsByUserId />
 				</ProtectedRoute> */}
+				<Route exact path="/users/:userId/profile">
+					<CreateProfile />
+				</Route>
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<UserById />
 				</ProtectedRoute>
 				<Route exact path="/users/:userId/edit">
 					<EditProfile />
 				</Route>
-				<Route exact path="/users/create">
-					<CreateProfile />
+				<Route exact path="/users/:userId/reviews/edit">
+					<EditReview />
 				</Route>
 				<Route exact path="/users/:userId/reviews">
 					<CreateReview />

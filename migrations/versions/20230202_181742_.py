@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: a4593107ec99
+Revision ID: 1c542b8140c2
 Revises: 
-Create Date: 2023-01-24 23:52:53.760408
+Create Date: 2023-02-02 18:17:42.410167
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a4593107ec99'
+revision = '1c542b8140c2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,12 +25,12 @@ def upgrade():
     sa.Column('pm_tagline', sa.String(length=255), nullable=True),
     sa.Column('is_pm', sa.Boolean(), nullable=False),
     sa.Column('profile_img', sa.String(length=255), nullable=True),
-    sa.Column('property_type', sa.String(length=255), nullable=False),
+    sa.Column('property_type', sa.String(length=255), nullable=True),
     sa.Column('pm_rate', sa.Integer(), nullable=True),
     sa.Column('phone_number', sa.String(length=10), nullable=True),
-    sa.Column('city', sa.String(length=50), nullable=False),
-    sa.Column('state', sa.String(length=2), nullable=False),
-    sa.Column('zipcode', sa.String(length=5), nullable=False),
+    sa.Column('city', sa.String(length=50), nullable=True),
+    sa.Column('state', sa.String(length=2), nullable=True),
+    sa.Column('zipcode', sa.String(length=5), nullable=True),
     sa.Column('avg_rating', sa.String(length=3), nullable=True),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
@@ -48,8 +48,8 @@ def upgrade():
     )
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('sender_id', sa.Integer(), nullable=False),
-    sa.Column('recipient_id', sa.Integer(), nullable=False),
+    sa.Column('sender_id', sa.Integer(), nullable=True),
+    sa.Column('recipient_id', sa.Integer(), nullable=True),
     sa.Column('message_body', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),

@@ -85,8 +85,12 @@ export const editReviewThunk = (review) => async (dispatch) => {
 		},
 		body: editedReview,
 	});
+
+	console.log(response, "response")
+	console.log(editedReview, "EDITED REVIEW FROM THUNK");
 	if (response.ok) {
 		const data = await response.json();
+		console.log("data", data)
 		dispatch(loadReviews(data));
 		return null;
 	} else if (response.status < 500) {

@@ -8,7 +8,6 @@ const CreateReview = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
     const {userId} = useParams()
-    console.log(userId, "USER ID IN CREATE REVIEW; RESULT OF USEPARAMS")
     const user = useSelector((state) => state.users[userId]);
     const sessionUserId = useSelector((state) => state.session.user.id)
 	const [reviewBody, setReviewBody] = useState("");
@@ -25,15 +24,13 @@ const CreateReview = () => {
 			stars,
 		};
 		let data = await dispatch(createReviewThunk(newReview));
-        console.log("***************")
-        console.log(data, "data to dispatch")
+
 		if (data) {
 			setErrors(data);
 		} else {
 			history.push(`/users/${userId}`);
 		}
-         console.log("***************");
-			console.log(data, "data to dispatch");
+
 	};
 	const handleCancelClick = (e) => {
 		e.preventDefault();

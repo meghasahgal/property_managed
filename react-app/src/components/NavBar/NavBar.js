@@ -1,13 +1,31 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+import LogoutButton from "../auth/LogoutButton";
+import { login } from "../../store/session";
 
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+import BecomePMConfirmation from "../BecomePMConfirmation";
+import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-  const history = useHistory()
-  return (
+	const history = useHistory();
+	const dispatch = useDispatch();
+
+	//demo user
+	const firstUser = useSelector((state) => state.users[1]);
+
+	const demoUser = {
+		email: firstUser?.email,
+		password: "password",
+	};
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		return dispatch(login(demoUser.email, demoUser.password));
+	};
+
+	return (
 		<nav>
 			<ul>
 				<li>
@@ -29,6 +47,7 @@ const NavBar = () => {
 						Sign Up
 					</NavLink>
 				</li>
+
 				{/* <li>
 					<NavLink to="/users" exact={true} activeClassName="active">
 						Users
@@ -47,7 +66,14 @@ const NavBar = () => {
 					{sessionUser?.id && (
 						<button
 							className="btn-create-profile"
-							onClick={() => history.push(`/users/${sessionUser.id}/`)}
+							onClick={() =>
+								history.push(
+									`users/${sessionUser.id}/confirmation`
+								)
+							}
+							// onClick={() =>
+							// 	history.push(`/users/${sessionUser.id}/`)
+							// }
 						>
 							Become a Property Manager
 						</button>
@@ -56,13 +82,15 @@ const NavBar = () => {
 				<li>
 					<LogoutButton />
 				</li>
+				<li>
+					<button onClick={handleClick}>Demo Login</button>
+				</li>
 			</ul>
 		</nav>
-  );
-}
+	);
+};
 
 export default NavBar;
-
 
 // {
 // 	sessionUser.shopName ? (

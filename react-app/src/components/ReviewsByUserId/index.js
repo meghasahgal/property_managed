@@ -65,15 +65,21 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 
 	return (
 		<div>
+			<hr></hr>
+			<div></div>
+			<div></div>
 			<div className="primary-text">Reviews</div>
 			<hr></hr>
+
 			<div className="reviews-container">
 				{reviews.map((review) => (
 					<div className="review-id" key={review.id}>
 						<div className="review-details">
 							<div className="review-font">
 								{review?.stars} {review?.reviewBody}
+					
 							</div>
+
 						</div>
 						{sessionUser?.id !== user.id &&
 							// review.reviewerId !== sessionUser?.id &&

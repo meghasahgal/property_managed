@@ -6,6 +6,7 @@ import { getAllUsersThunk } from "../../store/users";
 import "./HomePage.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHouse ,faHouseWindowChimney, faWarehouse, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import AverageRating from "../AverageRating";
 
 
 const HomePage = () => {
@@ -42,10 +43,7 @@ const HomePage = () => {
 									}}
 									className="img-size"
 								>
-									{/* <img
-										id="user-splash-img"
-										src={user?.profileImg}
-									/> */}
+
 								</div>
 								<Link
 									className="user-link"
@@ -55,11 +53,16 @@ const HomePage = () => {
 								</Link>
 
 								<div>
+                                    {user.propertyType == "Residential" ?
 									<FontAwesomeIcon
 										className="house"
 										icon={faHouse}
-									/>
-									Property Type: {user.propertyType}
+									/>:
+                                    <FontAwesomeIcon
+										className="house"
+										icon={faWarehouse}
+									/>}
+									{user.propertyType}
 								</div>
 								<div>
 									<FontAwesomeIcon
@@ -67,14 +70,13 @@ const HomePage = () => {
 										icon={faLocationDot}
 									/>
 									{user.city}, {user.state}
-									{/* <div>{user.avgRating}</div> */}
 								</div>
 								<div>
-									<FontAwesomeIcon
+									{/* <FontAwesomeIcon
 										className="house"
 										icon={faStar}
-									/>
-									{user.avgRating}
+									/> */}
+                                    <AverageRating user={user} />
 								</div>
 							</div>
 						</div>

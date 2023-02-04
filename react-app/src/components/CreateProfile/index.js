@@ -46,7 +46,7 @@ const CreateProfile = () =>{
 			zipcode,
 			is_pm: isPm
 		};
-		console.log(newProfile, "THIS IS THE NEW PROFILE DATA");
+		// console.log(newProfile, "THIS IS THE NEW PROFILE DATA");
 
 		let data = await dispatch(editProfileThunk(newProfile));
 		if (data) {

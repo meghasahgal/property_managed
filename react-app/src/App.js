@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
@@ -16,6 +16,7 @@ import EditProfile from "./components/EditProfile";
 import CreateProfile from "./components/CreateProfile";
 import CreateReview from "./components/CreateReview";
 import EditReview from "./components/EditReview";
+import BecomePMConfirmation from "./components/BecomePMConfirmation";
 import { getReviewsByUserIdThunk } from "./store/reviews";
 
 function App() {
@@ -54,17 +55,21 @@ function App() {
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
 				</ProtectedRoute>
+
 				{/* <ProtectedRoute path="/users/reviews" exact={true}>
 					<ReviewsByUserId />
 				</ProtectedRoute> */}
-				<Route exact path="/users/:userId/profile">
+				{/* <Route exact path="/users/:userId/profile">
 					<CreateProfile />
-				</Route>
+				</Route> */}
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<UserById />
 				</ProtectedRoute>
 				<Route exact path="/users/:userId/edit">
 					<EditProfile />
+				</Route>
+				 <Route path = "/users/:userId/confirmation" exact={true} >
+					<BecomePMConfirmation />
 				</Route>
 				<Route exact path="/users/:userId/reviews/edit">
 					<EditReview />

@@ -4,6 +4,15 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
 import ReviewsByUserId from "../ReviewsByUserId";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faStar,
+	faHouse,
+	faHouseWindowChimney,
+	faWarehouse,
+	faLocationDot,faMoneyCheckDollar
+} from "@fortawesome/free-solid-svg-icons";
+
 
 const UserById = () => {
 	const dispatch = useDispatch();
@@ -50,13 +59,39 @@ const UserById = () => {
 					<div className="title-text">{user.username}</div>
 					<div className="user-details-container">
 						<div className="user-info">
-							<span className="blob">{" · "}</span>
-							<div>Property Type: {user.propertyType}</div>
+							{/* <span className="blob">{" · "}</span> */}
+							<div>{user.pmTagline}</div>
+
 							<div>
 								{" "}
+								{user.propertyType == "Residential" ? (
+									<FontAwesomeIcon
+										className="house"
+										icon={faHouse}
+									/>
+								) : (
+									<FontAwesomeIcon
+										className="house"
+										icon={faWarehouse}
+									/>
+								)}
+								{user.propertyType}
+							</div>
+							<div>
+								<FontAwesomeIcon
+									className="location"
+									icon={faLocationDot}
+								/>{" "}
 								{user.city}
 								{", "}
 								{user.state}
+							</div>
+							<div>
+								<FontAwesomeIcon
+									className="location"
+									icon={faMoneyCheckDollar}
+								/>
+								{user.pmRate} {"%"}
 							</div>
 						</div>
 						<div className="img-container">
@@ -86,6 +121,7 @@ const UserById = () => {
 								</button>
 							)}
 						</div>
+						<div></div>
 						<div>
 							<ReviewsByUserId user={user} />
 						</div>

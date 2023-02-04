@@ -20,8 +20,9 @@ const EditProfile = () => {
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [isPm, setIsPm] = useState();
 
+	const [errors, setErrors] = useState([]);
 
 	//A useEffect that calls all of the setState functions to update the fields
 	useEffect(() => {
@@ -36,6 +37,7 @@ const EditProfile = () => {
 			setCity(user.city);
 			setState(user.state);
 			setZipcode(user.zipcode);
+			setIsPm(user.isPm);
 		}
 	}, [user]);
 
@@ -47,13 +49,14 @@ const EditProfile = () => {
 			username,
 			email,
 			pm_tagline: pmTagline,
-            profile_img: profileImg,
+			profile_img: profileImg,
 			property_type: propertyType,
 			pm_rate: pmRate,
 			phone_number: phoneNumber,
 			city,
 			state,
 			zipcode,
+			is_pm: isPm,
 		};
 
 		let data = await dispatch(editUserThunk(editedProfile));
@@ -67,12 +70,11 @@ const EditProfile = () => {
 	// const handleDelete = () =>
 	// 	dispatch(deleteProfileThunk(data.id));
 
-    const handleCancelClick = (e) => {
+	const handleCancelClick = (e) => {
 		e.preventDefault();
 		history.push(`/users/${userId}`);
 		// hideForm();
 	};
-
 
 	return (
 		<>
@@ -113,15 +115,26 @@ const EditProfile = () => {
 					value={profileImg}
 					onChange={(e) => setProfileImage(e.target.value)}
 				/>
-				<div>Property Type</div>
-				<input
+				{/* <div>Property Type</div> */}
+                <div></div>
+				<label>Property Type </label>
+				<select
+					value={propertyType}
+					onChange={(e) => setPropertyType(e.target.value)}
+				>
+					<option value="--">--</option>
+					<option value="Residential">Residential</option>
+					<option value="Retail">Retail</option>
+					<option value="Commercial">Commercial</option>
+				</select>
+				{/* <input
 					type="text"
 					placeholder={user?.propertyType}
 					required
 					value={propertyType}
 					onChange={(e) => setPropertyType(e.target.value)}
-				/>
-				<div>Property Manager Rate</div>
+				/> */}
+				<div>Your Rate (%)</div>
 				<input
 					type="text"
 					placeholder={user?.pmRate}
@@ -160,6 +173,15 @@ const EditProfile = () => {
 					required
 					value={zipcode}
 					onChange={(e) => setZipcode(e.target.value)}
+					minLength={5}
+				/>
+				<div>Confirm You're a Property Manager</div>
+				<input
+					type="text"
+					placeholder={user?.isPm}
+					required
+					value={isPm}
+					onChange={(e) => setIsPm(e.target.value)}
 				/>
 				<br></br>
 				<div></div>
@@ -175,7 +197,7 @@ const EditProfile = () => {
 					type="submit"
 					disabled={errors.length > 0}
 				>
-					Edit
+					Submit
 				</button>
 			</form>
 		</>

@@ -26,6 +26,7 @@ const CreateProfile = () =>{
 	const [city, setCity] = useState();
 	const [state, setState] = useState();
 	const [zipcode, setZipcode] = useState();
+	const [isPm, setIsPm] = useState();
 	const [errors, setErrors] = useState([]);
 
 	//handleSubmit function
@@ -43,6 +44,7 @@ const CreateProfile = () =>{
 			city,
 			state,
 			zipcode,
+			is_pm: isPm
 		};
 		console.log(newProfile, "THIS IS THE NEW PROFILE DATA");
 
@@ -146,6 +148,14 @@ const CreateProfile = () =>{
 					required
 					value={zipcode}
 					onChange={(e) => setZipcode(e.target.value)}
+				/>
+				<div>Confirm You're a Property Manager</div>
+				<input
+					type="text"
+					placeholder="Please confirm with a True if you're a Property Manager"
+					required
+					value={isPm}
+					onChange={(e) => setIsPm(e.target.value)}
 				/>
 				<br></br>
 				<div></div>

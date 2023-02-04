@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, IntegerField
+from wtforms import StringField, SelectField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, ValidationError, URL, Length,InputRequired
 from app.models import User
 
@@ -19,6 +19,11 @@ def user_exists(form, field):
     if user:
         raise ValidationError('Email address is already in use.')
 
+def check_category(form,field):
+    category = form.data['property_type']
+    if category.startswith('-'):
+        raise ValidationError('Please choose a property type')
+
 
 class ProfileForm(FlaskForm):
     id = IntegerField('user_id', validators=[DataRequired()])
@@ -26,9 +31,11 @@ class ProfileForm(FlaskForm):
     email = StringField('email', validators=[DataRequired()])
     pm_tagline = StringField('pm_tagline', validators=[DataRequired()])
     profile_img=StringField('profile_img')
-    property_type=SelectField('property_type', choices=[('Residential', 'Residential'),('Commercial', 'Commercial'), ('Retail', 'Retail'), ('Industrial', 'Industrial')],validators=[DataRequired()])
+    # property_type=SelectField('property_type', choices=[('Residential', 'Residential'),('Commercial', 'Commercial'), ('Retail', 'Retail'), ('Industrial', 'Industrial')],validators=[DataRequired()])
+    property_type=StringField('property_type', validators=[DataRequired(), check_category])
     pm_rate=IntegerField('pm_rate',validators=[DataRequired()])
     phone_number=StringField('phone_number', validators=[DataRequired()])
     city=StringField('city', validators=[DataRequired()])
     state=StringField('state', validators=[DataRequired()])
     zipcode=StringField('zipcode', validators=[DataRequired(), Length(min=5,max=5,message="Please provide a valid zipcode")])
+    is_pm=BooleanField('Are you a property manager?')

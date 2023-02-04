@@ -9,25 +9,15 @@ const UserById = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	console.log(userId, "userId");
+	// console.log(userId, "userId");
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
-	// console.log("*******");
-	// console.log(user, "THIS IS THE USER");
 
 	const handleDeleteProfile = (userId) => {
 		dispatch(deleteProfileThunk(userId));
 		history.push(`/users`);
 	};
 
-	// const handleEdit = () => {
-	// 	const data = {
-	// 		id,
-	// 		text: editText,
-	// 	};
-
-	// 	dispatch(editTweetThunk(data));
-	// };
 
 	// //button to edit profile
 	const routeChangetoEditForm = () => {
@@ -61,6 +51,7 @@ const UserById = () => {
 					<div className="user-details-container">
 						<div className="user-info">
 							<span className="blob">{" · "}</span>
+							<div>Property Type: {user.propertyType}</div>
 							<div>
 								{" "}
 								{user.city}
@@ -87,7 +78,9 @@ const UserById = () => {
 							)}
 							{user.id === sessionUser?.id && (
 								<button
-									onClick={() => handleDeleteProfile(user?.id)}
+									onClick={() =>
+										handleDeleteProfile(user?.id)
+									}
 								>
 									Delete Profile
 								</button>

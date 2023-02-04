@@ -1,0 +1,14 @@
+.user-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+    column-gap: 18px;
+    line-height: 20px;
+    margin: 16px 0px 40px 0px;
+    padding: 0 80px 0 80px;
+    /* cursor: pointer; */
+    margin-top: 50px;
+    /* opacity: 0.9; */
+}

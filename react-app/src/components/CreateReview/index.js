@@ -55,7 +55,7 @@ const CreateReview = () => {
 					value={reviewBody}
 					onChange={(e) => setReviewBody(e.target.value)}
 				/>
-				<div>Rating</div>
+				<div>Rating (1 - 5)</div>
 				<input
 					type="text"
 					placeholder="Enter your rating"

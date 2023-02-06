@@ -21,8 +21,9 @@ const EditReview = ({reviewId}) => {
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	);
-    const sesh =  sessionUserReview[0]['id']
-    // console.log(sesh, "SESH")
+	console.log(sessionUserReview, "sessionUserReview")
+    const seshReviewId =  sessionUserReview[0]['id']
+    console.log(seshReviewId, "SESHReviewID")
 	const sessionUserId = useSelector((state) => state.session.user.id);
     const reviewUserId = sessionUserReview[0]['reviewerId']
     // [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
@@ -31,8 +32,8 @@ const EditReview = ({reviewId}) => {
 		e.preventDefault();
 
 		const editedReview = {
-			id: sesh,
-			user_id: sessionUserId,
+			id: seshReviewId,
+			user_id: userId,
 			reviewer_id: reviewUserId,
 			review_body: reviewBody,
 			stars,

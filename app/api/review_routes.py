@@ -18,14 +18,14 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # #get all reviews
-# @review_routes.route('/')
-# @login_required
-# def reviews():
-#     """
-#     Query for all reviews and returns them in a list of review dictionaries
-#     """
-#     reviews = Review.query.all()
-#     return {'reviews': [review.to_dict() for review in reviews]}
+@review_routes.route('')
+@login_required
+def reviews():
+    """
+    Query for all reviews and returns them in a list of review dictionaries
+    """
+    reviews = Review.query.all()
+    return {'reviews': [review.to_dict() for review in reviews]}
 
 # User can update a review that they created
 # PUT api/reviews/:id - works

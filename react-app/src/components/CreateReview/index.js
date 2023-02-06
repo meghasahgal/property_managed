@@ -76,7 +76,7 @@ const CreateReview = () => {
 				<button
 					className="small-btn"
 					type="submit"
-					disabled={errors.length > 0}
+					// disabled={errors.length > 0}
 				>
 					Submit
 				</button>

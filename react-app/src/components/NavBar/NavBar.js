@@ -15,16 +15,15 @@ const NavBar = () => {
 	console.log(sessionUser?.isPm, "this is the pm")
 	const sessionUserisPm = sessionUser?.isPm
 
+	// load all users
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
 		// dispatch(getReviewsByUserIdThunk())
 	});
 
-
-
 	const history = useHistory();
 	const dispatch = useDispatch();
-
+	//demo user
 	const demoUser = {
 		email: "marnie@aa.io",
 		password: "password",
@@ -34,43 +33,25 @@ const NavBar = () => {
 		e.preventDefault();
 		return dispatch(login(demoUser.email, demoUser.password));
 	};
+
 	// const [isPm, setIsPm] = useState('false')
 	const [buttonText, setButtonText] = useState("Your Profile");
 	const changeText = (text) => setButtonText(text);
 	// console.log(sessionUserisPm==="true", "is this a val?")
 	console.log(sessionUserisPm == true)
-	//use effect
+
+	//use effect for sessionUserisPm and button text
 	useEffect(() => {
 		if (sessionUserisPm == true) {
-			setButtonText("Your Profile");
+			setButtonText("My Profile");
 		} else {
 			setButtonText("Become a PM");
 		}
-	},[buttonText]);
+	},[buttonText, sessionUserisPm]);
 
-	function handleClick2() {
-		setButtonText("My Profile");
-	}
-	// check if isPm and change nav bar button to respective text
-	// const changeButtonText=(sessionUserisPm)=>{
-
-	// 	if (sessionUserisPm == true){
-	// 		setButtonText['Your Profile']
-	// 	}
-	// 	else {
-	// 		setButtonText['Become a PM']
-	// 	}
+	// function handleClick2() {
+	// 	setButtonText("My Profile");
 	// }
-
-	// const changeButtonText = () =>{
-	// 	setButtonText('Your Profile')
-	// }
-	// console.log(buttonText);
-	// console.log(setButtonText)
-
-	// return (
-	// 	<Button onClick={() => setButtonText("Your Profile")}>{buttonText}</Button>
-	// );
 
 
 	// //button to confirm if someone would like to become a property manager
@@ -85,6 +66,7 @@ const NavBar = () => {
 	};
 
 	return (
+		<div className="header">
 		<nav>
 			<ul>
 				<li>
@@ -94,7 +76,7 @@ const NavBar = () => {
 							src={logo}
 							alt="Managed Logo"
 						/>
-						Home
+
 					</NavLink>
 				</li>
 
@@ -166,6 +148,7 @@ const NavBar = () => {
 				</li>
 			</ul>
 		</nav>
+		</div>
 	);
 };
 

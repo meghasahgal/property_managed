@@ -10,6 +10,7 @@
     padding: 0 5px 0 5px;
     /* cursor: pointer; */
     margin-top: 50px;
+    margin-left: 30px;
     /* opacity: 0.9; */
 }
 
@@ -75,4 +76,9 @@ background-color: #4E7375;
     height: 31px;
     border-radius: 5px;
     border: solid white 1px;
+}
+
+.check{
+    color: #4E7375;
+    margin-right: 10px;
 }

@@ -23,7 +23,7 @@ const EditProfile = () => {
 	const [isPm, setIsPm] = useState();
 	const [errors, setErrors] = useState([]);
 
-	
+
 
 	//A useEffect that calls all of the setState functions to update the fields
 	useEffect(() => {
@@ -176,14 +176,14 @@ const EditProfile = () => {
 					onChange={(e) => setZipcode(e.target.value)}
 					minLength={5}
 				/>
-				<div>Confirm You're a Property Manager</div>
+				{/* <div>Confirm You're a Property Manager</div>
 				<input
 					type="text"
 					placeholder={user?.isPm}
 					required
 					value={isPm}
 					onChange={(e) => setIsPm(e.target.value)}
-				/>
+				/> */}
 				<br></br>
 				<div></div>
 				<button

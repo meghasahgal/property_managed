@@ -22,7 +22,7 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 	// console.log("***********");
 	// console.log(allReviews, "THESE are all reviews");
 
-	// get all reviews for the property
+	// get all reviews for the user
 	const reviews = allReviews.filter((review) => review?.userId == userId); // all reviews for the specific user/PM
 	// console.log("***********");
 	// console.log(reviews, "filtered reviews");
@@ -67,8 +67,8 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 		<div>
 			<hr></hr>
 			<div></div>
-			<div></div>
-			<div className="primary-text">Reviews</div>
+			<h3>{reviews.length? "Reviews": "No Reviews Yet!" }</h3>
+			{/* <div className="primary-text">Reviews</div> */}
 			<hr></hr>
 
 			<div className="reviews-container">

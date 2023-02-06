@@ -114,7 +114,7 @@ const UserById = () => {
 								</div>
 								<div>
 									<FontAwesomeIcon
-										className="location"
+										className="check"
 										icon={faMoneyCheckDollar}
 									/>
 									{user.pmRate} {"%"}

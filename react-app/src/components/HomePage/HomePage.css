@@ -22,7 +22,7 @@
     column-gap: 18px;
     line-height: 20px;
     margin: 16px 0px 40px 0px;
-    padding: 0 80px 0 80px;
+    padding: 0 5px 0 5px;
     margin-top: 50px;
 }
 
@@ -43,9 +43,10 @@ user-splash-img{
             Helvetica Neue,
             sans-serif;
         border-radius: 10px;
-        /* background-size: contain; */
-        /* background-repeat: no-repeat; */
+
         background-size: cover;
+         border: 2px solid #4E7375;
+         /* border: 2px solid #EAEEF1; */
 }
 
 .house{

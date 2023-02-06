@@ -17,6 +17,7 @@ import CreateProfile from "./components/CreateProfile";
 import CreateReview from "./components/CreateReview";
 import EditReview from "./components/EditReview";
 import BecomePMConfirmation from "./components/BecomePMConfirmation";
+import PageNotFound from "./components/PageNotFound";
 import { getReviewsByUserIdThunk } from "./store/reviews";
 
 function App() {
@@ -68,7 +69,7 @@ function App() {
 				<Route exact path="/users/:userId/edit">
 					<EditProfile />
 				</Route>
-				 <Route path = "/users/:userId/confirmation" exact={true} >
+				<Route path="/users/:userId/confirmation" exact={true}>
 					<BecomePMConfirmation />
 				</Route>
 				<Route exact path="/users/:userId/reviews/edit">
@@ -76,6 +77,9 @@ function App() {
 				</Route>
 				<Route exact path="/users/:userId/reviews">
 					<CreateReview />
+				</Route>
+				<Route path="/">
+					<PageNotFound />
 				</Route>
 			</Switch>
 		</BrowserRouter>

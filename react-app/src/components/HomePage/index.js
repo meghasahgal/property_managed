@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsersThunk } from "../../store/users";
 import "./HomePage.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faHouse ,faHouseWindowChimney, faWarehouse, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faHouse , faWarehouse, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import AverageRating from "../AverageRating";
 
 
@@ -72,10 +72,7 @@ const HomePage = () => {
 									{user.city}, {user.state}
 								</div>
 								<div>
-									{/* <FontAwesomeIcon
-										className="house"
-										icon={faStar}
-									/> */}
+
                                     <AverageRating user={user} />
 								</div>
 							</div>
@@ -87,7 +84,6 @@ const HomePage = () => {
 			</div>
 		</>
 
-		// <h1>This is the home page</h1>
 	);
 
 	// const images = useSelector(

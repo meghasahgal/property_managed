@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
+import { getReviewsByUserIdThunk } from "../../store/reviews";
 import ReviewsByUserId from "../ReviewsByUserId";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,9 +11,10 @@ import {
 	faHouse,
 	faHouseWindowChimney,
 	faWarehouse,
-	faLocationDot,faMoneyCheckDollar
+	faLocationDot,
+	faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
-
+import "./UserById.css";
 
 const UserById = () => {
 	const dispatch = useDispatch();
@@ -27,6 +29,18 @@ const UserById = () => {
 		history.push(`/users`);
 	};
 
+	//get all reviews
+	const allReviews = useSelector((state) => Object.values(state?.reviews));
+	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
+	//dispatch the thunk the get the reviews for the userId
+	useEffect(() => {
+		dispatch(getReviewsByUserIdThunk(userId));
+	}, []);
+
+	const routeChangetoCreateReviewForm = () => {
+		let path = `/users/${userId}/reviews`;
+		history.push(path);
+	};
 
 	// //button to edit profile
 	const routeChangetoEditForm = () => {
@@ -52,55 +66,55 @@ const UserById = () => {
 	return (
 		<>
 			{user && user.id && (
-				<div className="user-container-individual-user">
-					<div>
-						<img id="user-splash-img" src={user?.profileImg} />
-					</div>
-					<div className="title-text">{user.username}</div>
-					<div className="user-details-container">
-						<div className="user-info">
-							{/* <span className="blob">{" · "}</span> */}
-							<div>{user.pmTagline}</div>
+				<div className="users-container-individual-user">
+					<div className="img-container">
+						<div
+							style={{
+								backgroundImage: `url('${user?.profileImg}')`,
+							}}
+							className="img-size-user"
+						></div>
 
-							<div>
-								{" "}
-								{user.propertyType == "Residential" ? (
+						<div className="title-text">{user.username}</div>
+						<div className="user-details-container">
+							<div className="user-info">
+								{/* <span className="blob">{" · "}</span> */}
+								<div className="secondary-header-text">
+									{user.pmTagline}
+								</div>
+								<br></br>
+								<div>
+									{" "}
+									{user.propertyType == "Residential" ? (
+										<FontAwesomeIcon
+											className="house"
+											icon={faHouse}
+										/>
+									) : (
+										<FontAwesomeIcon
+											className="house"
+											icon={faWarehouse}
+										/>
+									)}
+									{user.propertyType}
+								</div>
+								<div>
 									<FontAwesomeIcon
-										className="house"
-										icon={faHouse}
-									/>
-								) : (
+										className="location"
+										icon={faLocationDot}
+									/>{" "}
+									{user.city}
+									{", "}
+									{user.state}
+								</div>
+								<div>
 									<FontAwesomeIcon
-										className="house"
-										icon={faWarehouse}
+										className="location"
+										icon={faMoneyCheckDollar}
 									/>
-								)}
-								{user.propertyType}
+									{user.pmRate} {"%"}
+								</div>
 							</div>
-							<div>
-								<FontAwesomeIcon
-									className="location"
-									icon={faLocationDot}
-								/>{" "}
-								{user.city}
-								{", "}
-								{user.state}
-							</div>
-							<div>
-								<FontAwesomeIcon
-									className="location"
-									icon={faMoneyCheckDollar}
-								/>
-								{user.pmRate} {"%"}
-							</div>
-						</div>
-						<div className="img-container">
-							<div
-								className="img-size-id primary-text"
-								style={{
-									backgroundImage: `url('${user?.profileImage}')`,
-								}}
-							></div>
 						</div>
 						<div>
 							{user.id === sessionUser?.id && (
@@ -113,6 +127,7 @@ const UserById = () => {
 							)}
 							{user.id === sessionUser?.id && (
 								<button
+									className="change-profile-button"
 									onClick={() =>
 										handleDeleteProfile(user?.id)
 									}
@@ -122,13 +137,29 @@ const UserById = () => {
 							)}
 						</div>
 						<div></div>
+						<br></br>
 						<div>
 							<ReviewsByUserId user={user} />
 						</div>
 					</div>
+					{sessionUser?.id !== user.id &&
+						// review.reviewerId !== sessionUser?.id &&
+						!allReviewsReviewerIds.includes(sessionUser?.id) && (
+							// <EditReview review={review}/>, need to add a setState and set off an OnChange if want to do it other way
+							// {
+							<button
+								className="change-review-button"
+								onClick={routeChangetoCreateReviewForm}
+							>
+								Create Review
+							</button>
+							// }
+						)}
 					<div>
 						{user.id != sessionUser?.id && (
-							<button>Chat with Me!</button>
+							<button className="btn-secondary">
+								Chat with Me!
+							</button>
 						)}
 					</div>
 				</div>

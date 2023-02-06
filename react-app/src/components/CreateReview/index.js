@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createReviewThunk, editReviewThunk } from "../../store/reviews";
+import "./CreateReview.css"
 // have this render on the ReviewById component
 const CreateReview = () => {
 	const dispatch = useDispatch();

@@ -29,7 +29,7 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	); // review by the specific session user
-	console.log(sessionUserReview, "THIS IS THE SESSION USER's REVIEW");
+	// console.log(sessionUserReview, "THIS IS THE SESSION USER's REVIEW");
 
 	//get all reviewerIds related to the reviews:
 	//map over reviews:
@@ -76,12 +76,12 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 					<div className="review-id" key={review.id}>
 						<div className="review-details">
 							<div className="review-font">
-								{review?.stars} {review?.reviewBody}
-					
+								{review?.stars} {""} {review?.reviewBody}{""}
+
 							</div>
 
 						</div>
-						{sessionUser?.id !== user.id &&
+						{/* {sessionUser?.id !== user.id &&
 							// review.reviewerId !== sessionUser?.id &&
 								!allReviewsReviewerIds.includes(
 									sessionUser?.id) &&(
@@ -95,7 +95,7 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 									Create Review
 								</button>
 								// }
-							)}
+							)} */}
 						{review.reviewerId === sessionUser?.id && (
 							<button
 								className="change-review-button"

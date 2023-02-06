@@ -21,8 +21,9 @@ const EditProfile = () => {
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
 	const [isPm, setIsPm] = useState();
-
 	const [errors, setErrors] = useState([]);
+
+	
 
 	//A useEffect that calls all of the setState functions to update the fields
 	useEffect(() => {

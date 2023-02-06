@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import { login } from "../../store/session";
-
-import BecomePMConfirmation from "../BecomePMConfirmation";
+import { getAllUsersThunk } from "../../store/users";
 import "./NavBar.css";
+import logo from "../NavBar/logo.png";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
+	console.log(sessionUser?.is_Pm, "session user is PM?")
+	console.log(sessionUser, "this is the session user")
+	console.log(sessionUser?.id, "this is the id")
+	console.log(sessionUser?.isPm, "this is the pm")
+	const sessionUserisPm = sessionUser?.isPm
+
+	useEffect(() => {
+		dispatch(getAllUsersThunk());
+		// dispatch(getReviewsByUserIdThunk())
+	});
+
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	//demo user
-	const firstUser = useSelector((state) => state.users[1]);
-
 	const demoUser = {
-		email: firstUser?.email,
+		email: "marnie@aa.io",
 		password: "password",
 	};
 
@@ -24,16 +32,58 @@ const NavBar = () => {
 		e.preventDefault();
 		return dispatch(login(demoUser.email, demoUser.password));
 	};
+	// const [isPm, setIsPm] = useState('false')
+	const [buttonText, setButtonText] = useState("Become A PM");
+	const changeText = (text) => setButtonText(text);
+	// console.log(sessionUserisPm==="true", "is this a val?")
+	console.log(sessionUserisPm == true)
+	// check if isPm and change nav bar button to respective text
+	// const changeButtonText=(sessionUserisPm)=>{
+
+	// 	if (sessionUserisPm == true){
+	// 		setButtonText['Your Profile']
+	// 	}
+	// 	else {
+	// 		setButtonText['Become a PM']
+	// 	}
+	// }
+
+	// const changeButtonText = () =>{
+	// 	setButtonText('Your Profile')
+	// }
+	// console.log(buttonText);
+	// console.log(setButtonText)
+
+	// return (
+	// 	<Button onClick={() => setButtonText("Your Profile")}>{buttonText}</Button>
+	// );
+
+
+	// //button to confirm if someone would like to become a property manager
+	const routeChangetoEditForm = () => {
+		let path = `/users/${sessionUser.id}/confirmation`;
+		history.push(path);
+	};
+
+	const routeChangetoEditProfileForm = () => {
+		let path = `/users/${sessionUser.id}`;
+		history.push(path);
+	};
 
 	return (
 		<nav>
 			<ul>
 				<li>
 					<NavLink to="/" exact={true} activeClassName="active">
+						<img
+							className="logoImg"
+							src={logo}
+							alt="Managed Logo"
+						/>
 						Home
 					</NavLink>
 				</li>
-				<li>
+				{/* <li>
 					<NavLink to="/login" exact={true} activeClassName="active">
 						Login
 					</NavLink>
@@ -46,42 +96,75 @@ const NavBar = () => {
 					>
 						Sign Up
 					</NavLink>
-				</li>
+				</li> */}
+				{sessionUser ? (
+					<>
+						<li className="barLink">
+							<LogoutButton className="navButton" />
+						</li>
+						{/* <li className="barLink">
+							<NavLink
+								to={`/users/${sessionUser.id}`}
+								exact={true}
+							>
+								{sessionUser.username}'s Profile
+							</NavLink>
+						</li> */}
+						{(sessionUser.isPm == true) ? (
+							<li className="barLink">
+								{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
+								<button
+								OnClick={()=>{
+									// changeButtonText(sessionUserisPm)
+									routeChangetoEditForm();
+									changeText("Your Profile")
+									// setButtonText('Your Profile')
+								}}
+								>
+									{buttonText}
+								</button>
+							</li>
+						) : (
+							<li className="barLink">
+								<button
+
+								>
+									{buttonText}
+								</button>
+							</li>
+						)}
+					</>
+				) : (
+					<>
+						<li className="barLink">
+							<NavLink
+								to="/login"
+								exact={true}
+								activeClassName="active"
+							>
+								Login
+							</NavLink>
+						</li>
+						<li className="barLink">
+							<NavLink
+								to="/sign-up"
+								exact={true}
+								activeClassName="active"
+							>
+								Sign Up
+							</NavLink>
+						</li>
+						{/* <li className="barLink">
+							<button className="navButton" onClick={handleClick}>
+								Demo Login
+							</button>
+						</li> */}
+					</>
+				)}
 
 				{/* <li>
-					<NavLink to="/users" exact={true} activeClassName="active">
-						Users
-					</NavLink>
-				</li> */}
-				{/* <li>
-					<NavLink
-						to="/users/profile"
-						exact={true}
-						activeClassName="active"
-					>
-						Become a Property Manager
-					</NavLink>
-				</li> */}
-				<li>
-					{sessionUser?.id && (
-						<button
-							className="btn-create-profile"
-							onClick={() =>
-								history.push(
-									`users/${sessionUser.id}/confirmation`
-								)
-							}
-							// onClick={() =>
-							// 	history.push(`/users/${sessionUser.id}/`)
-							// }
-						>
-							Become a Property Manager
-						</button>
-					)}
-				</li>
-				<li>
 					<LogoutButton />
-				</li>
+				</li> */}
 				<li>
 					<button onClick={handleClick}>Demo Login</button>
 				</li>
@@ -93,17 +176,17 @@ const NavBar = () => {
 export default NavBar;
 
 // {
-// 	sessionUser.shopName ? (
+// 	sessionUser.isPm ? (
 // 		<li className="barLink">
-// 			<Link to={`/store/${sessionUser.id}`}>{sessionUser?.shopName}</Link>
+// 			<Link to={`/users/${sessionUser.id}`}>My Profile</Link>
 // 		</li>
 // 	) : (
 // 		<li className="barLink">
 // 			<button
 // 				className="navButton"
-// 				onClick={() => setIsOpenAddShop(true)}
+// 				onClick={() =>`users/${sessionUser.id}/`}
 // 			>
-// 				Become a Vendor
+// 				Become a Property Manager
 // 			</button>
 // 		</li>
 // 	);

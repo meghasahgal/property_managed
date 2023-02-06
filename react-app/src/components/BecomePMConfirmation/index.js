@@ -21,7 +21,8 @@ const BecomePMConfirmation = () => {
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
-	const [isPm, setIsPm] = useState(false);
+	const [isPm, setIsPm] = useState("false");
+
 
 	//useEffect/set state variables
 	useEffect(() => {
@@ -66,6 +67,10 @@ const BecomePMConfirmation = () => {
 		history.push(path);
 	};
 
+	const routeChangeToHome = () => {
+		history.push("/");
+	};
+
 	return (
 		<>
 			<div>Are you sure you'd like to become a Property Manager?</div>
@@ -76,10 +81,12 @@ const BecomePMConfirmation = () => {
 					handleEdit();
 					setIsPm((prev) => !prev);
 					routeChangetoEditForm();
+
 				}}
 			>
-				YES!
+				Yes!
 			</button>
+			<button onClick={routeChangeToHome}>Go Back Home</button>
 		</>
 	);
 };

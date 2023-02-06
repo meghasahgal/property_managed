@@ -18,7 +18,7 @@ import CreateReview from "./components/CreateReview";
 import EditReview from "./components/EditReview";
 import BecomePMConfirmation from "./components/BecomePMConfirmation";
 import PageNotFound from "./components/PageNotFound";
-import { getReviewsByUserIdThunk } from "./store/reviews";
+import { getAllReviewsThunk } from "./store/reviews";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -33,7 +33,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
-		// dispatch(getReviewsByUserIdThunk())
+		dispatch(getAllReviewsThunk())
 	});
 
 	if (!loaded) {

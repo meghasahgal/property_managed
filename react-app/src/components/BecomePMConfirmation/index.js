@@ -2,14 +2,21 @@ import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserThunk } from "../../store/users";
+import { editUserThunk, getAllUsersThunk } from "../../store/users";
 
 const BecomePMConfirmation = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+
+	useEffect(() => {
+		dispatch(getAllUsersThunk());
+	},[dispatch]);
+
 	const sessionUserId = useSelector((state) => state.session.user.id);
+	console.log(sessionUserId, "THIS IS THE SESH USER ID IN EDIT PROFILE");
 	const user = useSelector((state) => state.users[sessionUserId]);
+	console.log(user, "THIS IS THE USER IN BECOME A PM")
 	//set state variables
 	const [username, setUsername] = useState(user?.username);
 	const [email, setEmail] = useState(user?.email);

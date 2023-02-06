@@ -21,7 +21,6 @@ const EditReview = ({reviewId}) => {
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	);
-    // console.log(sessionUserReview, "SESSIONUSERREVIEW")
     const sesh =  sessionUserReview[0]['id']
     // console.log(sesh, "SESH")
 	const sessionUserId = useSelector((state) => state.session.user.id);
@@ -68,7 +67,7 @@ const EditReview = ({reviewId}) => {
 					value={reviewBody}
 					onChange={(e) => setReviewBody(e.target.value)}
 				/>
-				<div>Rating</div>
+				<div>Rating (1 to 5)</div>
 				<input
 					type="text"
 					placeholder={sessionUserReview[0]['stars']}
@@ -89,7 +88,7 @@ const EditReview = ({reviewId}) => {
 				<button
 					className="small-btn"
 					type="submit"
-					disabled={errors.length > 0}
+					// disabled={errors.length > 0}
 				>
 					Edit
 				</button>

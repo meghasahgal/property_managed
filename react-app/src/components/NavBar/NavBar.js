@@ -5,7 +5,7 @@ import LogoutButton from "../auth/LogoutButton";
 import { login } from "../../store/session";
 import { getAllUsersThunk } from "../../store/users";
 import "./NavBar.css";
-import logo from "../NavBar/logo.png";
+import logo from "../NavBar/logo2.png";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -20,6 +20,8 @@ const NavBar = () => {
 		// dispatch(getReviewsByUserIdThunk())
 	});
 
+
+
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -33,10 +35,22 @@ const NavBar = () => {
 		return dispatch(login(demoUser.email, demoUser.password));
 	};
 	// const [isPm, setIsPm] = useState('false')
-	const [buttonText, setButtonText] = useState("Become A PM");
+	const [buttonText, setButtonText] = useState("Your Profile");
 	const changeText = (text) => setButtonText(text);
 	// console.log(sessionUserisPm==="true", "is this a val?")
 	console.log(sessionUserisPm == true)
+	//use effect
+	useEffect(() => {
+		if (sessionUserisPm == true) {
+			setButtonText("Your Profile");
+		} else {
+			setButtonText("Become a PM");
+		}
+	},[buttonText]);
+
+	function handleClick2() {
+		setButtonText("My Profile");
+	}
 	// check if isPm and change nav bar button to respective text
 	// const changeButtonText=(sessionUserisPm)=>{
 
@@ -83,54 +97,40 @@ const NavBar = () => {
 						Home
 					</NavLink>
 				</li>
-				{/* <li>
-					<NavLink to="/login" exact={true} activeClassName="active">
-						Login
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to="/sign-up"
-						exact={true}
-						activeClassName="active"
-					>
-						Sign Up
-					</NavLink>
-				</li> */}
+
 				{sessionUser ? (
 					<>
 						<li className="barLink">
 							<LogoutButton className="navButton" />
 						</li>
-						{/* <li className="barLink">
-							<NavLink
-								to={`/users/${sessionUser.id}`}
-								exact={true}
-							>
-								{sessionUser.username}'s Profile
-							</NavLink>
-						</li> */}
-						{(sessionUser.isPm == true) ? (
+
+						{sessionUser.isPm == true ? (
 							<li className="barLink">
 								{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
-								<button
-								OnClick={()=>{
-									// changeButtonText(sessionUserisPm)
-									routeChangetoEditForm();
-									changeText("Your Profile")
-									// setButtonText('Your Profile')
-								}}
-								>
-									{buttonText}
-								</button>
+								<NavLink to={`/users/${sessionUser.id}`}>
+									<button
+										OnClick={()=>
+
+											// 	changeText("Your Profile")
+											// 	routeChangetoEditForm();
+											setButtonText('Your Profile')
+										}
+									>
+										{buttonText}
+									</button>
+								</NavLink>
 							</li>
 						) : (
 							<li className="barLink">
+								<NavLink to={`/users/${sessionUser.id}/confirmation`}>
 								<button
-
+									onClick={() =>
+										setButtonText('Become a PM')
+									}
 								>
 									{buttonText}
 								</button>
+								</NavLink>
 							</li>
 						)}
 					</>
@@ -154,11 +154,7 @@ const NavBar = () => {
 								Sign Up
 							</NavLink>
 						</li>
-						{/* <li className="barLink">
-							<button className="navButton" onClick={handleClick}>
-								Demo Login
-							</button>
-						</li> */}
+
 					</>
 				)}
 

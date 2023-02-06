@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
-import { getReviewsByUserIdThunk } from "../../store/reviews";
+import { getAllReviewsThunk, getReviewsByUserIdThunk } from "../../store/reviews";
 import ReviewsByUserId from "../ReviewsByUserId";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -33,9 +33,14 @@ const UserById = () => {
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
 	//dispatch the thunk the get the reviews for the userId
+	useEffect(()=>{
+		dispatch(getAllReviewsThunk())
+	},[dispatch])
 	useEffect(() => {
 		dispatch(getReviewsByUserIdThunk(userId));
-	}, []);
+	}, [dispatch]);
+
+
 
 	const routeChangetoCreateReviewForm = () => {
 		let path = `/users/${userId}/reviews`;

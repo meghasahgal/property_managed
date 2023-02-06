@@ -4,3 +4,23 @@
     font-family: "Asap", sans-serif;
         background-color: #F2D9D1
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #D9A190;
+    border-radius: 10px;
+
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+input {
+    text-align: left;
+}

@@ -4,11 +4,11 @@ from app.models import db, Review, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_reviews():
 
-    review1 = Review(stars = '1.5', review_body = "Excellent service!",     user_id = 1, reviewer_id=2)
-    review2 = Review(stars = '4.3', review_body = "Quick and to the point!", user_id = 2, reviewer_id=1)
-    review3 = Review(stars = '1.5', review_body = "Addresses all of my needs in time!", user_id = 3, reviewer_id=4)
-    review4 = Review(stars = '3.5', review_body = "Friendly and responsive -- great caretaker!", user_id = 1, reviewer_id=5)
-    review5 = Review(stars = '4.2', review_body = "Loves to help out!", user_id = 1, reviewer_id=3)
+    review1 = Review(stars = '2', review_body = "Excellent service!",     user_id = 1, reviewer_id=2)
+    review2 = Review(stars = '4', review_body = "Quick and to the point!", user_id = 2, reviewer_id=1)
+    review3 = Review(stars = '2', review_body = "Addresses all of my needs in time!", user_id = 3, reviewer_id=4)
+    review4 = Review(stars = '3', review_body = "Friendly and responsive -- great caretaker!", user_id = 1, reviewer_id=5)
+    review5 = Review(stars = '4', review_body = "Loves to help out!", user_id = 1, reviewer_id=3)
 
     db.session.add_all([review1,review2,review3,review4,review5])
     db.session.commit()

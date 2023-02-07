@@ -18,6 +18,7 @@ import CreateReview from "./components/CreateReview";
 import EditReview from "./components/EditReview";
 import BecomePMConfirmation from "./components/BecomePMConfirmation";
 import PageNotFound from "./components/PageNotFound";
+import Footer from "./components/Footer";
 import { getAllReviewsThunk } from "./store/reviews";
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
 					<PageNotFound />
 				</Route>
 			</Switch>
+			<Footer />
 		</BrowserRouter>
 	);
 }

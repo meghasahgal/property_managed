@@ -1,0 +1,53 @@
+.footer-page-container {
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    padding: 0px 0px 0px 0px;
+    position: fixed;
+    /* background-color:#84A3A8; */
+    width: 100%;
+    /* display: flex; */
+
+}
+
+.about {
+    display: flex;
+    justify-content: center;
+    /* padding-top: 20px; */
+    color: #4E7375;
+    text-decoration: none;
+
+}
+
+.footerLink:link {
+    text-decoration: none;
+    color: #84A3A8;
+    /* background-color: #84A3A8; */
+}
+
+
+.footerLink:visited {
+    text-decoration: none;
+    color: white;
+    /* background-color: #84A3A8; */
+}
+
+
+.footerLink:hover {
+    text-decoration: none;
+    color: white;
+    /* background-color: #84A3A8; */
+}
+
+
+.footerLink:active {
+    text-decoration: none;
+}
+
+.bottom-text {
+    display: flex;
+    justify-content: center;
+    color: #84A3A8;
+    /* padding-bottom: 10px; */
+
+}

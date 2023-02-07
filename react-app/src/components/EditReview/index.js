@@ -16,14 +16,14 @@ const EditReview = ({reviewId}) => {
     const review = useSelector((state) => state.reviews[reviewId]);
 
     const reviews = useSelector((state) => Object.values(state.reviews))
-    console.log(reviews, "THESE ARE THE REVIEWS")
+    // console.log(reviews, "THESE ARE THE REVIEWS")
     //look at array of sessionUserReview
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	);
-	console.log(sessionUserReview, "sessionUserReview")
+	// console.log(sessionUserReview, "sessionUserReview")
     const seshReviewId =  sessionUserReview[0]['id']
-    console.log(seshReviewId, "SESHReviewID")
+    // console.log(seshReviewId, "SESHReviewID")
 	const sessionUserId = useSelector((state) => state.session.user.id);
     const reviewUserId = sessionUserReview[0]['reviewerId']
     // [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
@@ -38,7 +38,7 @@ const EditReview = ({reviewId}) => {
 			review_body: reviewBody,
 			stars,
 		};
-		console.log(editedReview, "THIS IS THE EDITED REVIEW");
+		// console.log(editedReview, "THIS IS THE EDITED REVIEW");
 		let data = await dispatch(editReviewThunk(editedReview));
 		if (data) {
 			setErrors(data);

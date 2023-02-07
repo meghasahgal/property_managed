@@ -9,10 +9,10 @@ import logo from "../NavBar/logo2.png";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-	console.log(sessionUser?.is_Pm, "session user is PM?")
-	console.log(sessionUser, "this is the session user")
-	console.log(sessionUser?.id, "this is the id")
-	console.log(sessionUser?.isPm, "this is the pm")
+	// console.log(sessionUser?.is_Pm, "session user is PM?")
+	// console.log(sessionUser, "this is the session user")
+	// console.log(sessionUser?.id, "this is the id")
+	// console.log(sessionUser?.isPm, "this is the pm")
 	const sessionUserisPm = sessionUser?.isPm
 
 	// load all users
@@ -38,7 +38,7 @@ const NavBar = () => {
 	const [buttonText, setButtonText] = useState("Your Profile");
 	const changeText = (text) => setButtonText(text);
 	// console.log(sessionUserisPm==="true", "is this a val?")
-	console.log(sessionUserisPm == true)
+	// console.log(sessionUserisPm == true)
 
 	//use effect for sessionUserisPm and button text
 	useEffect(() => {

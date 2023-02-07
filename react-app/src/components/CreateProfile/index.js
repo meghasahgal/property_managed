@@ -10,7 +10,7 @@ const CreateProfile = () =>{
 
 	const user = useSelector((state) => state.users[userId]);
 	const sessionUserId = useSelector((state) => state.session.user.id);
-	console.log(sessionUserId, "THIS IS THE SESSION USER ID IN CREATE PROFILE");
+	// console.log(sessionUserId, "THIS IS THE SESSION USER ID IN CREATE PROFILE");
 	const sessionUsername = useSelector((state) => state.session.user.username);
 	const sessionUserEmail = useSelector((state) => state.session.user.email);
 	const { userId } = useParams(); // userId of PM/user

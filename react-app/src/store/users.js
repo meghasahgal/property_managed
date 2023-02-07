@@ -82,7 +82,7 @@ export const createProfileThunk = (data) => async (dispatch) => {
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
-		console.log(data, "is data is here?")
+		// console.log(data, "is data is here?")
 		if (data.errors) {
 			return data.errors;
 		}

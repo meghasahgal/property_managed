@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserThunk, deleteProfileThunk } from "../../store/users";
+import { editUserThunk } from "../../store/users";
 
 const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	const user = useSelector((state) => state.users[userId]);
+	const user = useSelector((state)=> state.session.user)
+	// const user = useSelector((state) => state.users[userId]);
 	//set state variables
 	const [username, setUsername] = useState(user?.username);
 	const [email, setEmail] = useState(user?.email);

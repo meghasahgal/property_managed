@@ -15,7 +15,9 @@ const BecomePMConfirmation = () => {
 
 	const sessionUserId = useSelector((state) => state.session.user.id);
 	// console.log(sessionUserId, "THIS IS THE SESH USER ID IN EDIT PROFILE");
-	const user = useSelector((state) => state.users[sessionUserId]);
+	// const user = useSelector((state) => state.users[sessionUserId]);
+	const user = useSelector((state) => state.session.user);
+
 	// console.log(user, "THIS IS THE USER IN BECOME A PM")
 	//set state variables
 	const [username, setUsername] = useState(user?.username);

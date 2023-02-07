@@ -35,7 +35,7 @@ const NavBar = () => {
 	};
 
 	// const [isPm, setIsPm] = useState('false')
-	const [buttonText, setButtonText] = useState("Your Profile");
+	const [buttonText, setButtonText] = useState("Become a PM");
 	const changeText = (text) => setButtonText(text);
 	// console.log(sessionUserisPm==="true", "is this a val?")
 	// console.log(sessionUserisPm == true)

@@ -1,3 +1,7 @@
+# import your socketio object (with the other imports at the
+# top of the file)
+# in this example, the file from the previous step is named socket.py
+from .socket import socketio
 import os
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
@@ -33,6 +37,9 @@ app.register_blueprint(review_routes, url_prefix='/api/reviews')
 
 db.init_app(app)
 Migrate(app, db)
+# initialize the app with the socket instance
+# you could include this line right after Migrate(app, db)
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -94,4 +101,6 @@ def react_root(path):
 def not_found(e):
     return app.send_static_file('index.html')
 
-
+# at the bottom of the file, use this to run the app
+if __name__ == '__main__':
+    socketio.run(app)

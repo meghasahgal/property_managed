@@ -42,9 +42,12 @@ const AverageRatingCalc = ({ user }) => {
 	return (
 		<div>
 			{" "}
+			{filteredReviewsForStars.length ? (
 			<FontAwesomeIcon className="star"
-				icon={filteredReviewsForStars.length ? faStar : null}
-			/>{" "}
+				icon={faStar}
+			/>
+			):null}
+			{" "}
 			{averageStars(filteredReviewsForStars, userId)
 				? averageStars(filteredReviewsForStars, userId).toFixed(1)
 				: "New!"}
@@ -52,3 +55,7 @@ const AverageRatingCalc = ({ user }) => {
 	);
 };
 export default AverageRatingCalc;
+
+{/* <FontAwesomeIcon className="star"
+				icon={filteredReviewsForStars.length ? faStar :null}
+			/>{" "} */}

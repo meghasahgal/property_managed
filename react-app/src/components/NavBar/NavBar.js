@@ -140,9 +140,7 @@ const NavBar = () => {
 					</>
 				)}
 
-				{/* <li>
-					<LogoutButton />
-				</li> */}
+		
 				<li>
 					<button onClick={handleClick}>Demo Login</button>
 				</li>

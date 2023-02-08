@@ -34,7 +34,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
-		dispatch(getAllReviewsThunk());
+		// dispatch(getAllReviewsThunk());
 	});
 
 	if (!loaded) {
@@ -45,7 +45,7 @@ function App() {
 		<BrowserRouter>
 			<NavBar />
 			<Switch>
-				<Route path={["/"]} exact={true}>
+				<Route path={["/", "/users"]} exact={true}>
 					<HomePage />
 				</Route>
 				<Route path="/login" exact={true}>
@@ -54,22 +54,31 @@ function App() {
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
+				<ProtectedRoute path="/users" exact={true}>
+					<UsersList />
+				</ProtectedRoute>
 
+				{/* <ProtectedRoute path="/users/reviews" exact={true}>
+					<ReviewsByUserId />
+				</ProtectedRoute> */}
+				{/* <Route exact path="/users/:userId/profile">
+					<CreateProfile />
+				</Route> */}
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<UserById />
 				</ProtectedRoute>
-				<ProtectedRoute path="/users/:userId/edit" exact={true}>
+				<ProtectedRoute exact path="/users/:userId/edit">
 					<EditProfile />
 				</ProtectedRoute>
-				<ProtectedRoute path="/users/:userId/confirmation" exact={true}>
+				<Route path="/users/:userId/confirmation" exact={true}>
 					<BecomePMConfirmation />
-				</ProtectedRoute>
-				<ProtectedRoute exact path="/users/:userId/reviews/edit">
+				</Route>
+				<Route exact path="/users/:userId/reviews/edit">
 					<EditReview />
-				</ProtectedRoute>
-				<ProtectedRoute exact path="/users/:userId/reviews">
+				</Route>
+				<Route exact path="/users/:userId/reviews">
 					<CreateReview />
-				</ProtectedRoute>
+				</Route>
 				<Route path="/">
 					<PageNotFound />
 				</Route>

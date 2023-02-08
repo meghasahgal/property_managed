@@ -15,7 +15,7 @@ const deleteUser = (userId) => ({
 //thunks
 // GET ALL USERS (PM's)
 export const getAllUsersThunk = () => async (dispatch) => {
-	const res = await fetch("/api/users/");
+	const res = await fetch("/api/users");
 	// const res = await fetch("/api/users");
 
 	if (res.ok) {
@@ -40,7 +40,7 @@ export const getUserThunk = (userId) => async (dispatch) => {
 export const editUserThunk = (data) => async (dispatch) => {
 	const editedUser = JSON.stringify(data);
 
-	const res = await fetch(`/api/users/${data.id}`, {
+	const res = await fetch(`/api/users/${data.id}/`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",

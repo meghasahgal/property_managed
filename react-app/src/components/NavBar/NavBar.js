@@ -91,7 +91,7 @@ const NavBar = () => {
 								{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
 								<NavLink to={`/users/${sessionUser.id}`}>
 									<button
-										OnClick={()=>
+										onClick={()=>
 
 											// 	changeText("Your Profile")
 											// 	routeChangetoEditForm();
@@ -140,7 +140,7 @@ const NavBar = () => {
 					</>
 				)}
 
-		
+
 				<li>
 					<button onClick={handleClick}>Demo Login</button>
 				</li>

@@ -7,9 +7,7 @@ import { getAllReviewsThunk, getReviewsByUserIdThunk } from "../../store/reviews
 import ReviewsByUserId from "../ReviewsByUserId";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-	faStar,
 	faHouse,
-	faHouseWindowChimney,
 	faWarehouse,
 	faLocationDot,
 	faMoneyCheckDollar,

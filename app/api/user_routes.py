@@ -44,7 +44,7 @@ def user(id):
 # GET api/users - ok
 
 @user_routes.route('/')
-# @login_required
+# @login_required - took out
 def users():
     """
     Query for all users that are PMs and returns them in a list of user dictionaries

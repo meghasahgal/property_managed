@@ -18,65 +18,33 @@ const BecomePMConfirmation = () => {
 	// const user = useSelector((state) => state.users[sessionUserId]);
 	const user = useSelector((state) => state.session.user);
 
-	// console.log(user, "THIS IS THE USER IN BECOME A PM")
-	//set state variables
-	const [username, setUsername] = useState(user?.username);
-	const [email, setEmail] = useState(user?.email);
-	const [pmTagline, setPmTagline] = useState("");
-	const [profileImg, setProfileImage] = useState("");
-	const [propertyType, setPropertyType] = useState("");
-	const [pmRate, setPmRate] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [city, setCity] = useState("");
-	const [state, setState] = useState("");
-	const [zipcode, setZipcode] = useState("");
-	const [isPm, setIsPm] = useState(false);
-
-
-	//useEffect/set state variables
-	// useEffect(() => {
-	// 	if (user) {
-	// 		setUsername(user.username);
-	// 		setEmail(user.email);
-	// 		setPmTagline(user.pmTagline);
-	// 		setProfileImage(user.profileImg);
-	// 		setPropertyType(user.propertyType);
-	// 		setPmRate(user.pmRate);
-	// 		setPhoneNumber(user.phoneNumber);
-	// 		setCity(user.city);
-	// 		setState(user.state);
-	// 		setZipcode(user.zipcode);
-	// 		setIsPm(user.isPm);
-	// 	}
-	// }, [user]);
-
 	console.log(user.isPm, "user is pm? in BECOME A PM")
 
 	//handle Edit
-	const handleEdit = async (e) => {
-		const editedProfile = {
-			id: sessionUserId,
-			username,
-			email,
-			pm_tagline: pmTagline,
-			profile_img: profileImg,
-			property_type: propertyType,
-			pm_rate: pmRate,
-			phone_number: phoneNumber,
-			city,
-			state,
-			zipcode,
-			is_pm: !isPm,
-		};
+	// const handleEdit = async (e) => {
+	// 	const editedProfile = {
+	// 		id: sessionUserId,
+	// 		username,
+	// 		email,
+	// 		pm_tagline: pmTagline,
+	// 		profile_img: profileImg,
+	// 		property_type: propertyType,
+	// 		pm_rate: pmRate,
+	// 		phone_number: phoneNumber,
+	// 		city,
+	// 		state,
+	// 		zipcode,
+	// 		is_pm: !isPm,
+	// 	};
 
-		let data = await dispatch(editUserThunk(editedProfile));
-	};
+	// 	let data = await dispatch(editUserThunk(editedProfile));
+	// };
 
 	//route change to edit the form
 	const routeChangetoEditForm = () => {
 		let path = `/users/${sessionUserId}/edit`;
 		history.push(path);
-		console.log(path, "path")
+		// console.log(path, "path")
 	};
 
 	const routeChangeToHome = () => {

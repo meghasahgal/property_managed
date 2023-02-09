@@ -102,5 +102,9 @@ const HomePage = () => {
 	// 	shallowEqual
 	// );
 };
-
 export default HomePage;
+
+    // const alert = (e) => {
+	// 	e.preventDefault();
+	// 	window.alert("You've deleted the review!");
+	// };

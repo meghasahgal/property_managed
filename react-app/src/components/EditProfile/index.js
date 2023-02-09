@@ -23,7 +23,7 @@ const EditProfile = () => {
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
-	const [isPm, setIsPm] = useState(true);
+	const [isPm, setIsPm] = useState(false);
 	const [errors, setErrors] = useState([]);
 
 	// check if user is a pm, render the form conditionally
@@ -47,6 +47,7 @@ const EditProfile = () => {
 	//handleEdit function
 	const handleEdit = async (e) => {
 		e.preventDefault();
+
 		const editedProfile = {
 			id: user.id,
 			username: user.username,
@@ -64,17 +65,19 @@ const EditProfile = () => {
 
 		let data = await dispatch(editUserThunk(editedProfile));
 		if (data) {
+			setIsPm((prev) => !prev);
 			setErrors(data);
+			history.push(`/users/${user.id}`);
 		}
-		else {
-			history.push(`/users/${userId}`);
-		}
+		// else {
+		// 	history.push(`/users/${user.id}`);
+		// }
 	};
 
 
 	const handleCancelClick = (e) => {
 		e.preventDefault();
-		history.push(`/users/${userId}`);
+		history.push(`/`);
 		// hideForm();
 	};
 
@@ -118,7 +121,7 @@ const EditProfile = () => {
 					onChange={(e) => setProfileImage(e.target.value)}
 				/>
 				{/* <div>Property Type</div> */}
-                <div></div>
+				<div></div>
 				<label>Property Type </label>
 				<select
 					value={propertyType}
@@ -129,13 +132,7 @@ const EditProfile = () => {
 					<option value="Retail">Retail</option>
 					<option value="Commercial">Commercial</option>
 				</select>
-				{/* <input
-					type="text"
-					placeholder={user?.propertyType}
-					required
-					value={propertyType}
-					onChange={(e) => setPropertyType(e.target.value)}
-				/> */}
+
 				<div>Your Rate (%)</div>
 				<input
 					type="text"
@@ -197,7 +194,10 @@ const EditProfile = () => {
 				<button
 					className="small-btn"
 					type="submit"
-					// disabled={errors.length > 0}
+					// onClick={() => {
+
+					// }}
+					disabled={errors.length > 0}
 				>
 					Submit
 				</button>

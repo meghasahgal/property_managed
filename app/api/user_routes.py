@@ -43,15 +43,21 @@ def user(id):
 # User property manager profiles can be retrieved
 # GET api/users - ok
 
-@user_routes.route('/')
-# @login_required - took out
+@user_routes.route('')
+# @login_required - took out and took out / in path
 def users():
     """
     Query for all users that are PMs and returns them in a list of user dictionaries
     """
     users = User.query.filter(User.is_pm == True).all()
     # users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+    res = dict()
+    for user in users:
+        current_user = user.to_dict()
+        res[current_user['id']] = current_user
+    return res
+
+    # return {'users': [user.to_dict() for user in users]}
 
 
 # User can create their profile based on user id - works
@@ -61,6 +67,7 @@ def users():
 def create_profile(id):
     form = ProfileForm()
     print(form, "form")
+    print(id, "id in user route")
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -83,6 +90,7 @@ def create_profile(id):
 def edit_profile(id):
     user= User.query.get(id)
     form = ProfileForm()
+
 
     if form.data["id"] != current_user.id:
         # print(form.data['user_id'], "userID")

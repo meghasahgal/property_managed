@@ -40,7 +40,7 @@ export const getUserThunk = (userId) => async (dispatch) => {
 export const editUserThunk = (data) => async (dispatch) => {
 	const editedUser = JSON.stringify(data);
 
-	const res = await fetch(`/api/users/${data.id}/`, {
+	const res = await fetch(`/api/users/${data.id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -101,6 +101,7 @@ export const editProfileThunk = (data) => async (dispatch) => {
 		},
 		body: editedUser,
 	});
+	console.log(editedUser, "editedUser")
 
 	if (res.ok) {
 		const data = await res.json();

@@ -7,7 +7,7 @@ import { editUserThunk } from "../../store/users";
 const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// const { userId } = useParams(); // userId of PM
+	const { userId } = useParams(); // userId of PM
 	const user = useSelector((state)=> state.session.user)
 	console.log(user, "USER IN EDIT")
 	console.log(user.id, "user id from session in EDIT")
@@ -18,32 +18,31 @@ const EditProfile = () => {
 	const [pmTagline, setPmTagline] = useState("");
 	const [profileImg, setProfileImage] = useState("");
 	const [propertyType, setPropertyType] = useState("");
-	const [pmRate, setPmRate] = useState();
+	const [pmRate, setPmRate] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
-	const [isPm, setIsPm] = useState();
+	const [isPm, setIsPm] = useState(true);
 	const [errors, setErrors] = useState([]);
 
-
-
+	// check if user is a pm, render the form conditionally
 	//A useEffect that calls all of the setState functions to update the fields
-	// useEffect(() => {
-	// 	if (user) {
-	// 		setUsername(user.username);
-	// 		setEmail(user.email);
-	// 		setPmTagline(user.pmTagline);
-	// 		setProfileImage(user.profileImg);
-	// 		setPropertyType(user.propertyType);
-	// 		setPmRate(user.pmRate);
-	// 		setPhoneNumber(user.phoneNumber);
-	// 		setCity(user.city);
-	// 		setState(user.state);
-	// 		setZipcode(user.zipcode);
-	// 		setIsPm(user.isPm);
-	// 	}
-	// }, [user]);
+	useEffect(() => {
+		if (user) {
+			setUsername(user.username);
+			setEmail(user.email);
+			setPmTagline(user.pmTagline);
+			setProfileImage(user.profileImg);
+			setPropertyType(user.propertyType);
+			setPmRate(user.pmRate);
+			setPhoneNumber(user.phoneNumber);
+			setCity(user.city);
+			setState(user.state);
+			setZipcode(user.zipcode);
+			setIsPm(user.isPm);
+		}
+	}, [user]);
 
 	//handleEdit function
 	const handleEdit = async (e) => {
@@ -68,14 +67,14 @@ const EditProfile = () => {
 			setErrors(data);
 		}
 		else {
-			history.push(`/users/${user.id}`);
+			history.push(`/users/${userId}`);
 		}
 	};
 
 
 	const handleCancelClick = (e) => {
 		e.preventDefault();
-		history.push(`/users/${user.id}`);
+		history.push(`/users/${userId}`);
 		// hideForm();
 	};
 

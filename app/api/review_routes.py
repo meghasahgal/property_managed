@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 # #get all reviews
 @review_routes.route('')
-@login_required
+# @login_required
 def reviews():
     """
     Query for all reviews and returns them in a list of review dictionaries

@@ -34,7 +34,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
-		// dispatch(getAllReviewsThunk());
+		dispatch(getAllReviewsThunk());
 	});
 
 	if (!loaded) {

@@ -22,33 +22,35 @@ const BecomePMConfirmation = () => {
 	//set state variables
 	const [username, setUsername] = useState(user?.username);
 	const [email, setEmail] = useState(user?.email);
-	const [pmTagline, setPmTagline] = useState(user?.pmTagline);
-	const [profileImg, setProfileImage] = useState(user?.profileImg);
+	const [pmTagline, setPmTagline] = useState("");
+	const [profileImg, setProfileImage] = useState("");
 	const [propertyType, setPropertyType] = useState("");
-	const [pmRate, setPmRate] = useState(user?.pmRate);
+	const [pmRate, setPmRate] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
-	const [isPm, setIsPm] = useState("false");
+	const [isPm, setIsPm] = useState(false);
 
 
 	//useEffect/set state variables
-	useEffect(() => {
-		if (user) {
-			setUsername(user.username);
-			setEmail(user.email);
-			setPmTagline(user.pmTagline);
-			setProfileImage(user.profileImg);
-			setPropertyType(user.propertyType);
-			setPmRate(user.pmRate);
-			setPhoneNumber(user.phoneNumber);
-			setCity(user.city);
-			setState(user.state);
-			setZipcode(user.zipcode);
-			setIsPm(user.isPm);
-		}
-	}, [user]);
+	// useEffect(() => {
+	// 	if (user) {
+	// 		setUsername(user.username);
+	// 		setEmail(user.email);
+	// 		setPmTagline(user.pmTagline);
+	// 		setProfileImage(user.profileImg);
+	// 		setPropertyType(user.propertyType);
+	// 		setPmRate(user.pmRate);
+	// 		setPhoneNumber(user.phoneNumber);
+	// 		setCity(user.city);
+	// 		setState(user.state);
+	// 		setZipcode(user.zipcode);
+	// 		setIsPm(user.isPm);
+	// 	}
+	// }, [user]);
+
+	console.log(user.isPm, "user is pm? in BECOME A PM")
 
 	//handle Edit
 	const handleEdit = async (e) => {
@@ -74,6 +76,7 @@ const BecomePMConfirmation = () => {
 	const routeChangetoEditForm = () => {
 		let path = `/users/${sessionUserId}/edit`;
 		history.push(path);
+		console.log(path, "path")
 	};
 
 	const routeChangeToHome = () => {
@@ -87,8 +90,8 @@ const BecomePMConfirmation = () => {
 			<button
 				style={{ display: "block" }}
 				onClick={() => {
-					handleEdit();
-					setIsPm((prev) => !prev);
+					// handleEdit();
+					// setIsPm((prev) => !prev);
 					routeChangetoEditForm();
 
 				}}

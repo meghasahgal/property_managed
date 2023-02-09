@@ -19,8 +19,8 @@ const HomePage = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 
     const allUsersArray = useSelector((state) =>{
-        if(state?.users?.users){
-		return Object.values(state?.users?.users)
+        if(state?.users){
+		return Object.values(state?.users)
     }
     else return undefined
     });
@@ -84,7 +84,7 @@ const HomePage = () => {
 					)
 				)}
 			</div>
-			
+
 
 		</>
 

@@ -42,18 +42,14 @@ const NavBar = () => {
 	// console.log(sessionUserisPm==="true", "is this a val?")
 	// console.log(sessionUserisPm == true)
 
-	//use effect for sessionUserisPm and button text
+	//use effect for sessionUserisPm to show My Profile
 	useEffect(() => {
-		if (sessionUserisPm == true) {
+		if (sessionUser && (sessionUser.isPm==true)) {
 			setButtonText("My Profile");
-		} else {
-			setButtonText("Become a PM");
 		}
-	}, [buttonText, sessionUserisPm]);
+	}, [sessionUser]);
 
-	// function handleClick2() {
-	// 	setButtonText("My Profile");
-	// }
+
 
 	// //button to confirm if someone would like to become a property manager
 	const routeChangetoEditForm = () => {
@@ -86,16 +82,16 @@ const NavBar = () => {
 								<LogoutButton className="navButton" />
 							</li>
 
-							{sessionUser.isPm == true ? (
+							{(sessionUser.isPm == true) ? (
 								<li className="barLink">
 									{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
 									<NavLink to={`/users/${sessionUser.id}`}>
 										<button
-											onClick={() =>
-												// 	changeText("Your Profile")
-												// 	routeChangetoEditForm();
-												setButtonText("Your Profile")
-											}
+											// onClick={() =>
+											// 	// 	changeText("Your Profile")
+											// 	// 	routeChangetoEditForm();
+											// 	setButtonText("Your Profile")
+											// }
 										>
 											{buttonText}
 										</button>
@@ -107,9 +103,7 @@ const NavBar = () => {
 										to={`/users/${sessionUser.id}/confirmation`}
 									>
 										<button
-											onClick={() =>
-												setButtonText("Become a PM")
-											}
+
 										>
 											{buttonText}
 										</button>

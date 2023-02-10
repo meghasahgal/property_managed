@@ -1,3 +1,23 @@
-h1, h2{
-    color: #4E7375
+h1{
+    color: #4E7375;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+
+h2 {
+    color: #4E7375;
+    display: flex;
+    justify-content: center;
+}
+
+.img-splash{
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ margin-left: 200px;
+
 }

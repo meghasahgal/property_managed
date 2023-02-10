@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserThunk, getAllUsersThunk } from "../../store/users";
+import "./BecomePMConfirmation.css"
 
 const BecomePMConfirmation = () => {
 	const dispatch = useDispatch();
@@ -34,9 +35,10 @@ const BecomePMConfirmation = () => {
 
 	return (
 		<>
-			<div>Are you sure you'd like to become a Property Manager?</div>
+			<h3 className="med-title">Are you sure you'd like to become a Property Manager?</h3>
 
-			<button
+			<button className="med-btn"onClick={routeChangeToHome}>Go Back Home</button>
+			<button className="med-btn"
 				style={{ display: "inline-block" }}
 				onClick={() => {
 					// handleEdit();
@@ -47,7 +49,6 @@ const BecomePMConfirmation = () => {
 			>
 				Yes!
 			</button>
-			<button onClick={routeChangeToHome}>Go Back Home</button>
 		</>
 	);
 };

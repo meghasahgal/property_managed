@@ -1,0 +1,15 @@
+
+
+.med-btn {
+    background-color: #4E7375;
+    color: white;
+    width: 150px;
+    height: 31px;
+    border-radius: 5px;
+    border: solid white 1px;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}

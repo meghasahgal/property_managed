@@ -98,6 +98,9 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
+//update the user in session in navbar
+export const updateSession = (user) =>(dispatch)=>dispatch(setUser(user))
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:

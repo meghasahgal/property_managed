@@ -92,10 +92,10 @@ def edit_profile(id):
     form = ProfileForm()
 
 
-    if form.data["id"] != current_user.id:
-        # print(form.data['user_id'], "userID")
-        # print(current_user.id, "current user")
-        return {'error': "You are not authorized to edit this profile"}, 401
+    # if form.data["id"] != current_user.id:
+    #     # print(form.data['user_id'], "userID")
+    #     # print(current_user.id, "current user")
+    #     return {'error': "You are not authorized to edit this profile"}, 401
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

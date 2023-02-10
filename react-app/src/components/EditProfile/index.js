@@ -3,6 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserThunk } from "../../store/users";
+import { updateSession } from "../../store/session";
+import "./EditProfile.css"
 
 const EditProfile = () => {
 	const dispatch = useDispatch();
@@ -13,16 +15,16 @@ const EditProfile = () => {
 	console.log(user.id, "user id from session in EDIT");
 	// const user = useSelector((state) => state.users[userId]);
 	//set state variables
-	const [username, setUsername] = useState(user?.username);
-	const [email, setEmail] = useState(user?.email);
-	const [pmTagline, setPmTagline] = useState("");
-	const [profileImg, setProfileImage] = useState("");
-	const [propertyType, setPropertyType] = useState("");
-	const [pmRate, setPmRate] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [city, setCity] = useState("");
-	const [state, setState] = useState("");
-	const [zipcode, setZipcode] = useState("");
+	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
+	const [pmTagline, setPmTagline] = useState('');
+	const [profileImg, setProfileImage] = useState('');
+	const [propertyType, setPropertyType] = useState('');
+	const [pmRate, setPmRate] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [city, setCity] = useState('');
+	const [state, setState] = useState('');
+	const [zipcode, setZipcode] = useState('');
 	const [isPm, setIsPm] = useState(false);
 	const [errors, setErrors] = useState([]);
 
@@ -47,14 +49,6 @@ const EditProfile = () => {
 	//handleEdit function
 	const handleEdit = async (e) => {
 		e.preventDefault();
-		// e.preventDefault
-		// let PMVar = isPm
-		// setIsPm(true)
-		// // if(data){
-
-		// } else {
-		// setIsPm(PMVar)
-		// }
 
 		const editedProfile = {
 			id: user.id,
@@ -68,17 +62,19 @@ const EditProfile = () => {
 			city,
 			state,
 			zipcode,
-			is_pm: isPm,
+			is_pm: true,
 		};
 
+		//update the value of isPm for the user by dispatching the updateSession on the user
+		const updateUser = {...user, isPm: true}
+
 		let data = await dispatch(editUserThunk(editedProfile));
-		// let PmVar = isPm
+		dispatch(updateSession(updateUser))
+
 		if (data) {
 			setErrors(data);
 		}
-		else if (!errors.length) {
-			// setIsPm(true)
-			// setIsPm((prev) => !prev);
+		else {
 			history.push(`/users/${user.id}`);
 		}
 	};
@@ -91,6 +87,7 @@ const EditProfile = () => {
 
 	return (
 		<>
+
 			<form className="edit-profile-form" onSubmit={handleEdit}>
 				<div>
 					{errors.map((error, i) => (
@@ -202,10 +199,10 @@ const EditProfile = () => {
 				<button
 					className="small-btn"
 					type="submit"
-					// onClick={() => {
-
-					// }}
-					// disabled={errors.length > 0}
+					onClick={() => {
+						setIsPm(true)
+					}}
+					disabled={errors.length > 0}
 				>
 					Submit
 				</button>

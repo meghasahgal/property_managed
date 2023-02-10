@@ -9,6 +9,7 @@ import {
 	editReviewThunk,
 } from "../../store/reviews";
 import EditReview from "../EditReview";
+import "../ReviewsByUserId/ReviewsByUserId.css"
 
 const ReviewsByUserId = ({reviewId, reviewerId}) => {
 	const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 		<div>
 			<hr></hr>
 			<div></div>
-			<h3>{reviews.length? "Reviews": "No Reviews Yet!" }</h3>
+			<h3 className="reviews-header">{reviews.length? "Reviews": "No Reviews Yet!" }</h3>
 			{/* <div className="primary-text">Reviews</div> */}
 			<hr></hr>
 

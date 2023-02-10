@@ -71,6 +71,7 @@ const EditProfile = () => {
 		const updateUser = {...user, isPm: true}
 		console.log(updateUser, "updateUser")
 
+
 		let data = await dispatch(editUserThunk(editedProfile));
 
 		if (data) {
@@ -205,7 +206,7 @@ const EditProfile = () => {
 					onClick={() => {
 						setIsPm(true)
 					}}
-					disabled={errors.length > 0}
+					// disabled={errors.length > 0}
 				>
 					Submit
 				</button>

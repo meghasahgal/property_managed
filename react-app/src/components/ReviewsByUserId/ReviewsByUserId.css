@@ -1,0 +1,8 @@
+.reviews-header{
+        display: flex;
+        flex-direction: column;
+        align-items: left !important;
+        margin-bottom: 20px;
+        margin-top: 20px;
+
+}

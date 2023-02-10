@@ -8,9 +8,9 @@ const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	const user = useSelector((state)=> state.session.user)
-	console.log(user, "USER IN EDIT")
-	console.log(user.id, "user id from session in EDIT")
+	const user = useSelector((state) => state.session.user);
+	console.log(user, "USER IN EDIT");
+	console.log(user.id, "user id from session in EDIT");
 	// const user = useSelector((state) => state.users[userId]);
 	//set state variables
 	const [username, setUsername] = useState(user?.username);
@@ -47,6 +47,14 @@ const EditProfile = () => {
 	//handleEdit function
 	const handleEdit = async (e) => {
 		e.preventDefault();
+		// e.preventDefault
+		// let PMVar = isPm
+		// setIsPm(true)
+		// // if(data){
+
+		// } else {
+		// setIsPm(PMVar)
+		// }
 
 		const editedProfile = {
 			id: user.id,
@@ -64,16 +72,16 @@ const EditProfile = () => {
 		};
 
 		let data = await dispatch(editUserThunk(editedProfile));
+		// let PmVar = isPm
 		if (data) {
-			setIsPm((prev) => !prev);
 			setErrors(data);
+		}
+		else if (!errors.length) {
+			// setIsPm(true)
+			// setIsPm((prev) => !prev);
 			history.push(`/users/${user.id}`);
 		}
-		// else {
-		// 	history.push(`/users/${user.id}`);
-		// }
 	};
-
 
 	const handleCancelClick = (e) => {
 		e.preventDefault();
@@ -197,7 +205,7 @@ const EditProfile = () => {
 					// onClick={() => {
 
 					// }}
-					disabled={errors.length > 0}
+					// disabled={errors.length > 0}
 				>
 					Submit
 				</button>

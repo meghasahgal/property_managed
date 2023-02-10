@@ -20,25 +20,6 @@ const BecomePMConfirmation = () => {
 
 	console.log(user.isPm, "user is pm? in BECOME A PM")
 
-	//handle Edit
-	// const handleEdit = async (e) => {
-	// 	const editedProfile = {
-	// 		id: sessionUserId,
-	// 		username,
-	// 		email,
-	// 		pm_tagline: pmTagline,
-	// 		profile_img: profileImg,
-	// 		property_type: propertyType,
-	// 		pm_rate: pmRate,
-	// 		phone_number: phoneNumber,
-	// 		city,
-	// 		state,
-	// 		zipcode,
-	// 		is_pm: !isPm,
-	// 	};
-
-	// 	let data = await dispatch(editUserThunk(editedProfile));
-	// };
 
 	//route change to edit the form
 	const routeChangetoEditForm = () => {
@@ -56,7 +37,7 @@ const BecomePMConfirmation = () => {
 			<div>Are you sure you'd like to become a Property Manager?</div>
 
 			<button
-				style={{ display: "block" }}
+				style={{ display: "inline-block" }}
 				onClick={() => {
 					// handleEdit();
 					// setIsPm((prev) => !prev);

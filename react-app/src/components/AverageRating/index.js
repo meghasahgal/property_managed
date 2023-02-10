@@ -13,7 +13,7 @@ const AverageRatingCalc = ({ user }) => {
 	//dispatch the thunk the get the reviews for the userId
 	useEffect(() => {
 		dispatch(getReviewsByUserIdThunk(userId));
-	}, []);
+	}, [dispatch]);
 
 	//get all reviews where user id = user id of the review(s)
 	const allReviewsArray = Object.values(reviews).filter(

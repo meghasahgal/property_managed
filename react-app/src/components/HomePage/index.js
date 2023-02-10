@@ -33,7 +33,7 @@ const HomePage = () => {
 	return (
 		<>
 			<div></div>
-			{/* {sessionUser? ( */}
+			{sessionUser? (
 			<div className="users-container">
 				{allUsersArray?.map((user) =>
 					user && user?.id ? (
@@ -84,7 +84,9 @@ const HomePage = () => {
 					)
 				)}
 			</div>
-
+			):(
+				<div><SplashPage/></div>
+			)}
 
 		</>
 

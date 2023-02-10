@@ -13,8 +13,9 @@ const NavBar = () => {
 	// console.log(sessionUser, "this is the session user")
 	// console.log(sessionUser?.id, "this is the id")
 	// console.log(sessionUser?.isPm, "this is the pm")
-	const sessionUserisPm = sessionUser?.isPm
+	const sessionUserisPm = sessionUser?.isPm;
 
+	const [showDemo, setShowDemo] = useState(true);
 	// load all users
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
@@ -32,6 +33,7 @@ const NavBar = () => {
 	const handleClick = (e) => {
 		e.preventDefault();
 		return dispatch(login(demoUser.email, demoUser.password));
+		setShowDemo(false)
 	};
 
 	// const [isPm, setIsPm] = useState('false')
@@ -47,12 +49,11 @@ const NavBar = () => {
 		} else {
 			setButtonText("Become a PM");
 		}
-	},[buttonText, sessionUserisPm]);
+	}, [buttonText, sessionUserisPm]);
 
 	// function handleClick2() {
 	// 	setButtonText("My Profile");
 	// }
-
 
 	// //button to confirm if someone would like to become a property manager
 	const routeChangetoEditForm = () => {
@@ -67,85 +68,85 @@ const NavBar = () => {
 
 	return (
 		<div className="header">
-		<nav>
-			<ul>
-				<li>
-					<NavLink to="/" exact={true} activeClassName="active">
-						<img
-							className="logoImg"
-							src={logo}
-							alt="Managed Logo"
-						/>
+			<nav>
+				<ul>
+					<li>
+						<NavLink to="/" exact={true} activeClassName="active">
+							<img
+								className="logoImg"
+								src={logo}
+								alt="Managed Logo"
+							/>
+						</NavLink>
+					</li>
 
-					</NavLink>
-				</li>
-
-				{sessionUser ? (
-					<>
-						<li className="barLink">
-							<LogoutButton className="navButton" />
-						</li>
-
-						{sessionUser.isPm == true ? (
+					{sessionUser ? (
+						<>
 							<li className="barLink">
-								{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
-								<NavLink to={`/users/${sessionUser.id}`}>
-									<button
-										onClick={()=>
+								<LogoutButton className="navButton" />
+							</li>
 
-											// 	changeText("Your Profile")
-											// 	routeChangetoEditForm();
-											setButtonText('Your Profile')
-										}
+							{sessionUser.isPm == true ? (
+								<li className="barLink">
+									{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
+									<NavLink to={`/users/${sessionUser.id}`}>
+										<button
+											onClick={() =>
+												// 	changeText("Your Profile")
+												// 	routeChangetoEditForm();
+												setButtonText("Your Profile")
+											}
+										>
+											{buttonText}
+										</button>
+									</NavLink>
+								</li>
+							) : (
+								<li className="barLink">
+									<NavLink
+										to={`/users/${sessionUser.id}/confirmation`}
 									>
-										{buttonText}
-									</button>
-								</NavLink>
-							</li>
-						) : (
+										<button
+											onClick={() =>
+												setButtonText("Become a PM")
+											}
+										>
+											{buttonText}
+										</button>
+									</NavLink>
+								</li>
+							)}
+						</>
+					) : (
+						<>
 							<li className="barLink">
-								<NavLink to={`/users/${sessionUser.id}/confirmation`}>
-								<button
-									onClick={() =>
-										setButtonText('Become a PM')
-									}
+								<NavLink
+									to="/login"
+									exact={true}
+									activeClassName="active"
 								>
-									{buttonText}
-								</button>
+									Login
 								</NavLink>
 							</li>
-						)}
-					</>
-				) : (
-					<>
-						<li className="barLink">
-							<NavLink
-								to="/login"
-								exact={true}
-								activeClassName="active"
-							>
-								Login
-							</NavLink>
-						</li>
-						<li className="barLink">
-							<NavLink
-								to="/sign-up"
-								exact={true}
-								activeClassName="active"
-							>
-								Sign Up
-							</NavLink>
-						</li>
+							<li className="barLink">
+								<NavLink
+									to="/sign-up"
+									exact={true}
+									activeClassName="active"
+								>
+									Sign Up
+								</NavLink>
+							</li>
+						</>
+					)}
 
-					</>
-				)}
+					<li>{!sessionUser &&
+						<button onClick={handleClick}>Demo Login</button>
+					}
+					</li>
 
-
-				<li>
-					<button onClick={handleClick}>Demo Login</button>
-				</li>
-			</ul>
-		</nav>
+				</ul>
+			</nav>
 		</div>
 	);
 };

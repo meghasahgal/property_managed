@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, IntegerField, BooleanField
-from wtforms.validators import DataRequired, ValidationError, URL, Length,InputRequired
+from wtforms.validators import DataRequired, ValidationError, URL, Length,InputRequired, NumberRange
 from app.models import User
 
 #Custom Validators
@@ -28,8 +28,8 @@ def check_category(form,field):
 class ProfileForm(FlaskForm):
     id = IntegerField('user_id', validators=[DataRequired()])
     username=StringField('username', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired()])
-    pm_tagline = StringField('pm_tagline', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired("Email required")])
+    pm_tagline = StringField('pm_tagline', validators=[DataRequired("Property Manager Tagline required")])
     profile_img=StringField('profile_img')
     # property_type=SelectField('property_type', choices=[('Residential', 'Residential'),('Commercial', 'Commercial'), ('Retail', 'Retail'), ('Industrial', 'Industrial')],validators=[DataRequired()])
     property_type=StringField('property_type', validators=[DataRequired(), check_category])

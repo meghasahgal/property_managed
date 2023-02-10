@@ -64,17 +64,20 @@ const EditProfile = () => {
 			zipcode,
 			is_pm: true,
 		};
+		console.log(editedProfile, "editedProfile")
+		console.log(`\n\n\n Edited Profile \n\n ${editedProfile} \n\n`);
 
 		//update the value of isPm for the user by dispatching the updateSession on the user
 		const updateUser = {...user, isPm: true}
+		console.log(updateUser, "updateUser")
 
 		let data = await dispatch(editUserThunk(editedProfile));
-		dispatch(updateSession(updateUser))
 
 		if (data) {
 			setErrors(data);
 		}
 		else {
+			dispatch(updateSession(updateUser))
 			history.push(`/users/${user.id}`);
 		}
 	};

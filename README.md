@@ -19,9 +19,7 @@ Code Snippets:
 I enjoyed bringing together conceptual learnings of the React store, thunk and database retrievals to write the following code in the backend to retrieve all users who are Property Managers, which really brought the website to life.
 
 @user_routes.route('')
-
 def users():
-    
     users = User.query.filter(User.is_pm == True).all()
 
     res = dict()

@@ -34,4 +34,4 @@ def users():
 
 ## Wiki:
 Please visit the Wiki for more information related to the database schema, API routes and frontend:
-[Wiki]([https://managed.onrender.com/](https://github.com/meghasahgal/property_managed/wiki)].
+[Wiki]((https://github.com/meghasahgal/property_managed/wiki)].

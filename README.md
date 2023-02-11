@@ -20,3 +20,6 @@ I enjoyed bringing together conceptual learnings of the React store, thunk and d
 
 <img width="1215" alt="image" src="https://user-images.githubusercontent.com/1787106/218231239-d50ea54a-d326-43db-ab8a-9017600ebbaf.png">
 
+## Wiki:
+Please visit the Wiki for more information related to the database schema, API routes and 
+[Wiki]([https://managed.onrender.com/] to App.

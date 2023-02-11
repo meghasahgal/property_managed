@@ -21,9 +21,7 @@ I enjoyed bringing together conceptual learnings of the React store, thunk and d
 @user_routes.route('')
 
 def users():
-    """
-    Query for all users that are PMs and returns them in a list of user dictionaries
-    """
+    
     users = User.query.filter(User.is_pm == True).all()
 
     res = dict()

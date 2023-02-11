@@ -9,13 +9,15 @@ import logo from "../NavBar/logo2.png";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
+	
+	const user = useSelector((state)=> state.session.user)
 	// console.log(sessionUser?.is_Pm, "session user is PM?")
 	// console.log(sessionUser, "this is the session user")
 	// console.log(sessionUser?.id, "this is the id")
 	// console.log(sessionUser?.isPm, "this is the pm")
 	const sessionUserisPm = sessionUser?.isPm;
 
-	const [showDemo, setShowDemo] = useState(true);
+	// const [showDemo, setShowDemo] = useState(true);
 	// load all users
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
@@ -43,6 +45,7 @@ const NavBar = () => {
 	// console.log(sessionUserisPm == true)
 
 	//use effect for sessionUserisPm to show My Profile
+
 	useEffect(() => {
 		if (sessionUser && sessionUser.isPm) {
 			setButtonText("My Profile");
@@ -82,14 +85,10 @@ const NavBar = () => {
 								<LogoutButton className="navButton" />
 							</li>
 
-							{(sessionUser.isPm == true) ? (
+							{sessionUser.isPm === true ? (
 								<li className="barLink">
 									<NavLink to={`/users/${sessionUser.id}`}>
-										<button
-
-										>
-											{buttonText}
-										</button>
+										<button>My Profile</button>
 									</NavLink>
 								</li>
 							) : (
@@ -97,11 +96,7 @@ const NavBar = () => {
 									<NavLink
 										to={`/users/${sessionUser.id}/confirmation`}
 									>
-										<button
-
-										>
-											{buttonText}
-										</button>
+										<button>Become a PM</button>
 									</NavLink>
 								</li>
 							)}
@@ -114,7 +109,7 @@ const NavBar = () => {
 									exact={true}
 									activeClassName="active"
 								>
-									Login
+									<button>Login</button>
 								</NavLink>
 							</li>
 							<li className="barLink">
@@ -123,17 +118,17 @@ const NavBar = () => {
 									exact={true}
 									activeClassName="active"
 								>
-									Sign Up
+									<button>Sign Up</button>
 								</NavLink>
 							</li>
 						</>
 					)}
 
-					<li>{!sessionUser &&
-						<button onClick={handleClick}>Demo Login</button>
-					}
+					<li>
+						{!sessionUser && (
+							<button onClick={handleClick}>Demo Login</button>
+						)}
 					</li>
-
 				</ul>
 			</nav>
 		</div>

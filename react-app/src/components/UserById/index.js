@@ -3,6 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
+import { logout } from '../../store/session';
+
 import {
 	getAllReviewsThunk,
 	getReviewsByUserIdThunk,
@@ -27,12 +29,22 @@ const UserById = () => {
 
 	const handleDeleteProfile = (userId) => {
 		dispatch(deleteProfileThunk(userId));
-		history.push(`/users`);
+		dispatch(logout())
+		history.push(`/sign-up`);
 	};
 
 	//get all reviews
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
+	let filteredReviews
+	if (allReviews){
+	filteredReviews = allReviews.filter(review => review.reviewerId === sessionUser.id)
+	console.log(filteredReviews, "filteredreviews")
+}
+
+	console.log(allReviews, "allReviews")
+	// const allReviewsByID = allReviews.filter((review)=> review.userId == review.id)
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
+	console.log(allReviewsReviewerIds, "allreviewreviewerIds");
 	//dispatch the thunk the get the reviews for the userId
 	useEffect(() => {
 		dispatch(getAllReviewsThunk());
@@ -134,6 +146,7 @@ const UserById = () => {
 									className="change-profile-button"
 									onClick={() =>
 										handleDeleteProfile(user?.id)
+
 									}
 								>
 									Delete Profile
@@ -146,9 +159,11 @@ const UserById = () => {
 							<ReviewsByUserId user={user} />
 						</div>
 					</div>
-					{sessionUser?.id !== user.id &&
+					{sessionUser?.id != user.id &&
 						// review.reviewerId !== sessionUser?.id &&
-						!allReviewsReviewerIds.includes(sessionUser?.id) && (
+						filteredReviews &&
+						filteredReviews.length === 0 &&
+						(
 							// <EditReview review={review}/>, need to add a setState and set off an OnChange if want to do it other way
 							// {
 							<button

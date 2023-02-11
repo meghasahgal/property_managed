@@ -16,10 +16,7 @@ const SignUpForm = () => {
 	const onSignUp = async (e) => {
 		e.preventDefault();
 		if (password === repeatPassword) {
-			
-			const data = await dispatch(
-				signUp(username, email, password)
-			);
+			const data = await dispatch(signUp(username, email, password));
 			if (data) {
 				setErrors(data);
 			}
@@ -50,7 +47,6 @@ const SignUpForm = () => {
 
 	return (
 		<div className="login-signup-main">
-
 			<form className="login-signup-form" onSubmit={onSignUp}>
 				<div className="errors-section">
 					{errors.map((error, ind) => (
@@ -125,16 +121,16 @@ export default SignUpForm;
 
 //     if (password === repeatPassword) {
 //       const data = await dispatch(signUp(username, email, password));
-//       console.log(data, "signupdata")
-//       console.log(password, "********password")
-//       console.log(repeatPassword, "*********repeatpassword")
+//       //(data, "signupdata")
+//       //(password, "********password")
+//       //(repeatPassword, "*********repeatpassword")
 
 //       if (data) {
 //         setErrors(data)
 //       }
 //       else{
 //         setErrors(["Passwords do not match"]);
-//         console.log(errors, "errors")
+//         //(errors, "errors")
 //       }
 //     }
 //   };

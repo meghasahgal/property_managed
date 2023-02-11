@@ -51,15 +51,15 @@ export const getReviewByReviewIdThunk = (reviewId) => async (dispatch) => {
 // CREATE A REVIEW based on userId /<int:id>/reviews'
 export const createReviewThunk = (data) => async (dispatch) => {
 	const newReview = JSON.stringify(data);
-	// console.log(newReview, "THIS IS THE NEW REVIEW")
+	// //(newReview, "THIS IS THE NEW REVIEW")
 	const response = await fetch(`/api/users/${data.user_id}/reviews`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: newReview
+		body: newReview,
 	});
-	// console.log(data.user_id, "this is the user id of the review")
+	// //(data.user_id, "this is the user id of the review")
 
 	if (response.ok) {
 		const data = await response.json();
@@ -86,11 +86,11 @@ export const editReviewThunk = (review) => async (dispatch) => {
 		body: editedReview,
 	});
 
-	// console.log(response, "response")
-	// console.log(editedReview, "EDITED REVIEW FROM THUNK");
+	// //(response, "response")
+	// //(editedReview, "EDITED REVIEW FROM THUNK");
 	if (response.ok) {
 		const data = await response.json();
-		// console.log("data", data)
+		// //("data", data)
 		dispatch(loadReviews(data));
 		return null;
 	} else if (response.status < 500) {

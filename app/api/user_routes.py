@@ -66,8 +66,8 @@ def users():
 @login_required
 def create_profile(id):
     form = ProfileForm()
-    print(form, "form")
-    print(id, "id in user route")
+    # print(form, "form")
+    # print(id, "id in user route")
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

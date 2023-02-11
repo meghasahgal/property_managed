@@ -1,5 +1,6 @@
 import "./SplashPage.css"
 import town from "../SplashPage/town.svg"
+import {Link} from 'react-router-dom'
 
 const SplashPage =() =>{
     return (
@@ -15,6 +16,14 @@ const SplashPage =() =>{
 						src={town}
 						alt="we'll help you manage your properties!"
 					/>
+					{/* <div className="splash-button">
+						<Link to={`/login`}>
+							<button>Login</button>
+						</Link>
+						<Link to={`/sign-up`}>
+							<button>Sign Up</button>
+						</Link>
+					</div> */}
 				</header>
 			</body>
 		</>

@@ -33,7 +33,7 @@ const NavBar = () => {
 	const handleClick = (e) => {
 		e.preventDefault();
 		return dispatch(login(demoUser.email, demoUser.password));
-		setShowDemo(false)
+		// setShowDemo(false)
 	};
 
 	// const [isPm, setIsPm] = useState('false')
@@ -84,14 +84,9 @@ const NavBar = () => {
 
 							{(sessionUser.isPm == true) ? (
 								<li className="barLink">
-									{/* <Link to={`/users/${sessionUser.id}`}></Link> */}
 									<NavLink to={`/users/${sessionUser.id}`}>
 										<button
-											// onClick={() =>
-											// 	// 	changeText("Your Profile")
-											// 	// 	routeChangetoEditForm();
-											// 	setButtonText("Your Profile")
-											// }
+
 										>
 											{buttonText}
 										</button>

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { getReviewsByUserIdThunk } from "../../store/reviews";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
-import "./AverageRating.css"
+import "./AverageRating.css";
 // map through all reviews based on user id then render in Home Page
 const AverageRatingCalc = ({ user }) => {
 	const dispatch = useDispatch();
@@ -19,13 +19,13 @@ const AverageRatingCalc = ({ user }) => {
 	const allReviewsArray = Object.values(reviews).filter(
 		(review) => userId == review.userId
 	);
-	// console.log(allReviewsArray, "allReviewsArray"); //returns an array of objs
+	// //(allReviewsArray, "allReviewsArray"); //returns an array of objs
 	const sessionUser = useSelector((state) => state.session.user);
 
 	const filteredReviewsForStars = allReviewsArray.map(
 		(review) => review.stars
 	);
-	// console.log(filteredReviewsForStars, "filteredReviewsForStars"); // returns an array of stars numbers
+	// //(filteredReviewsForStars, "filteredReviewsForStars"); // returns an array of stars numbers
 	//average calculation
 	const averageStars = (filteredReviewsForStars, userId) => {
 		let average;
@@ -35,7 +35,7 @@ const AverageRatingCalc = ({ user }) => {
 			total += Number(stars);
 		}
 		average = total / filteredReviewsForStars.length;
-		// console.log("average", average)
+		// //("average", average)
 		return average;
 	};
 
@@ -43,11 +43,8 @@ const AverageRatingCalc = ({ user }) => {
 		<div>
 			{" "}
 			{filteredReviewsForStars.length ? (
-			<FontAwesomeIcon className="star"
-				icon={faStar}
-			/>
-			):null}
-			{" "}
+				<FontAwesomeIcon className="star" icon={faStar} />
+			) : null}{" "}
 			{averageStars(filteredReviewsForStars, userId)
 				? averageStars(filteredReviewsForStars, userId).toFixed(1)
 				: "New!"}
@@ -56,6 +53,8 @@ const AverageRatingCalc = ({ user }) => {
 };
 export default AverageRatingCalc;
 
-{/* <FontAwesomeIcon className="star"
+{
+	/* <FontAwesomeIcon className="star"
 				icon={filteredReviewsForStars.length ? faStar :null}
-			/>{" "} */}
+			/>{" "} */
+}

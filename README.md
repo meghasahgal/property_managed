@@ -16,7 +16,21 @@ Frontend: ReactJS, Redux, NodeJS
 
 Code Snippets:
 
-I enjoyed bringing together conceptual learnings of the React store, thunk and database retrievals to write the following code to retrieve all Property Managers, which really brought the website to life.
+I enjoyed bringing together conceptual learnings of the React store, thunk and database retrievals to write the following code in the backend to retrieve all users who are Property Managers, which really brought the website to life.
+
+@user_routes.route('')
+
+def users():
+    """
+    Query for all users that are PMs and returns them in a list of user dictionaries
+    """
+    users = User.query.filter(User.is_pm == True).all()
+
+    res = dict()
+    for user in users:
+        current_user = user.to_dict()
+        res[current_user['id']] = current_user
+    return res
 
 <img width="1215" alt="image" src="https://user-images.githubusercontent.com/1787106/218231239-d50ea54a-d326-43db-ab8a-9017600ebbaf.png">
 

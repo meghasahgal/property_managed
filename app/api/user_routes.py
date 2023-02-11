@@ -44,13 +44,13 @@ def user(id):
 # GET api/users - ok
 
 @user_routes.route('')
-# @login_required - took out and took out / in path
+
 def users():
     """
-    Query for all users that are PMs and returns them in a list of user dictionaries
+    Query for all users that are Property Managers and returns them in a list of user dictionaries
     """
     users = User.query.filter(User.is_pm == True).all()
-    # users = User.query.all()
+
     res = dict()
     for user in users:
         current_user = user.to_dict()

@@ -9,32 +9,33 @@ import {
 	editReviewThunk,
 } from "../../store/reviews";
 import EditReview from "../EditReview";
+import "../ReviewsByUserId/ReviewsByUserId.css";
 
-const ReviewsByUserId = ({reviewId, reviewerId}) => {
+const ReviewsByUserId = ({ reviewId, reviewerId }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams();
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
-	// console.log(user.id, "USER/PM ID IN REVIEWS BY ID")
+	// //(user.id, "USER/PM ID IN REVIEWS BY ID")
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
-	// console.log("***********");
-	// console.log(allReviews, "THESE are all reviews");
+	// //("***********");
+	// //(allReviews, "THESE are all reviews");
 
 	// get all reviews for the user
 	const reviews = allReviews.filter((review) => review?.userId == userId); // all reviews for the specific user/PM
-	// console.log("***********");
-	// console.log(reviews, "filtered reviews");
+	// //("***********");
+	// //(reviews, "filtered reviews");
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	); // review by the specific session user
-	// console.log(sessionUserReview, "THIS IS THE SESSION USER's REVIEW");
+	// //(sessionUserReview, "THIS IS THE SESSION USER's REVIEW");
 
 	//get all reviewerIds related to the reviews:
 	//map over reviews:
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
-	// console.log(
+	// //(
 	// 	allReviewsReviewerIds,
 	// 	"THESE ARE THE REVIEWER IDS of the REVIEWS"
 	// );
@@ -67,7 +68,9 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 		<div>
 			<hr></hr>
 			<div></div>
-			<h3>{reviews.length? "Reviews": "No Reviews Yet!" }</h3>
+			<h3 className="reviews-header">
+				{reviews.length ? "Reviews" : "No Reviews Yet!"}
+			</h3>
 			{/* <div className="primary-text">Reviews</div> */}
 			<hr></hr>
 
@@ -76,10 +79,9 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 					<div className="review-id" key={review.id}>
 						<div className="review-details">
 							<div className="review-font">
-								{review?.stars} {""} {review?.reviewBody}{""}
-
+								{review?.stars} {""} {review?.reviewBody}
+								{""}
 							</div>
-
 						</div>
 						{/* {sessionUser?.id !== user.id &&
 							// review.reviewerId !== sessionUser?.id &&
@@ -100,7 +102,6 @@ const ReviewsByUserId = ({reviewId, reviewerId}) => {
 							<button
 								className="change-review-button"
 								onClick={routeChangetoEditReviewForm}
-
 							>
 								Edit Review
 							</button>

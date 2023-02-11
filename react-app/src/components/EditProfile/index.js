@@ -3,29 +3,32 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserThunk } from "../../store/users";
+import { updateSession } from "../../store/session";
+import "./EditProfile.css";
 
 const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	const user = useSelector((state)=> state.session.user)
+	const user = useSelector((state) => state.session.user);
+	//(user, "USER IN EDIT");
+	//(user.id, "user id from session in EDIT");
 	// const user = useSelector((state) => state.users[userId]);
 	//set state variables
-	const [username, setUsername] = useState(user?.username);
-	const [email, setEmail] = useState(user?.email);
-	const [pmTagline, setPmTagline] = useState(user?.pmTagline);
-	const [profileImg, setProfileImage] = useState(user?.profileImg);
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [pmTagline, setPmTagline] = useState("");
+	const [profileImg, setProfileImage] = useState("");
 	const [propertyType, setPropertyType] = useState("");
-	const [pmRate, setPmRate] = useState(user?.pmRate);
+	const [pmRate, setPmRate] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipcode, setZipcode] = useState("");
-	const [isPm, setIsPm] = useState();
+	const [isPm, setIsPm] = useState(false);
 	const [errors, setErrors] = useState([]);
 
-
-
+	// check if user is a pm, render the form conditionally
 	//A useEffect that calls all of the setState functions to update the fields
 	useEffect(() => {
 		if (user) {
@@ -46,10 +49,11 @@ const EditProfile = () => {
 	//handleEdit function
 	const handleEdit = async (e) => {
 		e.preventDefault();
+
 		const editedProfile = {
-			id: userId,
-			username,
-			email,
+			id: user.id,
+			username: user.username,
+			email: user.email,
 			pm_tagline: pmTagline,
 			profile_img: profileImg,
 			property_type: propertyType,
@@ -58,23 +62,28 @@ const EditProfile = () => {
 			city,
 			state,
 			zipcode,
-			is_pm: isPm,
+			is_pm: true,
 		};
+		//(editedProfile, "editedProfile")
+		//(`\n\n\n Edited Profile \n\n ${editedProfile} \n\n`);
+
+		//update the value of isPm for the user by dispatching the updateSession on the user
+		const updateUser = { ...user, isPm: true };
+		//(updateUser, "updateUser")
 
 		let data = await dispatch(editUserThunk(editedProfile));
+
 		if (data) {
 			setErrors(data);
 		} else {
-			history.push(`/users/${userId}`);
+			dispatch(updateSession(updateUser));
+			history.push(`/users/${user.id}`);
 		}
 	};
 
-	// const handleDelete = () =>
-	// 	dispatch(deleteProfileThunk(data.id));
-
 	const handleCancelClick = (e) => {
 		e.preventDefault();
-		history.push(`/users/${userId}`);
+		history.push(`/`);
 		// hideForm();
 	};
 
@@ -118,7 +127,7 @@ const EditProfile = () => {
 					onChange={(e) => setProfileImage(e.target.value)}
 				/>
 				{/* <div>Property Type</div> */}
-                <div></div>
+				<div></div>
 				<label>Property Type </label>
 				<select
 					value={propertyType}
@@ -129,13 +138,7 @@ const EditProfile = () => {
 					<option value="Retail">Retail</option>
 					<option value="Commercial">Commercial</option>
 				</select>
-				{/* <input
-					type="text"
-					placeholder={user?.propertyType}
-					required
-					value={propertyType}
-					onChange={(e) => setPropertyType(e.target.value)}
-				/> */}
+
 				<div>Your Rate (%)</div>
 				<input
 					type="text"
@@ -197,7 +200,10 @@ const EditProfile = () => {
 				<button
 					className="small-btn"
 					type="submit"
-					disabled={errors.length > 0}
+					onClick={() => {
+						setIsPm(true);
+					}}
+					// disabled={errors.length > 0}
 				>
 					Submit
 				</button>

@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createProfileThunk, editProfileThunk } from "../../store/users";
 
-const CreateProfile = () =>{
+const CreateProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const user = useSelector((state) => state.users[userId]);
 	const sessionUserId = useSelector((state) => state.session.user.id);
-	// console.log(sessionUserId, "THIS IS THE SESSION USER ID IN CREATE PROFILE");
+	// //(sessionUserId, "THIS IS THE SESSION USER ID IN CREATE PROFILE");
 	const sessionUsername = useSelector((state) => state.session.user.username);
 	const sessionUserEmail = useSelector((state) => state.session.user.email);
 	const { userId } = useParams(); // userId of PM/user
@@ -44,9 +44,9 @@ const CreateProfile = () =>{
 			city,
 			state,
 			zipcode,
-			is_pm: isPm
+			is_pm: isPm,
 		};
-		// console.log(newProfile, "THIS IS THE NEW PROFILE DATA");
+		// //(newProfile, "THIS IS THE NEW PROFILE DATA");
 
 		let data = await dispatch(editProfileThunk(newProfile));
 		if (data) {
@@ -176,6 +176,6 @@ const CreateProfile = () =>{
 			</form>
 		</>
 	);
-}
+};
 
 export default CreateProfile;

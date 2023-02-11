@@ -5,11 +5,10 @@ const Footer = () => {
 		<div className="footer-page-container">
 			<a
 				className="footerLink"
-				href="https://github.com/meghasahgal/project_managed"
+				href="https://github.com/meghasahgal/property_managed"
 			>
 				<p className="about"> About </p>
 			</a>
-
 
 			<span className="bottom-text">© 2023, Managed, Inc.</span>
 		</div>

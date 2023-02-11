@@ -34,7 +34,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
-		dispatch(getAllReviewsThunk())
+		dispatch(getAllReviewsThunk());
 	});
 
 	if (!loaded) {
@@ -67,9 +67,9 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<UserById />
 				</ProtectedRoute>
-				<Route exact path="/users/:userId/edit">
+				<ProtectedRoute exact path="/users/:userId/edit">
 					<EditProfile />
-				</Route>
+				</ProtectedRoute>
 				<Route path="/users/:userId/confirmation" exact={true}>
 					<BecomePMConfirmation />
 				</Route>

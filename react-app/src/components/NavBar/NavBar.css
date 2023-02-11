@@ -1,3 +1,7 @@
+nav{
+    display: flex;
+}
+
 .logoImg{
     height: 10%;
     width: 10%;
@@ -5,9 +9,27 @@
     display: inline-flex;
     position: relative;
 }
-
+/* nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
 .header{
     display: flex;
+    flex-direction: row;
+        /* justify-content: space-between; */
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        text-decoration: none;
+        
+}
+
+.barLink{
+    display: flex;
+    /* flex-direction: ; */
         justify-content: space-between;
         align-items: center;
         position: sticky;
@@ -17,6 +39,10 @@
         text-decoration: none;
 }
 
+.navButton{
+    display: flex;
+    flex-direction: row;
+}
 li{
     text-decoration: none;
 }

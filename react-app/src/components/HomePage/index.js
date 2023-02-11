@@ -7,6 +7,7 @@ import "./HomePage.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse , faWarehouse, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import AverageRating from "../AverageRating";
+import SplashPage from "../SplashPage"
 
 
 const HomePage = () => {
@@ -18,8 +19,8 @@ const HomePage = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 
     const allUsersArray = useSelector((state) =>{
-        if(state?.users?.users){
-		return Object.values(state?.users?.users)
+        if(state?.users){
+		return Object.values(state?.users)
     }
     else return undefined
     });
@@ -32,6 +33,7 @@ const HomePage = () => {
 	return (
 		<>
 			<div></div>
+			{sessionUser? (
 			<div className="users-container">
 				{allUsersArray?.map((user) =>
 					user && user?.id ? (
@@ -82,7 +84,12 @@ const HomePage = () => {
 					)
 				)}
 			</div>
+			):(
+				<div><SplashPage/></div>
+			)}
+
 		</>
+
 
 	);
 
@@ -97,5 +104,9 @@ const HomePage = () => {
 	// 	shallowEqual
 	// );
 };
-
 export default HomePage;
+
+    // const alert = (e) => {
+	// 	e.preventDefault();
+	// 	window.alert("You've deleted the review!");
+	// };

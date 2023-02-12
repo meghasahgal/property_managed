@@ -21,9 +21,7 @@ I enjoyed bringing together conceptual learnings of the React store, thunk and d
 @user_routes.route('')
 
 def users():
-    """
-    Query for all users that are PMs and returns them in a list of user dictionaries
-    """
+
     users = User.query.filter(User.is_pm == True).all()
 
     res = dict()
@@ -35,5 +33,5 @@ def users():
 <img width="1215" alt="image" src="https://user-images.githubusercontent.com/1787106/218231239-d50ea54a-d326-43db-ab8a-9017600ebbaf.png">
 
 ## Wiki:
-Please visit the Wiki for more information related to the database schema, API routes and
-[Wiki]([https://managed.onrender.com/] to App.
+Please visit the Wiki for more information related to the database schema, API routes and frontend:
+[Wiki][https://github.com/meghasahgal/property_managed/wiki].

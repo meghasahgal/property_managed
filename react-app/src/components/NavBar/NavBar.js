@@ -9,9 +9,10 @@ import logo from "../NavBar/logo2.png";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-
+	console.log(sessionUser, "sessionUser")
 	const user = useSelector((state)=> state.session.user)
-
+	const currentUser = useSelector((state)=> state?.users[sessionUser?.id])
+	console.log(currentUser, "currentUser")
 	// console.log(sessionUser?.is_Pm, "session user is PM?")
 	// console.log(sessionUser, "this is the session user")
 	// console.log(sessionUser?.id, "this is the id")
@@ -23,7 +24,7 @@ const NavBar = () => {
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
 		// dispatch(getReviewsByUserIdThunk())
-	});
+	},[]);
 
 	const history = useHistory();
 	const dispatch = useDispatch();

@@ -11,6 +11,7 @@ const EditReview = ({ reviewId }) => {
 	const [stars, setStars] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { userId } = useParams(); // userId of PM
+
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
 	const review = useSelector((state) => state.reviews[reviewId]);
@@ -32,12 +33,12 @@ const EditReview = ({ reviewId }) => {
 	const reviewUserId = sessionUserReview[0]["reviewerId"];
 	// [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
 
-	useEffect(() => {
-		if (sessionUserReview) {
-			setReviewBody(sessionUserReview[0]["reviewBody"]);
-			setStars(sessionUserReview[0]["stars"]);
-		}
-	}, [sessionUserReview]);
+	// useEffect(() => {
+	// 	if (sessionUserReview) {
+	// 		setReviewBody(sessionUserReview[0]["reviewBody"]);
+	// 		setStars(sessionUserReview[0]["stars"]);
+	// 	}
+	// }, [sessionUserReview]);
 
 	// console.log(
 	// 	sessionUserReview[0]["reviewBody"],

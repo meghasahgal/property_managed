@@ -48,11 +48,7 @@ const NavBar = () => {
 	//use effect for sessionUserisPm to show My Profile
 
 	useEffect(() => {
-<<<<<<< HEAD
-		if (sessionUser && (sessionUser.isPm)) {
-=======
 		if (sessionUser && (sessionUser.isPm===true)) {
->>>>>>> dev
 			setButtonText("My Profile");
 		}
 	}, [sessionUser]);

@@ -70,8 +70,8 @@ const EditProfile = () => {
 			zipcode,
 			is_pm: true,
 		};
-		console.log(editedProfile, "this is the editedProfile")
-		console.log(`\n\n\n Edited Profile \n\n ${editedProfile} \n\n`);
+		// console.log(editedProfile, "this is the editedProfile")
+		// console.log(`\n\n\n Edited Profile \n\n ${editedProfile} \n\n`);
 
 		// const updateUser = { ...user, isPm: true };
 		//update the value of isPm for the user by dispatching the updateSession on the user

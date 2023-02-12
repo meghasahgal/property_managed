@@ -13,11 +13,16 @@ const EditReview = ({ reviewId }) => {
 	const { userId } = useParams(); // userId of PM
 
 	const sessionUser = useSelector((state) => state.session.user);
-	const user = useSelector((state) => state.users[userId]);
+	const user = useSelector((state) => state?.users[userId])
+	// console.log(user)
+	// const userReview = useSelector((state) => Object.values(state?.users[userId].reviews).filter(user => user.reviewerId == sessionUser.id));
+	// console.log(userReview, "USER REVIEW")
 	const review = useSelector((state) => state.reviews[reviewId]);
 	// console.log(review, "REVIEW IN TEH REVIEW COMP")
 
 	const reviews = useSelector((state) => Object.values(state.reviews));
+
+
 	// console.log(reviews, "THESE ARE THE REVIEWS")
 	//look at array of sessionUserReview
 	const sessionUserReview = reviews.filter(

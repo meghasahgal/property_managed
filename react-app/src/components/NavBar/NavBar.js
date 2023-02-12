@@ -9,8 +9,9 @@ import logo from "../NavBar/logo2.png";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-	
+
 	const user = useSelector((state)=> state.session.user)
+
 	// console.log(sessionUser?.is_Pm, "session user is PM?")
 	// console.log(sessionUser, "this is the session user")
 	// console.log(sessionUser?.id, "this is the id")
@@ -47,7 +48,7 @@ const NavBar = () => {
 	//use effect for sessionUserisPm to show My Profile
 
 	useEffect(() => {
-		if (sessionUser && sessionUser.isPm) {
+		if (sessionUser && (sessionUser.isPm===true)) {
 			setButtonText("My Profile");
 		}
 	}, [sessionUser]);

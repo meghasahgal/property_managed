@@ -12,9 +12,9 @@ const EditProfile = () => {
 	const { userId } = useParams(); // userId of PM
 	const id = parseInt(userId)
 	const sessionUser = useSelector((state) => state.session.user);
-	console.log(sessionUser.id, "sessionuserid")
+	// console.log(sessionUser.id, "sessionuserid")
 	const user = useSelector((state)=>state?.users[id])
-	console.log(user, "USER")
+	// console.log(user, "USER")
 	// console.log(user.id, "userid")
 	//(user, "USER IN EDIT");
 	//(user.id, "user id from session in EDIT");

@@ -37,7 +37,7 @@ def user(id):
     user = User.query.get(id)
     # return user.to_dict()
     return {user.id: user.to_dict()}
-    # print(user, "user HerE")
+    # (user, "user HerE")
 
 
 # User property manager profiles can be retrieved
@@ -67,7 +67,7 @@ def users():
 def create_profile(id):
     form = ProfileForm()
     # print(form, "form")
-    # print(id, "id in user route")
+    # (id, "id in user route")
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -101,11 +101,11 @@ def edit_profile(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         form.populate_obj(user)
-        print(form.data)
+
         db.session.commit()
         return {user.id: user.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    print(form.errors)
+
 # Logged in user can delete their profile based on user id
 # DELETE api/users/:id/profile
 @user_routes.route('/<int:id>', methods=['DELETE'])

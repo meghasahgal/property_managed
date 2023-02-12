@@ -14,19 +14,35 @@ const EditReview = ({ reviewId }) => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
 	const review = useSelector((state) => state.reviews[reviewId]);
+	// console.log(review, "REVIEW IN TEH REVIEW COMP")
 
 	const reviews = useSelector((state) => Object.values(state.reviews));
-	// //(reviews, "THESE ARE THE REVIEWS")
+	// console.log(reviews, "THESE ARE THE REVIEWS")
 	//look at array of sessionUserReview
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	);
-	// //(sessionUserReview, "sessionUserReview")
-	const seshReviewId = sessionUserReview[0]["id"];
-	// //(seshReviewId, "SESHReviewID")
-	const sessionUserId = useSelector((state) => state.session.user.id);
+	// console.log(sessionUserReview, "sessionUserReview")
+	let seshReviewId;
+	if (sessionUserReview) {
+		seshReviewId = sessionUserReview[0]["id"];
+	}
+	// console.log(seshReviewId, "SESHReviewID")
+	const sessionUserId = useSelector((state) => state.session?.user?.id);
 	const reviewUserId = sessionUserReview[0]["reviewerId"];
 	// [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
+
+	useEffect(() => {
+		if (sessionUserReview) {
+			setReviewBody(sessionUserReview[0]["reviewBody"]);
+			setStars(sessionUserReview[0]["stars"]);
+		}
+	}, [sessionUserReview]);
+
+	console.log(
+		sessionUserReview[0]["reviewBody"],
+		"sessionUserReviewReviewBody"
+	);
 
 	const handleEdit = async (e) => {
 		e.preventDefault();
@@ -38,7 +54,7 @@ const EditReview = ({ reviewId }) => {
 			review_body: reviewBody,
 			stars,
 		};
-		// //(editedReview, "THIS IS THE EDITED REVIEW");
+		// console.log(editedReview, "THIS IS THE EDITED REVIEW");
 		let data = await dispatch(editReviewThunk(editedReview));
 		if (data) {
 			setErrors(data);
@@ -63,7 +79,7 @@ const EditReview = ({ reviewId }) => {
 				<div>Review</div>
 				<input
 					type="text"
-					placeholder={sessionUserReview[0]["reviewBody"]}
+					placeholder={sessionUserReview[0]['reviewBody']}
 					required
 					value={reviewBody}
 					onChange={(e) => setReviewBody(e.target.value)}
@@ -71,7 +87,7 @@ const EditReview = ({ reviewId }) => {
 				<div>Rating (1 to 5)</div>
 				<input
 					type="text"
-					placeholder={sessionUserReview[0]["stars"]}
+					placeholder={sessionUserReview[0]['stars']}
 					required
 					value={stars}
 					onChange={(e) => setStars(e.target.value)}
@@ -89,7 +105,6 @@ const EditReview = ({ reviewId }) => {
 				<button
 					className="small-btn"
 					type="submit"
-					// disabled={errors.length > 0}
 				>
 					Edit
 				</button>

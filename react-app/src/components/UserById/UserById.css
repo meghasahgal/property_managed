@@ -3,7 +3,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-content: space-between;
+    align-content: space-around;
     column-gap: 18px;
     line-height: 20px;
     margin: 16px 0px 40px 0px;

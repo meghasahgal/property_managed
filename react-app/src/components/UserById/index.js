@@ -26,10 +26,10 @@ const UserById = () => {
 	// //(userId, "userId");
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
-	console.log(user, "user");
-	console.log(user?.id, "user.id");
-	console.log(sessionUser?.id, "sessionUser.id");
-	console.log(user?.id !== sessionUser?.id);
+	// console.log(user, "user");
+	// console.log(user?.id, "user.id");
+	// console.log(sessionUser?.id, "sessionUser.id");
+	// console.log(user?.id !== sessionUser?.id);
 
 	const handleDeleteProfile = (userId) => {
 		dispatch(deleteProfileThunk(userId));
@@ -48,11 +48,11 @@ const UserById = () => {
 	const reviews = totalReviews.filter((review) => review.userId == userId); // all reviews for the specific peep
 	//map over reviews to get the reviewerIds:
 	const allReviewsUserIds = reviews.map((review) => review.reviewerId);
-	console.log(allReviewsUserIds, "All Reviews ReVIeWER IDS")
-	console.log(allReviewsUserIds.includes(sessionUser.id), "is the session user id in the reviewer id array?");
+	// console.log(allReviewsUserIds, "All Reviews ReVIeWER IDS")
+	// console.log(allReviewsUserIds.includes(sessionUser.id), "is the session user id in the reviewer id array?");
 	//get all reviews for that PM/user
 	const allPmReviews = useSelector((state) => state?.reviews[userId]);
-	console.log(allPmReviews, "allPmReviews");
+	// console.log(allPmReviews, "allPmReviews");
 
 	//filter reviews for where the session user ID is also the reviewerID
 	let filteredReviews;
@@ -60,15 +60,15 @@ const UserById = () => {
 		filteredReviews = allReviews.filter(
 			(review) => review.reviewerId === sessionUser.id
 		);
-		console.log(filteredReviews, "filteredreviews");
+		// console.log(filteredReviews, "filteredreviews");
 	}
-	console.log(filteredReviews);
+	// console.log(filteredReviews);
 
 
-	console.log(allReviews, "allReviews");
+	// console.log(allReviews, "allReviews");
 	// const allReviewsByID = allReviews.filter((review)=> review.userId == review.id)
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
-	console.log(allReviewsReviewerIds, "allreviewreviewerIds");
+	// console.log(allReviewsReviewerIds, "allreviewreviewerIds");
 	//dispatch the thunk the get the user reviews for the userId
 	useEffect(() => {
 		dispatch(getUserThunk(userId));

@@ -13,7 +13,9 @@ const EditReview = ({reviewId}) => {
 	const { userId } = useParams(); // userId of PM
     const sessionUser = useSelector((state=> state.session.user))
 	const user = useSelector((state) => state.users[userId]);
-    const review = useSelector((state) => state.reviews[reviewId]);
+    const review = useSelector((state) => state?.reviews[reviewId]);
+	const userReview = useSelector((state) => state.user.review.id)
+	console.log(userReview, "userReview")
 	// console.log(review, "REVIEW IN TEH REVIEW COMP")
 
     const reviews = useSelector((state) => Object.values(state.reviews))
@@ -22,20 +24,17 @@ const EditReview = ({reviewId}) => {
 	const sessionUserReview = reviews.filter(
 		(review) => review.reviewerId == sessionUser.id
 	);
-	// console.log(sessionUserReview, "sessionUserReview")
-	let seshReviewId
-	if (sessionUserReview){
-    seshReviewId =  sessionUserReview[0]['id']
-	}
+	console.log(sessionUserReview, "sessionUserReview")
+    const seshReviewId =  sessionUserReview[0]['id']
     // console.log(seshReviewId, "SESHReviewID")
-	const sessionUserId = useSelector((state) => state.session?.user?.id);
+	const sessionUserId = useSelector((state) => state.session.user.id);
     const reviewUserId = sessionUserReview[0]['reviewerId']
     // [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
 
 	useEffect(() => {
 		if (sessionUserReview) {
-			setReviewBody(sessionUserReview[0]['reviewBody']);
-			setStars(sessionUserReview[0]['stars']);
+			setReviewBody(sessionUserReview.reviewBody);
+			setStars(sessionUserReview.stars);
 		}
 	}, [review]);
 
@@ -76,17 +75,17 @@ const EditReview = ({reviewId}) => {
 				<div>Review</div>
 				<input
 					type="text"
-					// placeholder={sessionUserReview[0]['reviewBody']}
+					placeholder={sessionUserReview[0]['reviewBody']}
 					required
-					value={reviewBody}
+					value={review?.reviewBody}
 					onChange={(e) => setReviewBody(e.target.value)}
 				/>
 				<div>Rating (1 to 5)</div>
 				<input
 					type="text"
-					// placeholder={sessionUserReview[0]['stars']}
+					placeholder={sessionUserReview[0]['stars']}
 					required
-					value={stars}
+					value={review?.stars}
 					onChange={(e) => setStars(e.target.value)}
 				/>
 

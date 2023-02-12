@@ -15,7 +15,7 @@ const ReviewsByUserId = ({ reviewId, reviewerId }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams();
-	console.log(userId, "USER ID IN THUNK")
+	// console.log(userId, "USER ID IN THUNK")
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);

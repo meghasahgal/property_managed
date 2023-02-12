@@ -47,8 +47,8 @@ user-splash-img {
 .img-size-id {
     display: flex;
     flex-direction: row;
-    height: 428px;
-    width: 560px;
+    height: 400px;
+    width: 540px;
     font-family: Circular,
         -apple-system,
         BlinkMacSystemFont,

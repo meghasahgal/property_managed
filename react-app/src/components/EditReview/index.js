@@ -13,7 +13,7 @@ const EditReview = ({reviewId}) => {
 	const { userId } = useParams(); // userId of PM
     const sessionUser = useSelector((state=> state.session.user))
 	const user = useSelector((state) => state.users[userId]);
-    const review = useSelector((state) => state?.reviews[reviewId]);
+    const review = useSelector((state) => state.reviews[reviewId]);
 	// console.log(review, "REVIEW IN TEH REVIEW COMP")
 
     const reviews = useSelector((state) => Object.values(state.reviews))
@@ -31,8 +31,8 @@ const EditReview = ({reviewId}) => {
 
 	useEffect(() => {
 		if (sessionUserReview) {
-			setReviewBody(sessionUserReview.reviewBody);
-			setStars(sessionUserReview.stars);
+			setReviewBody(sessionUserReview[0]['reviewBody']);
+			setStars(sessionUserReview[0]['stars']);
 		}
 	}, [review]);
 
@@ -75,7 +75,7 @@ const EditReview = ({reviewId}) => {
 					type="text"
 					// placeholder={sessionUserReview[0]['reviewBody']}
 					required
-					value={review?.reviewBody}
+					value={reviewBody}
 					onChange={(e) => setReviewBody(e.target.value)}
 				/>
 				<div>Rating (1 to 5)</div>
@@ -83,7 +83,7 @@ const EditReview = ({reviewId}) => {
 					type="text"
 					// placeholder={sessionUserReview[0]['stars']}
 					required
-					value={review?.stars}
+					value={stars}
 					onChange={(e) => setStars(e.target.value)}
 				/>
 

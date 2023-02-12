@@ -19,7 +19,7 @@ const EditProfile = () => {
 	//(user, "USER IN EDIT");
 	//(user.id, "user id from session in EDIT");
 	// const user = useSelector((state) => state.users[userId]);
-	//set state variables
+	//set state variables / default vals
 
 	const [username, setUsername] = useState(sessionUser?.username);
 	const [email, setEmail] = useState(sessionUser?.email);

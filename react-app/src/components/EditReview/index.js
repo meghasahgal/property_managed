@@ -39,10 +39,10 @@ const EditReview = ({ reviewId }) => {
 		}
 	}, [sessionUserReview]);
 
-	console.log(
-		sessionUserReview[0]["reviewBody"],
-		"sessionUserReviewReviewBody"
-	);
+	// console.log(
+	// 	sessionUserReview[0]["reviewBody"],
+	// 	"sessionUserReviewReviewBody"
+	// );
 
 	const handleEdit = async (e) => {
 		e.preventDefault();

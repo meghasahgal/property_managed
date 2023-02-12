@@ -47,7 +47,7 @@ export const editUserThunk = (data) => async (dispatch) => {
 		},
 		body: editedUser,
 	});
-	console.log(`\n\n\n Edited user in thunk \n\n ${editedUser} \n\n`);
+	// console.log(`\n\n\n Edited user in thunk \n\n ${editedUser} \n\n`);
 
 	if (res.ok) {
 		const data = await res.json();

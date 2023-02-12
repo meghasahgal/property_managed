@@ -10,13 +10,19 @@ const EditProfile = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	const user = useSelector((state) => state.session.user);
+	const id = parseInt(userId)
+	const sessionUser = useSelector((state) => state.session.user);
+	// console.log(sessionUser.id, "sessionuserid")
+	const user = useSelector((state)=>state?.users[id])
+	// console.log(user, "USER")
+	// console.log(user.id, "userid")
 	//(user, "USER IN EDIT");
 	//(user.id, "user id from session in EDIT");
 	// const user = useSelector((state) => state.users[userId]);
-	//set state variables
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
+	//set state variables / default vals
+
+	const [username, setUsername] = useState(sessionUser?.username);
+	const [email, setEmail] = useState(sessionUser?.email);
 	const [pmTagline, setPmTagline] = useState("");
 	const [profileImg, setProfileImage] = useState("");
 	const [propertyType, setPropertyType] = useState("");
@@ -51,9 +57,9 @@ const EditProfile = () => {
 		e.preventDefault();
 
 		const editedProfile = {
-			id: user.id,
-			username: user.username,
-			email: user.email,
+			id: sessionUser.id,
+			username: username,
+			email: email,
 			pm_tagline: pmTagline,
 			profile_img: profileImg,
 			property_type: propertyType,
@@ -64,20 +70,22 @@ const EditProfile = () => {
 			zipcode,
 			is_pm: true,
 		};
-		//(editedProfile, "editedProfile")
-		//(`\n\n\n Edited Profile \n\n ${editedProfile} \n\n`);
+		console.log(editedProfile, "this is the editedProfile")
+		console.log(`\n\n\n Edited Profile \n\n ${editedProfile} \n\n`);
 
+		// const updateUser = { ...user, isPm: true };
 		//update the value of isPm for the user by dispatching the updateSession on the user
-		const updateUser = { ...user, isPm: true };
-		//(updateUser, "updateUser")
+		// console.log(`\n\n\n Updated User \n\n ${updateUser} \n\n`)
+		// console.log(updateUser, "updateUser")
 
 		let data = await dispatch(editUserThunk(editedProfile));
 
+		// const updateUser = { ...editedProfile, isPm: true, };
 		if (data) {
 			setErrors(data);
 		} else {
-			dispatch(updateSession(updateUser));
-			history.push(`/users/${user.id}`);
+			// dispatch(updateSession(updateUser));
+			history.push(`/users/${sessionUser.id}`);
 		}
 	};
 
@@ -98,7 +106,7 @@ const EditProfile = () => {
 				<div>Username</div>
 				<input
 					type="text"
-					placeholder={user?.username}
+					// placeholder={user?.username}
 					required
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
@@ -106,7 +114,7 @@ const EditProfile = () => {
 				<div>Email</div>
 				<input
 					type="text"
-					placeholder={user?.email}
+					// placeholder={user?.email}
 					required
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
@@ -114,7 +122,7 @@ const EditProfile = () => {
 				<div>Property Manager Tagline</div>
 				<input
 					type="text"
-					placeholder={user?.pmTagline}
+					// placeholder={user?.pmTagline}
 					required
 					value={pmTagline}
 					onChange={(e) => setPmTagline(e.target.value)}
@@ -122,7 +130,7 @@ const EditProfile = () => {
 				<div>Profile Image</div>
 				<input
 					type="url"
-					placeholder={user?.profileImg}
+					// placeholder={user?.profileImg}
 					value={profileImg}
 					onChange={(e) => setProfileImage(e.target.value)}
 				/>
@@ -142,7 +150,7 @@ const EditProfile = () => {
 				<div>Your Rate (%)</div>
 				<input
 					type="text"
-					placeholder={user?.pmRate}
+					// placeholder={user?.pmRate}
 					required
 					value={pmRate}
 					onChange={(e) => setPmRate(e.target.value)}
@@ -150,7 +158,7 @@ const EditProfile = () => {
 				<div>Phone Number</div>
 				<input
 					type="text"
-					placeholder={user?.phoneNumber}
+					// placeholder={user?.phoneNumber}
 					required
 					value={phoneNumber}
 					onChange={(e) => setPhoneNumber(e.target.value)}
@@ -158,7 +166,7 @@ const EditProfile = () => {
 				<div>City</div>
 				<input
 					type="text"
-					placeholder={user?.city}
+					// placeholder={user?.city}
 					required
 					value={city}
 					onChange={(e) => setCity(e.target.value)}
@@ -166,7 +174,7 @@ const EditProfile = () => {
 				<div>State</div>
 				<input
 					type="text"
-					placeholder={user?.state}
+					// placeholder={user?.state}
 					required
 					value={state}
 					onChange={(e) => setState(e.target.value)}
@@ -174,7 +182,7 @@ const EditProfile = () => {
 				<div>Zipcode</div>
 				<input
 					type="text"
-					placeholder={user?.zipcode}
+					// placeholder={user?.zipcode}
 					required
 					value={zipcode}
 					onChange={(e) => setZipcode(e.target.value)}
@@ -200,9 +208,9 @@ const EditProfile = () => {
 				<button
 					className="small-btn"
 					type="submit"
-					onClick={() => {
-						setIsPm(true);
-					}}
+					// onClick={() => {
+					// 	setIsPm(true);
+					// }}
 					// disabled={errors.length > 0}
 				>
 					Submit

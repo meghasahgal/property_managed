@@ -27,6 +27,7 @@ def reviews():
     reviews = Review.query.all()
     return {'reviews': [review.to_dict() for review in reviews]}
 
+
 # User can update a review that they created
 # PUT api/reviews/:id - works
 @review_routes.route('/<int:id>', methods=['PUT'])

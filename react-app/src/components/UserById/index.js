@@ -3,6 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
+import { logout } from '../../store/session';
+
 import {
 	getAllReviewsThunk,
 	getReviewsByUserIdThunk,
@@ -24,22 +26,61 @@ const UserById = () => {
 	// //(userId, "userId");
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
+	// console.log(user, "user");
+	// console.log(user?.id, "user.id");
+	// console.log(sessionUser?.id, "sessionUser.id");
+	// console.log(user?.id !== sessionUser?.id);
 
 	const handleDeleteProfile = (userId) => {
 		dispatch(deleteProfileThunk(userId));
-		history.push(`/users`);
+		dispatch(logout());
+		history.push(`/sign-up`);
 	};
 
 	//get all reviews
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
+	// conditions to create a review
+	// 1. user/pm can't write a review for themselves (sessionUserId can't write one for the userId)
+	// 2. reviewerId can't write a duplicate review - need to check for existing review (reviewerId dups)
+	// 3. if a person has no reviews, can write a review for them (review length for that Id has to be 0)
+
+	const totalReviews = useSelector((state) => Object.values(state?.reviews)); //all reviews array in store
+	const reviews = totalReviews.filter((review) => review.userId == userId); // all reviews for the specific peep
+	//map over reviews to get the reviewerIds:
+	const allReviewsUserIds = reviews.map((review) => review.reviewerId);
+	// console.log(allReviewsUserIds, "All Reviews ReVIeWER IDS")
+	// console.log(allReviewsUserIds.includes(sessionUser.id), "is the session user id in the reviewer id array?");
+	//get all reviews for that PM/user
+	const allPmReviews = useSelector((state) => state?.reviews[userId]);
+	// console.log(allPmReviews, "allPmReviews");
+
+	//filter reviews for where the session user ID is also the reviewerID
+	let filteredReviews;
+	if (allReviews) {
+		filteredReviews = allReviews.filter(
+			(review) => review.reviewerId === sessionUser.id
+		);
+		// console.log(filteredReviews, "filteredreviews");
+	}
+	// console.log(filteredReviews);
+
+
+	// console.log(allReviews, "allReviews");
+	// const allReviewsByID = allReviews.filter((review)=> review.userId == review.id)
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
-	//dispatch the thunk the get the reviews for the userId
+	// console.log(allReviewsReviewerIds, "allreviewreviewerIds");
+	//dispatch the thunk the get the user reviews for the userId
+	useEffect(() => {
+		dispatch(getUserThunk(userId));
+	}, [userId]);
+
 	useEffect(() => {
 		dispatch(getAllReviewsThunk());
 	}, [dispatch]);
+
 	useEffect(() => {
 		dispatch(getReviewsByUserIdThunk(userId));
-	}, [dispatch]);
+	}, [userId]);
 
 	const routeChangetoCreateReviewForm = () => {
 		let path = `/users/${userId}/reviews`;
@@ -62,10 +103,6 @@ const UserById = () => {
 	// 	} else return undefined;
 	// }); //all reviews array in store
 	// const review = reviews.filter((review) => review.userId == userId); // all reviews for the specific user/PM
-
-	useEffect(() => {
-		dispatch(getUserThunk(userId));
-	}, [userId]);
 
 	return (
 		<>
@@ -146,9 +183,11 @@ const UserById = () => {
 							<ReviewsByUserId user={user} />
 						</div>
 					</div>
-					{sessionUser?.id !== user.id &&
-						// review.reviewerId !== sessionUser?.id &&
-						!allReviewsReviewerIds.includes(sessionUser?.id) && (
+					{sessionUser?.id !== user?.id &&
+						!allReviewsUserIds.includes(sessionUser.id) && (
+							// review.reviewerId !== sessionUser?.id &&
+							// filteredReviews &&
+							// filteredReviews?.length == 0 &&
 							// <EditReview review={review}/>, need to add a setState and set off an OnChange if want to do it other way
 							// {
 							<button
@@ -160,11 +199,11 @@ const UserById = () => {
 							// }
 						)}
 					<div>
-						{user.id != sessionUser?.id && (
+						{/* {user.id != sessionUser?.id && (
 							<button className="btn-secondary">
 								Chat with Me!
 							</button>
-						)}
+						)} */}
 					</div>
 				</div>
 			)}

@@ -34,7 +34,7 @@ class ProfileForm(FlaskForm):
     # property_type=SelectField('property_type', choices=[('Residential', 'Residential'),('Commercial', 'Commercial'), ('Retail', 'Retail'), ('Industrial', 'Industrial')],validators=[DataRequired()])
     property_type=StringField('property_type', validators=[DataRequired(), check_category])
     pm_rate=IntegerField('pm_rate',validators=[DataRequired(), NumberRange(min=1,max=99,message="Please enter a whole number between 1 and 99")])
-    phone_number=StringField('phone_number', validators=[DataRequired()])
+    phone_number=StringField('phone_number', validators=[DataRequired(),Length(min=10,max=10,message="Please provide a 10 digit number")])
     city=StringField('city', validators=[DataRequired()])
     state=StringField('state', validators=[DataRequired()])
     zipcode=StringField('zipcode', validators=[DataRequired(), Length(min=5,max=5,message="Please provide a valid zipcode")])

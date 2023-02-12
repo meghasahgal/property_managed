@@ -53,8 +53,3 @@ const AverageRatingCalc = ({ user }) => {
 };
 export default AverageRatingCalc;
 
-{
-	/* <FontAwesomeIcon className="star"
-				icon={filteredReviewsForStars.length ? faStar :null}
-			/>{" "} */
-}

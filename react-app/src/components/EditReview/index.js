@@ -23,9 +23,12 @@ const EditReview = ({reviewId}) => {
 		(review) => review.reviewerId == sessionUser.id
 	);
 	// console.log(sessionUserReview, "sessionUserReview")
-    const seshReviewId =  sessionUserReview[0]['id']
+	let seshReviewId
+	if (sessionUserReview){
+    seshReviewId =  sessionUserReview[0]['id']
+	}
     // console.log(seshReviewId, "SESHReviewID")
-	const sessionUserId = useSelector((state) => state.session.user.id);
+	const sessionUserId = useSelector((state) => state.session?.user?.id);
     const reviewUserId = sessionUserReview[0]['reviewerId']
     // [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
 

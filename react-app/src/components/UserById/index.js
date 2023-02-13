@@ -92,16 +92,7 @@ const UserById = () => {
 		let path = `/users/${userId}/edit`;
 		history.push(path);
 	};
-	// const allUsersArray = useSelector((state) => {
-	// 	if (state?.users?.users) {
-	// 		return Object.values(state?.users?.users);
-	// 	} else return undefined;
-	// });
-	// const reviews = useSelector((state) => {
-	// 	if (state?.users?.users) {
-	// 		return Object.values(state?.users?.users?.reviews);
-	// 	} else return undefined;
-	// }); //all reviews array in store
+
 	// const review = reviews.filter((review) => review.userId == userId); // all reviews for the specific user/PM
 
 	return (

@@ -11,12 +11,11 @@ import {
 import EditReview from "../EditReview";
 import "../ReviewsByUserId/ReviewsByUserId.css";
 
-const ReviewsByUserId = ({ reviewId, reviewerId }) => {
+const ReviewsByUserId = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams();
 	// console.log(userId, "USER ID IN THUNK")
-
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
 	// //(user.id, "USER/PM ID IN REVIEWS BY ID")
@@ -44,7 +43,7 @@ const ReviewsByUserId = ({ reviewId, reviewerId }) => {
 	//dispatch the thunk the get the reviews for the userId
 	useEffect(() => {
 		dispatch(getReviewsByUserIdThunk(userId));
-	}, []);
+	}, [userId]);
 
 	// dispatch the thunk to edit the review of the session user
 	const handleEdit = (sessionUserReview) => {

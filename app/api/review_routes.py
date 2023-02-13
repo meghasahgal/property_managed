@@ -41,7 +41,7 @@ def reviews():
 @login_required
 def update_review(id):
     review = Review.query.get(id)
-    print(review, "this is the review in the BE route")
+    # print(review, "this is the review in the BE route")
     form = ReviewForm()
 
     if form.data["reviewer_id"] != current_user.id:

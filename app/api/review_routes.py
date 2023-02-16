@@ -25,7 +25,15 @@ def reviews():
     Query for all reviews and returns them in a list of review dictionaries
     """
     reviews = Review.query.all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+    # return {'reviews': [review.to_dict() for review in reviews]}
+    res = dict()
+    for review in reviews:
+        current_review = review.to_dict()
+        res[current_review['id']] = current_review
+    return res
+
+    # return {'users': [user.to_dict() for user in users]}
+
 
 # User can update a review that they created
 # PUT api/reviews/:id - works
@@ -33,6 +41,7 @@ def reviews():
 @login_required
 def update_review(id):
     review = Review.query.get(id)
+    # print(review, "this is the review in the BE route")
     form = ReviewForm()
 
     if form.data["reviewer_id"] != current_user.id:

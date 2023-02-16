@@ -3,7 +3,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-content: space-between;
+    align-content: space-around;
     column-gap: 18px;
     line-height: 20px;
     margin: 16px 0px 40px 0px;
@@ -47,8 +47,8 @@ user-splash-img {
 .img-size-id {
     display: flex;
     flex-direction: row;
-    height: 428px;
-    width: 560px;
+    height: 400px;
+    width: 540px;
     font-family: Circular,
         -apple-system,
         BlinkMacSystemFont,

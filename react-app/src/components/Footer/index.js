@@ -10,7 +10,7 @@ const Footer = () => {
 				<p className="about"> About </p>
 			</a>
 
-			<span className="bottom-text">© 2023, Managed, Inc.</span>
+			{/* <span className="bottom-text">© 2023, Managed, Inc.</span> */}
 		</div>
 	);
 };

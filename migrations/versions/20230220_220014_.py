@@ -26,16 +26,26 @@ def upgrade():
     sa.ForeignKeyConstraint(['user2_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.add_column('messages', sa.Column('chat_id', sa.Integer(), nullable=False))
-    op.alter_column('messages', 'sender_id',
-               existing_type=sa.INTEGER(),
-               nullable=False)
-    op.alter_column('messages', 'message_body',
-               existing_type=sa.VARCHAR(length=255),
-               nullable=False)
+
+    op.add_column('messages', sa.Column('chat_id', sa.Integer(), nullable=True))
+    op.add_column('leads', sa.Column('is_serious', sa.Boolean(), nullable=False))
+
+    # op.alter_column('messages', 'sender_id',
+    #            existing_type=sa.INTEGER(),
+    #            nullable=True)
+    # op.execute(
+    #     'messages'.update()
+    #     .where(table_name.c.column_name is None)
+    #     .values(column_name="some_value")
+    # )
+    # op.alter_column('messages', 'message_body',
+    #            existing_type=sa.VARCHAR(length=255),
+    #            nullable=True)
     op.drop_constraint(None, 'messages', type_='foreignkey')
     op.create_foreign_key(None, 'messages', 'chats', ['chat_id'], ['id'])
     op.drop_column('messages', 'recipient_id')
+
+
     # ### end Alembic commands ###
 
 
@@ -52,4 +62,6 @@ def downgrade():
                nullable=True)
     op.drop_column('messages', 'chat_id')
     op.drop_table('chats')
+    op.drop_column('leads','is_serious')
+
     # ### end Alembic commands ###

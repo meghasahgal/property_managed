@@ -4,6 +4,14 @@ db = SQLAlchemy()
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from flask_login import current_user
+
+
+# many to many table
+# chat_user = db.Table('chat_user',
+#     db.Column('chat_id', db.Integer, db.ForeignKey(add_prefix_for_prod('chats.id')), primary_key=True),
+#     db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
+# )
 
 
 class Chat(db.Model):
@@ -15,21 +23,11 @@ class Chat(db.Model):
      id = db.Column(db.Integer, primary_key=True)
      user1_id = db.Column(db.Integer, db.ForeignKey('users.id'))
      user2_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-     messages = db.relationship('Message', backref='chat', lazy=True)
+    #  messages = db.relationship('Message', back_populates='chat', cascade="all,delete")
 
-    #  id = db.Column(db.Integer, primary_key=True)
-    #  pm_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    #  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
 
 #relationships
-# user can have many messages
-# room can have many messages
-# room has many messages
-
-    #  messages = db.relationship('Message',back_populates='room')
-    #  users = db.relationship('User', back_populates='rooms')
-    #  pm_id = db.relationship('')
 
 
 #normalization
@@ -38,14 +36,15 @@ def to_dict(self):
                 'id': self.id,
                 'user1Id': self.user1_id,
                 'user2Id': self.user2_id,
-                'messsages': [message.to_dict() for message in self.messages]
+                # 'user': next((user.to_dict() for user in self.users if user.id != current_user.id), {}),
+                # 'messsages': [message.to_dict() for message in self.messages]
             }
-def to_dict_basic(self):
-            return{
-                'id': self.id,
-                'user1Id': self.user1_id,
-                'user2Id': self.user2_id
-            }
+# def to_dict_basic(self):
+#             return{
+#                 'id': self.id,
+#                 'user1Id': self.user1_id,
+#                 'user2Id': self.user2_id
+#             }
 
 # class Message(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

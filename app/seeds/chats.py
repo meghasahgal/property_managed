@@ -1,13 +1,18 @@
 from app.models import db, Chat, environment, SCHEMA
 def seed_chats():
 
-    chat1 = Chat(user1_id = 2, user2_id =1),
-    chat2 = Chat(user1_id = 1, user2_id =2),
-    chat3 = Chat(user1_id = 3, user2_id =4),
-    chat4 = Chat(user1_id = 4, user2_id =3),
-    chat5 = Chat(user1_id = 5, user2_id =3),
+    chat1 = Chat(user1_id = 2, user2_id =1)
+    chat2 = Chat(user1_id = 1, user2_id =2)
+    chat3 = Chat(user1_id = 3, user2_id =4)
+    chat4 = Chat(user1_id = 4, user2_id =3)
+    chat5 = Chat(user1_id = 5, user2_id =3)
 
     db.session.add_all([chat1,chat2,chat3,chat4,chat5])
+    # db.session.add(chat1)
+    # db.session.add(chat2)
+    # db.session.add(chat3)
+    # db.session.add(chat4)
+    # db.session.add(chat5)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

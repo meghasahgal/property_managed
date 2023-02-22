@@ -4,8 +4,8 @@ from app.models import db, Lead, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_leads():
 
-    lead1 = Lead(user_id = 1, quantity = 2,  price = 12.99)
-    lead2 = Lead(user_id = 2, quantity =1, price = 12.99)
+    lead1 = Lead(user_id = 1, quantity = 2,  price = 12.99, is_serious=False)
+    lead2 = Lead(user_id = 2, quantity =1, price = 12.99, is_serious=False)
 
     db.session.add_all([lead1, lead2])
     db.session.commit()

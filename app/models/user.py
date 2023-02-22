@@ -26,16 +26,11 @@ class User(db.Model, UserMixin):
 
 #relationships
     reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
-    # rooms = db.relationship("Room", back_populates="users")
+
     chats_as_user1 = db.relationship('Chat', foreign_keys='Chat.user1_id', backref='user1', lazy=True)
     chats_as_user2 = db.relationship('Chat', foreign_keys='Chat.user2_id', backref='user2', lazy=True)
     messages_sent = db.relationship('Message', foreign_keys='Message.sender_id', backref='sender', lazy=True)
-    # rooms_as_pm_id = db.relationship("Room", foreign_keys="Room.pm_id", back_populates="pm_id")
-    # rooms_as_user_id = db.relationship("Room", foreign_keys="Room.user_id", back_populates="user_id")
-    # messages = db.relationship("Message", back_populates="sender", cascade="all,delete")
-    # # leads = db.relationship('Lead', back_populates="user_leads", cascade='all,delete')
-    # recipients = db.relationship('Message',foreign_keys='Message.sender_id', back_populates="sender") # try message.sender_id if not working
-    # senders = db.relationship('Message',foreign_keys='Message.recipient_id', back_populates="recipient")
+
 
     @property
     def password(self):

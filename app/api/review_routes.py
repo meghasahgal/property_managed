@@ -30,6 +30,7 @@ def reviews():
     for review in reviews:
         current_review = review.to_dict()
         res[current_review['id']] = current_review
+    # print(res, "\n \n \n \n I got to retrieve all my reviews")
     return res
 
     # return {'users': [user.to_dict() for user in users]}

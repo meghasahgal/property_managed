@@ -61,7 +61,7 @@ class User(db.Model, UserMixin):
             'reviews':[review.to_dict_basic() for review in self.reviews],
             'chatsAsUserId1': [chat.to_dict_basic() for chat in self.chats_as_user1],
             'chatsAsUserId2': [chat.to_dict_basic() for chat in self.chats_as_user2],
-            'messages': [message.to_dict_basic() for message in self.messages]
+            'messagesSent': [message.to_dict_basic() for message in self.messages_sent]
             # 'senders':[sender.to_dict_basic() for sender in self.senders],
             # 'recipients': [recipient.to_dict_basic() for recipient in self.recipients]
             # 'leads': [lead.to_dict_basic() for lead in self.leads]
@@ -79,8 +79,8 @@ class User(db.Model, UserMixin):
             'city': self.city,
             'state': self.state,
             'avgRating': self.avg_rating,
-            'chatsAsUserId1': self.chats_as_user1,
-            'chatsAsUserId2': self.chats_as_user2,
-            'messages': self.messages
+            'chatsAsUserId1': [chat.to_dict_basic() for chat in self.chats_as_user1],
+            'chatsAsUserId2': [chat.to_dict_basic() for chat in self.chats_as_user2],
+            'messagesSent': [message.to_dict_basic() for message in self.messages_sent]
 
         }

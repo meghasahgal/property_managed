@@ -25,13 +25,7 @@ class Chat(db.Model):
      user2_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     #  messages = db.relationship('Message', back_populates='chat', cascade="all,delete")
 
-
-
-#relationships
-
-
-#normalization
-def to_dict(self):
+     def to_dict(self):
             return {
                 'id': self.id,
                 'user1Id': self.user1_id,
@@ -39,13 +33,15 @@ def to_dict(self):
                 # 'user': next((user.to_dict() for user in self.users if user.id != current_user.id), {}),
                 # 'messsages': [message.to_dict() for message in self.messages]
             }
-# def to_dict_basic(self):
-#             return{
-#                 'id': self.id,
-#                 'user1Id': self.user1_id,
-#                 'user2Id': self.user2_id
-#             }
+     def to_dict_basic(self):
+            return{
+                'id': self.id,
+                'user1Id': self.user1_id,
+                'user2Id': self.user2_id
+            }
 
+     def __repr__(self):
+            return f"<Chat id: {self.id}, user1Id: {self.user1_id}, user2Id: {self.user2_id}>"
 # class Message(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), nullable=False)

@@ -14,6 +14,7 @@ else:
 
 # create your SocketIO instance
 socketio = SocketIO(cors_allowed_origins=origins)
+print(socketio, "THIS IS SOCKETIO")
 
 #we want to handle chat events, so we will use the label "chat". (On the front-end, we will need to make sure that we use the same value when we emit our events so that they get handled by this function).
 #Unlike with a Flask route handler, we will not need to have an actual return statement—we send messages explicitly using emit or send functions.
@@ -22,5 +23,4 @@ socketio = SocketIO(cors_allowed_origins=origins)
 @socketio.on("chat")
 def handle_chat(data):
     emit("chat", data, broadcast=True)
-
-#pipenv requirements
+    print("***********this is the chat")

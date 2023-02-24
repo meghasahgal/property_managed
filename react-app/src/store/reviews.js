@@ -24,6 +24,7 @@ export const getAllReviewsThunk = () => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(loadReviews(data));
+		console.log(data, "THIS IS THE REVIEWS DATA")
 		return data;
 	}
 };
@@ -35,6 +36,7 @@ export const getReviewsByUserIdThunk = (userId) => async (dispatch) => {
 		const data = await response.json();
 		dispatch(loadReviews(data));
 		return data;
+		console.log(data, "THIS IS THE REVIEW FOR USER ID")
 	}
 };
 

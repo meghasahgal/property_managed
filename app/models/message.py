@@ -21,18 +21,18 @@ class Message(db.Model):
     def to_dict(self):
             return {
                 'id': self.id,
-                'roomId': self.room_id,
+                'chatId': self.chat_id,
                 'senderId': self.sender_id,
                 'messageBody': self.message_body,
                 'createdAt': self.created_at,
                 'updatedAt': self.updated_at
-
             }
+
     def to_dict_basic(self):
             return{
                 'id': self.id,
                 'chatId': self.chat_id,
                 'senderId': self.sender_id,
-                'messageBody': self.message_body,
+                'messageBody': self.message_body
 
-            }
+           }

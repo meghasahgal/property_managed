@@ -89,6 +89,8 @@ def create_profile(id):
 @login_required
 def edit_profile(id):
     user= User.query.get(id)
+
+    # print(user, "\n \n \n \n ***********HERES THE USER**********")
     form = ProfileForm()
 
 
@@ -129,6 +131,7 @@ def post_review(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         review = Review()
+        print(review, "HERE IS THE REVIEW!!!")
         form.populate_obj(review)
 
         db.session.add(review)
@@ -142,6 +145,7 @@ def post_review(id):
 @user_routes.route('/<int:id>/reviews', methods=['GET'])
 def get_all_reviews(id):
     reviews = Review.query.filter_by(user_id=id).all()
-
+    # print(reviews, "\n \n \n*****here are the reviews of the property manager")
     res = {review.id: review.to_dict() for review in reviews}
+    # print("\n\n\n\n\n\n\n\n\n\n hello", res)
     return res

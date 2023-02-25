@@ -19,7 +19,7 @@ import EditReview from "./components/EditReview";
 import BecomePMConfirmation from "./components/BecomePMConfirmation";
 import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
-// import Chat from "./components/Chat";
+import Chat from "./components/Chat";
 import { getAllReviewsThunk } from "./store/reviews";
 
 function App() {
@@ -58,9 +58,9 @@ function App() {
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
 				</ProtectedRoute>
-				{/* <Route exact path="/users/chat">
+				<Route exact path="/users/chat">
 					<Chat />
-				</Route> */}
+				</Route>
 
 				{/* <ProtectedRoute path="/users/reviews" exact={true}>
 					<ReviewsByUserId />

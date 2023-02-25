@@ -8,11 +8,7 @@ def seed_chats():
     chat5 = Chat(user1_id = 5, user2_id =3)
 
     db.session.add_all([chat1,chat2,chat3,chat4,chat5])
-    # db.session.add(chat1)
-    # db.session.add(chat2)
-    # db.session.add(chat3)
-    # db.session.add(chat4)
-    # db.session.add(chat5)
+   
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

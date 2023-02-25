@@ -131,7 +131,7 @@ def post_review(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         review = Review()
-        print(review, "HERE IS THE REVIEW!!!")
+        # print(review, "HERE IS THE REVIEW!!!")
         form.populate_obj(review)
 
         db.session.add(review)

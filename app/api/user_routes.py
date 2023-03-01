@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, Review,db
-from app.forms import ReviewForm, ProfileForm
+from app.models import User, Review,Chat,Message,db
+from app.forms import ReviewForm, ProfileForm, MessageForm
 
 
 user_routes = Blueprint('users', __name__)
@@ -90,15 +90,8 @@ def create_profile(id):
 def edit_profile(id):
     user= User.query.get(id)
 
-    # print(user, "\n \n \n \n ***********HERES THE USER**********")
     form = ProfileForm()
 
-
-
-    # if form.data["id"] != current_user.id:
-    #     # print(form.data['user_id'], "userID")
-    #     # print(current_user.id, "current user")
-    #     return {'error': "You are not authorized to edit this profile"}, 401
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -148,4 +141,38 @@ def get_all_reviews(id):
     # print(reviews, "\n \n \n*****here are the reviews of the property manager")
     res = {review.id: review.to_dict() for review in reviews}
     # print("\n\n\n\n\n\n\n\n\n\n hello", res)
+    return res
+
+#Create a new chat between two users if one doesn't exist already
+# POST - Current user (user2) creates a chat with the property manager (user1) - works ok
+#api/users/:id/chats
+@user_routes.route('/<int:id>/chats', methods=['POST'])
+@login_required
+def create_chat(user1_id):
+    user1_id = id
+    # print(user1_id, "user 1 id")
+    user2_id = current_user.id
+    # print(user2_id, "user 2 id")
+    chat = Chat.query.filter(
+        Chat.user1_id == current_user.id or Chat.user2_id == current_user.id
+    ).first()
+
+    if chat is None:
+        # Create a new chat if one doesn't exist yet
+        chat = Chat(user1_id=id, user2_id=user2_id)
+        db.session.add(chat)
+        db.session.commit()
+    return {chat.id: chat.to_dict()}
+
+
+# # GET route to retrieve all messages of current user - works
+# api/users/:id/messages
+@user_routes.route('/<int:sender_id>/messages', methods=['GET'])
+def get_messages(sender_id):
+    print(sender_id, "/n/n/n/nTHIS IS THE SENDER ID")
+    privatemsgs = Message.query.filter((Message.sender_id == current_user.id))
+    res = dict()
+    for privatemsg in privatemsgs:
+        current_msg = privatemsg.to_dict()
+        res[current_msg['id']] = current_msg
     return res

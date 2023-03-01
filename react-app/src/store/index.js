@@ -3,11 +3,14 @@ import thunk from "redux-thunk";
 import session from "./session";
 import users from "./users";
 import reviews from "./reviews"
+import chats from "./chats"
+import messages from "./messages"
 
 const rootReducer = combineReducers({
 	session,
 	users,
-  reviews
+  	reviews,
+	chats
 });
 
 let enhancer;

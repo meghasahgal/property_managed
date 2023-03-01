@@ -30,6 +30,18 @@ def on_join(data):
     join_room(room)
     emit('message', 'You have joined the room', room=room)
 
+# @socketio.on('join')
+# def handle_join(data):
+#     room = data['room']
+#     join_room(room)
+#     emit('message', {'message': f'User {request.sid} joined room {room}'}, room=room)
+
+# @socketio.on('leave')
+# def handle_leave(data):
+#     room = data['room']
+#     leave_room(room)
+#     emit('message', {'message': f'User {request.sid} left room {room}'}, room=room)
+
 @socketio.on('leave')
 def on_leave(data):
     room = data['room']
@@ -41,3 +53,10 @@ def on_message(data):
     room = data['room']
     message = data['message']
     emit('message', message, room=room)
+
+
+@socketio.on('private_message')
+def handle_private_message(data):
+    print('received private message: ' + data['message'])
+    recipient_sid = data['recipient_sid']
+    emit('private_message', data, room=recipient_sid)

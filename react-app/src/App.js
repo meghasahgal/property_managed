@@ -22,6 +22,7 @@ import Footer from "./components/Footer";
 import Chat from "./components/Chat";
 import { getAllReviewsThunk } from "./store/reviews";
 
+
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();

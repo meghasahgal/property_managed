@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, Review,Chat,Message,db
+from app.models import User, Review,Chat,Message,Lead,db
 from app.forms import ReviewForm, ProfileForm, MessageForm
 
 
@@ -176,3 +176,25 @@ def get_messages(sender_id):
         current_msg = privatemsg.to_dict()
         res[current_msg['id']] = current_msg
     return res
+
+
+# POST - Current user creates a lead/hire with the property manager
+#api/users/:id/leads
+@user_routes.route('/<int:id>/leads', methods=['POST'])
+@login_required
+def create_lead(id):
+    user1_id = id
+    user_id = current_user.id
+    # print(user1_id, "user 1 id")
+    # print(user_id, "client id")
+    #filter for the leads that the current user has for the current PM (identified by the params in the route)
+    lead = Lead.query.filter(
+         Lead.user_id == current_user.id and Lead.user_1 == id
+    ).first()
+
+    if chat is None:
+        # Create a new chat if one doesn't exist yet
+        chat = Chat(user1_id=id, user2_id=user2_id)
+        db.session.add(chat)
+        db.session.commit()
+    return {chat.id: chat.to_dict()}

@@ -108,3 +108,8 @@ def not_found(e):
 # at the bottom of the file, use this to run the app
 if __name__ == '__main__':
     socketio.run(app)
+
+def app_run():
+    socketio.run(app, debug=True, port=5000)
+
+app.app_run = app_run

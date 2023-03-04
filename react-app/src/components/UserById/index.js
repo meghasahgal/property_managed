@@ -3,12 +3,14 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
-import { logout } from '../../store/session';
+import { logout } from "../../store/session";
 
 import {
 	getAllReviewsThunk,
 	getReviewsByUserIdThunk,
 } from "../../store/reviews";
+
+import { createHireThunk } from "../../store/hires";
 import ReviewsByUserId from "../ReviewsByUserId";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,6 +28,7 @@ const UserById = () => {
 	// //(userId, "userId");
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
+
 	// console.log(user, "user");
 	// console.log(user?.id, "user.id");
 	// console.log(sessionUser?.id, "sessionUser.id");
@@ -36,6 +39,8 @@ const UserById = () => {
 		dispatch(logout());
 		history.push(`/sign-up`);
 	};
+
+	
 
 	//get all reviews
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
@@ -64,7 +69,6 @@ const UserById = () => {
 	}
 	// console.log(filteredReviews);
 
-
 	// console.log(allReviews, "allReviews");
 	// const allReviewsByID = allReviews.filter((review)=> review.userId == review.id)
 	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
@@ -90,6 +94,12 @@ const UserById = () => {
 	// //button to edit profile
 	const routeChangetoEditForm = () => {
 		let path = `/users/${userId}/edit`;
+		history.push(path);
+	};
+
+	// //button to edit profile
+	const routeChangetoCreateHire = () => {
+		let path = `/users/${userId}/hire`;
 		history.push(path);
 	};
 
@@ -149,6 +159,15 @@ const UserById = () => {
 							</div>
 						</div>
 						<div>
+							{user.id != sessionUser?.id && (
+								<button className="btn-secondary"
+									onClick={routeChangetoCreateHire}
+									>
+									Hire {user.username}!
+								</button>
+							)}
+						</div>
+						<div>
 							{user.id === sessionUser?.id && (
 								<button
 									className="change-profile-button"
@@ -189,13 +208,6 @@ const UserById = () => {
 							</button>
 							// }
 						)}
-					<div>
-						{/* {user.id != sessionUser?.id && (
-							<button className="btn-secondary">
-								Chat with Me!
-							</button>
-						)} */}
-					</div>
 				</div>
 			)}
 		</>

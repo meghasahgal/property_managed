@@ -151,21 +151,22 @@ def get_all_reviews(id):
 @user_routes.route('/<int:id>/hires', methods=['POST'])
 @login_required
 def create_hire(id):
-    #pm id
-    user2_id = id
+    #pm id    print(id, "this is the id")
     #client id
+    user2_id = id
+    print(id, "THIS IS THE ID IN THE BE")
     user1_id = current_user.id
     # print(user1_id, "user 1 id")
     # print(user_id, "client id")
     #filter for the hires that the current user has for the current PM (identified by the params in the route)
-    hire = Hire.query.filter(
-         Hire.user1_id == current_user.id and Hire.user2_id == id
-    ).first()
+    # hire = Hire.query.filter(
+    #      Hire.user1_id == current_user.id and Hire.user2_id == id
+    # ).first()
 
-    if hire is None:
-        # Create a newhire if one doesn't exist yet
-        hire = Hire(user1_id=user1_id, user2_id=user2_id, quantity=1, price=12.99)
-        db.session.add(hire)
-        db.session.commit()
-        return {hire.id: hire.to_dict()}
-    return {"error": "You are not authorized to create this hire"}, 401
+    # if hire is None:
+    #     # Create a newhire if one doesn't exist yet
+    hire = Hire(user1_id=user1_id, user2_id=user2_id, quantity=1, price=12.99)
+    db.session.add(hire)
+    db.session.commit()
+    return {hire.id: hire.to_dict()}
+    # return {"error": "You are not authorized to create this hire"}, 401

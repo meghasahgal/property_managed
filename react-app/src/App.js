@@ -12,6 +12,7 @@ import { authenticate } from "./store/session";
 import { getAllUsersThunk } from "./store/users";
 import UserById from "./components/UserById";
 import ReviewsByUserId from "./components/ReviewsByUserId";
+import CreateHire from "./components/CreateHire"
 import EditProfile from "./components/EditProfile";
 import CreateProfile from "./components/CreateProfile";
 import CreateReview from "./components/CreateReview";
@@ -70,6 +71,9 @@ function App() {
 				<ProtectedRoute exact path="/users/:userId/edit">
 					<EditProfile />
 				</ProtectedRoute>
+				<Route exact path="/users/:userId/hire">
+					<CreateHire />
+				</Route>
 				<Route path="/users/:userId/confirmation" exact={true}>
 					<BecomePMConfirmation />
 				</Route>

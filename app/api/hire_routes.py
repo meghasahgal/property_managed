@@ -27,7 +27,7 @@ def validation_errors_to_error_messages(validation_errors):
 #     hires = Hire.query.all()
 #     # return {'hires': [hire.to_dict() for hire in hires]}
 #     res = dict()
-#     for lead in hires:
+#     for hire in hires:
 #         current_hire = lead.to_dict()
 #         res[current_hire['id']] = current_hire
 #     # print(res, "\n \n \n \n I got to retrieve all my hires")
@@ -35,7 +35,7 @@ def validation_errors_to_error_messages(validation_errors):
 
     # return {'users': [user.to_dict() for user in users]}
 
-#Current user can retrieve their hires
+#Current user can retrieve their hires - works ok
 @hire_routes.route('',methods=['GET'])
 # @login_required
 def hires():

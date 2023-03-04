@@ -1,13 +1,13 @@
-from app.models import db, Lead, environment, SCHEMA
+from app.models import db, Hire, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_leads():
+def seed_hires():
 
-    lead1 = Lead(user_id = 1, quantity = 2,  price = 12.99)
-    lead2 = Lead(user_id = 2, quantity =1, price = 12.99)
+    hire1 = Hire(user1_id = 1,user2_id = 2, quantity = 1,  price = 12.99)
+    hire2 = Hire(user1_id = 2,user2_id=3, quantity =1, price = 12.99)
 
-    db.session.add_all([lead1, lead2])
+    db.session.add_all([hire1, hire2])
     db.session.commit()
 
 
@@ -22,10 +22,10 @@ def seed_leads():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_leads():
+def undo_hires():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.leads RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.hires RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM leads")
+        db.session.execute("DELETE FROM hires")
 
     db.session.commit()

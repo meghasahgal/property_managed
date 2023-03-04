@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, Review,db
+from app.models import User, Review,Hire,db
 from app.forms import ReviewForm, ProfileForm
 
 
@@ -145,3 +145,27 @@ def get_all_reviews(id):
 
     res = {review.id: review.to_dict() for review in reviews}
     return res
+
+# POST - Current user creates a hire/hire with the property manager
+#api/users/:id/leads
+@user_routes.route('/<int:id>/hires', methods=['POST'])
+@login_required
+def create_hire(id):
+    #pm id
+    user2_id = id
+    #client id
+    user1_id = current_user.id
+    # print(user1_id, "user 1 id")
+    # print(user_id, "client id")
+    #filter for the hires that the current user has for the current PM (identified by the params in the route)
+    hire = Hire.query.filter(
+         Hire.user1_id == current_user.id and Hire.user2_id == id
+    ).first()
+
+    if hire is None:
+        # Create a newhire if one doesn't exist yet
+        hire = Hire(user1_id=user1_id, user2_id=user2_id, quantity=1, price=12.99)
+        db.session.add(hire)
+        db.session.commit()
+        return {hire.id: hire.to_dict()}
+    return {"error": "You are not authorized to create this hire"}, 401

@@ -26,7 +26,9 @@ class User(db.Model, UserMixin):
 
 #relationships
     reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
-    # leads = db.relationship('Lead', back_populates="user_leads", cascade='all,delete')
+    # leads = db.relationship('Hire', back_populates="user_leads")
+    hires_as_user1 = db.relationship('Hire', foreign_keys='Hire.user1_id', backref='user1', lazy=True)
+    hires_as_user2 = db.relationship('Hire', foreign_keys='Hire.user2_id', backref='user2', lazy=True)
     recipients = db.relationship('Message',foreign_keys='Message.sender_id', back_populates="sender") # try message.sender_id if not working
     senders = db.relationship('Message',foreign_keys='Message.recipient_id', back_populates="recipient")
 
@@ -58,8 +60,11 @@ class User(db.Model, UserMixin):
             'avgRating': self.avg_rating,
             'reviews':[review.to_dict_basic() for review in self.reviews],
             'senders':[sender.to_dict_basic() for sender in self.senders],
-            'recipients': [recipient.to_dict_basic() for recipient in self.recipients]
+            'recipients': [recipient.to_dict_basic() for recipient in self.recipients],
             # 'leads': [lead.to_dict_basic() for lead in self.leads]
+            'hiressAsUserId1': [hire.to_dict_basic() for hire in self.hires_as_user1],
+            'hiresAsUserId2': [hire.to_dict_basic() for hire in self.hires_as_user2],
+
             # 'orders': [order.to_dict_basic() for order in self.user_orders],
             # 'creditCards': [payment.to_dict_basic() for payment in self.user_credit_cards],
         }
@@ -74,5 +79,7 @@ class User(db.Model, UserMixin):
             'city': self.city,
             'state': self.state,
             'avgRating': self.avg_rating,
+            'hiresAsUserId1': [hire.to_dict_basic() for hire in self.hires_as_user1],
+            'hiresAsUserId2': [hire.to_dict_basic() for hire in self.hires_as_user2],
 
         }

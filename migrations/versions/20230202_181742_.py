@@ -49,6 +49,23 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.add_column('leads', sa.Column('user2_id', sa.Integer(), nullable=True))
+    # op.drop_column('leads', sa.Column('user1_id', sa.Integer(), nullable=True))
+    # op.drop_column('leads', 'user_id')
+    # op.alter_column('leads', 'user_id', nullable=True, new_column_name='user1_id')
+
+    op.create_table('hires',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user1_id', sa.Integer(), nullable=False),
+    sa.Column('user2_id', sa.Integer(), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=True),
+    sa.Column('price', sa.Numeric(asdecimal=False), nullable=True),
+    sa.ForeignKeyConstraint(['user1_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user2_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=True),

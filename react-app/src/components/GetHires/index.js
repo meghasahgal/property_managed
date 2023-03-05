@@ -77,23 +77,28 @@ const GetHires = () => {
 						user && user?.id ? (
 							<div key={user?.id}>
 								<div className="user-details"></div>
-                                <div>{user.username}</div>
-                                <div></div>
-                                <button
-                                onClick={() => handleDeleteHire(user?.id)}>
-                                    Delete Hire
-
-                                </button>
+								<div>{user.username}</div>
+								<div>
+									<div
+										style={{
+											backgroundImage: `url('${user?.profileImg}')`,
+										}}
+										className="img-size-user"
+									></div>
+								</div>
+								<button
+									onClick={() => handleDeleteHire(user?.id)}
+								>
+									Remove Hire
+								</button>
 							</div>
 						) : (
 							<div></div>
 						)
-
 					)}
 				</div>
 			) : (
-				<div>
-				</div>
+				<div></div>
 			)}
 		</>
 	);

@@ -12,6 +12,7 @@ import { authenticate } from "./store/session";
 import { getAllUsersThunk } from "./store/users";
 import UserById from "./components/UserById";
 import ReviewsByUserId from "./components/ReviewsByUserId";
+import GetHires from "./components/GetHires";
 import CreateHire from "./components/CreateHire"
 import EditProfile from "./components/EditProfile";
 import CreateProfile from "./components/CreateProfile";

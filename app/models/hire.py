@@ -25,6 +25,7 @@ class Hire(db.Model):
                 'user2Id': self.user2_id,
                 'quantity': self.quantity,
                 'price': self.price,
+                # 'username': user_leads.username
                 # 'isSerious': self.is_serious,
                 # 'user': self.user_leads.to_dict_basic()
             }

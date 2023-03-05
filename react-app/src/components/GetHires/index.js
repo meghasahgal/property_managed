@@ -8,7 +8,7 @@ import {
 	getUserThunk,
     getAllUsersThunk
 } from "../../store/users";
-import { createHireThunk, getAllHiresThunk } from "../../store/hires";
+import { createHireThunk, getAllHiresThunk, deleteHireThunk } from "../../store/hires";
 
 const GetHires = () => {
 	const dispatch = useDispatch();
@@ -22,6 +22,8 @@ const GetHires = () => {
     const allUsersArray = Object.values(users)
     console.log(allUsersArray, "THESE ARE ALL THE HIRES BY THE USER")
 
+
+
 	const allHiresArray = useSelector((state) => {
 		if (state?.hires) {
 			return Object.values(state?.hires);
@@ -29,7 +31,12 @@ const GetHires = () => {
 	});
     console.log(allHiresArray, "allHiresArray")
     //get the hires for that user where user2 id is equal to the user id
-    const filteredHires = allHiresArray.filter((hire) => hire.user2Id)
+    const filteredHires = allHiresArray.map((hire) => hire.user2Id)
+    //now get the users of the ids in the filteredHires
+    // for (let i = 0; i < allUsersArray.length; i++) {
+    //     let res = []
+    //     if()
+    // }
     console.log(filteredHires, "filteredHIRES")
     // const pms = allReviews.filter((review) => review?.userId == userId); // all reviews for the specific user/PM
 
@@ -37,6 +44,11 @@ const GetHires = () => {
 		dispatch(getAllHiresThunk());
         dispatch(getAllUsersThunk())
 	}, [dispatch]);
+
+    //delete hire
+    const handleDeleteHire = (userId) => {
+		dispatch(deleteHireThunk(userId));
+	};
 
 	return (
 		<>
@@ -47,7 +59,14 @@ const GetHires = () => {
 						user && user?.id ? (
 							<div key={user?.id}>
 								<div className="user-details"></div>
-                                <div>{user.username}</div>
+                                <div>ID: {user.id}</div>
+                                <div>Quantity: {user.quantity}</div>
+                                <div>Price: {user.price}</div>
+                                <button
+                                onClick={() => handleDeleteHire(user?.id)}>
+                                    Delete Hire
+
+                                </button>
 							</div>
 						) : (
 							<div></div>

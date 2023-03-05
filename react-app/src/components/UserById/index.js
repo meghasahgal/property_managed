@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
 import { logout } from "../../store/session";
+import GetHires from "../GetHires";
 
 import {
 	getAllReviewsThunk,
@@ -40,7 +41,7 @@ const UserById = () => {
 		history.push(`/sign-up`);
 	};
 
-	
+
 
 	//get all reviews
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
@@ -192,6 +193,7 @@ const UserById = () => {
 						<div>
 							<ReviewsByUserId user={user} />
 						</div>
+
 					</div>
 					{sessionUser?.id !== user?.id &&
 						!allReviewsUserIds.includes(sessionUser.id) && (
@@ -208,6 +210,9 @@ const UserById = () => {
 							</button>
 							// }
 						)}
+						{/* <div>
+							<GetHires user={user}/>
+						</div> */}
 				</div>
 			)}
 		</>

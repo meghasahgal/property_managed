@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
+import { getAllHiresThunk } from "../../store/hires";
 import { logout } from "../../store/session";
 import GetHires from "../GetHires";
 
@@ -86,6 +87,11 @@ const UserById = () => {
 	useEffect(() => {
 		dispatch(getReviewsByUserIdThunk(userId));
 	}, [userId]);
+
+	 useEffect(() => {
+			dispatch(getAllHiresThunk());
+		}, [dispatch]);
+
 
 	const routeChangetoCreateReviewForm = () => {
 		let path = `/users/${userId}/reviews`;

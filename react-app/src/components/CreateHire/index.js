@@ -14,10 +14,16 @@ const CreateHire = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
     // console.log(user, "THIS IS THE USER in THE FE")
+    const hires = Object.values(useSelector((state)=>state.hires))
 
     useEffect(() => {
 		dispatch(getUserThunk(userId));
 	}, [userId]);
+
+     useEffect(() => {
+			dispatch(getAllHiresThunk());
+		}, [dispatch]);
+
 
 
     const routeChangetoHome = () => {
@@ -32,13 +38,14 @@ const CreateHire = () => {
 
 	return (
 		<>
-        {user && user.id && (
+        {user && user.id && user.id && (
 			<div>
 				<h3>Please confirm that you'd like to hire {user?.username}.</h3>
 
 				<button
                 onClick={() => routeChangetoHome()}
                 >No</button>
+
 				<button
 					onClick={() => handleCreateHire(user?.id)}> Yes!
 				</button>

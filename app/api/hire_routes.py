@@ -76,7 +76,7 @@ def hires():
 # DELETE api/hires/:id - works
 @hire_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
-def delete_review(id):
+def delete_hire(id):
     hire = Hire.query.get(id)
 
     if hire.user1_id != current_user.id:

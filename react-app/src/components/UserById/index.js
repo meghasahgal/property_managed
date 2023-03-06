@@ -35,6 +35,8 @@ const UserById = () => {
 	// console.log(user?.id, "user.id");
 	// console.log(sessionUser?.id, "sessionUser.id");
 	// console.log(user?.id !== sessionUser?.id);
+	const hiresByUser1 = Object.values(useSelector((state) => state.hires)).filter((hire)=>sessionUser.id == hire.user1Id).map((hire)=>hire.user2Id)
+	console.log(hiresByUser1, "hiresByUser1")
 
 	const handleDeleteProfile = (userId) => {
 		dispatch(deleteProfileThunk(userId));
@@ -166,7 +168,7 @@ const UserById = () => {
 							</div>
 						</div>
 						<div>
-							{user.id != sessionUser?.id && (
+							{user.id != sessionUser?.id && (!hiresByUser1.includes(user?.id)) &&(
 								<button className="btn-secondary"
 									onClick={routeChangetoCreateHire}
 									>

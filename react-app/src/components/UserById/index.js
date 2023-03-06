@@ -176,16 +176,19 @@ const UserById = () => {
 							</div>
 						</div>
 						<div>
-							{user.id != sessionUser?.id &&
-								(!hiresByUser1.includes(user?.id)) ? (
+							{user.id !== sessionUser?.id &&
+								!hiresByUser1.includes(user?.id) && (
 									<button
 										className="btn-secondary"
 										onClick={routeChangetoCreateHire}
 									>
 										Hire {user.username}!
 									</button>
-								): (
-									<button onClick={()=>handleDeleteHire(hireId)}
+								)}
+							{user.id !== sessionUser?.id &&
+								hiresByUser1.includes(user?.id) &&(
+									<button
+										onClick={() => handleDeleteHire(hireId)}
 									>
 										UnHire Me!
 									</button>

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from app.models import User, Review,Hire,db
+from app.models import User, Review,Hire, Love,db
 from app.forms import ReviewForm, ProfileForm
 
 
@@ -147,7 +147,7 @@ def get_all_reviews(id):
     return res
 
 # POST - Current user creates a hire/hire with the property manager
-#api/users/:id/leads
+#api/users/:id/hires
 @user_routes.route('/<int:id>/hires', methods=['POST'])
 @login_required
 def create_hire(id):
@@ -169,4 +169,30 @@ def create_hire(id):
     db.session.add(hire)
     db.session.commit()
     return {hire.id: hire.to_dict()}
+    # return {"error": "You are not authorized to create this hire"}, 401
+
+
+#  POST - Current user creates a love with the property manager
+#api/users/:id/loves
+@user_routes.route('/<int:id>/loves', methods=['POST'])
+@login_required
+def create_love(id):
+    #pm id    print(id, "this is the id")
+    #client id
+    user2_id = id
+    print(id, "THIS IS THE ID IN THE BE")
+    user1_id = current_user.id
+    # print(user1_id, "user 1 id")
+    # print(user_id, "client id")
+    #filter for the hires that the current user has for the current PM (identified by the params in the route)
+    # hire = Hire.query.filter(
+    #      Hire.user1_id == current_user.id and Hire.user2_id == id
+    # ).first()
+
+    # if hire is None:
+    #     # Create a newhire if one doesn't exist yet
+    love = Love(user1_id=user1_id, user2_id=user2_id)
+    db.session.add(love)
+    db.session.commit()
+    return {love.id: love.to_dict()}
     # return {"error": "You are not authorized to create this hire"}, 401

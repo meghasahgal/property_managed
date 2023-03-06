@@ -4,7 +4,8 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from .models import db, User, Review, Lead
+from .models import db, User, Review, Lead, Love
+from .api.love_routes import love_routes
 from .api.hire_routes import hire_routes
 from .api.review_routes import review_routes
 from .api.user_routes import user_routes
@@ -32,6 +33,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(hire_routes, url_prefix='/api/hires')
+app.register_blueprint(love_routes, url_prefix='/api/loves')
 
 db.init_app(app)
 Migrate(app, db)

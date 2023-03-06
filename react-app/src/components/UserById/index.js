@@ -20,6 +20,7 @@ import {
 	faWarehouse,
 	faLocationDot,
 	faMoneyCheckDollar,
+	faHeart
 } from "@fortawesome/free-solid-svg-icons";
 import "./UserById.css";
 

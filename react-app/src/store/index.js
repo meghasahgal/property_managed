@@ -4,12 +4,14 @@ import session from "./session";
 import users from "./users";
 import reviews from "./reviews";
 import hires from "./hires";
+import loves from "./loves"
 
 const rootReducer = combineReducers({
 	session,
 	users,
 	reviews,
 	hires,
+	loves
 });
 
 let enhancer;

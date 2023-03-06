@@ -5,17 +5,17 @@ class Love(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    love = db.Column(db.Boolean, nullable=True)
-    # dislove = db.Column(db.Boolean, nullable=True)
+        """User can have many loves"""
 
-    user_response = db.relationship('User', back_populates='response_user')
+    id = db.Column(db.Integer, primary_key=True)
+    user1_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    user2_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+
+    # user = db.relationship('User', back_populates='loved_by_users')
 
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'love': self.love,
-            # 'dislike': self.dislike
+            'user1_id': self.user1_id,
+            'user2_id': self.user2_id
         }

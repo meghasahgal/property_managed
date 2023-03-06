@@ -65,6 +65,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
+    # op.add_column('hires', sa.Column('username', sa.Integer(), nullable=False))
+    # op.add_column('hires', sa.Column('profile_img', sa.String(length=255), nullable=True))
+
+
+
 
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),

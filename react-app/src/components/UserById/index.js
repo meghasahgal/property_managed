@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
-import { getAllHiresThunk, deleteHireThunk } from "../../store/hires";
+import { getAllHiresThunk, deleteHireThunk, getHiresByUserIdThunk } from "../../store/hires";
 import { logout } from "../../store/session";
 import GetHires from "../GetHires";
 
@@ -27,10 +27,14 @@ const UserById = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	// //(userId, "userId");
+	console.log(userId, "THIS IS THE USER ID")
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
-
+	// need to get the hires array and filter for the hire ID where the user2Id == userId
+	const hireId = Object.values(useSelector((state) => state.hires)).filter((hire)=>hire.user2Id == userId).map((hire)=>hire.id)[0]
+	console.log(hireId, "HIRES")
+	// const id2 = hires.first()
+	// console.log(id2, "id2")
 	// console.log(user, "user");
 	// console.log(user?.id, "user.id");
 	// console.log(sessionUser?.id, "sessionUser.id");
@@ -46,8 +50,9 @@ const UserById = () => {
 		history.push(`/sign-up`);
 	};
 
-	const handleDeleteHire = (userId) => {
-		dispatch(deleteHireThunk(userId));
+	const handleDeleteHire = (hireId) => {
+		dispatch(deleteHireThunk(hireId));
+		history.push('/')
 	};
 
 	//get all reviews
@@ -172,12 +177,17 @@ const UserById = () => {
 						</div>
 						<div>
 							{user.id != sessionUser?.id &&
-								!hiresByUser1.includes(user?.id) && (
+								(!hiresByUser1.includes(user?.id)) ? (
 									<button
 										className="btn-secondary"
 										onClick={routeChangetoCreateHire}
 									>
 										Hire {user.username}!
+									</button>
+								): (
+									<button onClick={()=>handleDeleteHire(hireId)}
+									>
+										UnHire Me!
 									</button>
 								)}
 						</div>

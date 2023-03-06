@@ -27,7 +27,7 @@ const GetHires = () => {
     // console.log(result)
 
     const allUsersArray = Object.values(users)
-    console.log(allUsersArray, "THESE ARE ALL THE HIRES BY THE USER")
+    // console.log(allUsersArray, "THESE ARE ALL THE HIRES BY THE USER")
 
 
 
@@ -36,13 +36,13 @@ const GetHires = () => {
 			return Object.values(state?.hires);
 		} else return undefined;
 	});
-    console.log(allHiresArray, "allHiresArray")
+    // console.log(allHiresArray, "allHiresArray")
     //get the hires for that user where user2 id is equal to the user id
     const filteredHires = allHiresArray.map((hire) => hire.user2Id)
 
-    console.log(filteredHires, "filteredHIRES")
+    // console.log(filteredHires, "filteredHIRES")
      const result = allUsers.filter(({id}) => filteredHires.includes(id));
-     console.log(result, "THIS IS THE RESULT")
+    //  console.log(result, "THIS IS THE RESULT")
 
     // const pms = allReviews.filter((review) => review?.userId == userId); // all reviews for the specific user/PM
     // const activeIds = [202, 204];
@@ -70,27 +70,27 @@ const GetHires = () => {
 
 	return (
 		<>
-			<div></div>
+			<div><h3>My Hires:</h3></div>
 			{sessionUser ? (
 				<div className="users-container">
 					{result?.map((user) =>
 						user && user?.id ? (
 							<div key={user?.id}>
 								<div className="user-details"></div>
-								<div>{user.username}</div>
 								<div>
 									<div
 										style={{
-											backgroundImage: `url('${user?.profileImg}')`,
+                                            backgroundImage: `url('${user?.profileImg}')`,
 										}}
 										className="img-size-user"
-									></div>
+                                        ></div>
 								</div>
-								<button
+                                        <div>{user.username}</div>
+								{/* <button
 									onClick={() => handleDeleteHire(user?.id)}
 								>
 									Remove Hire
-								</button>
+								</button> */}
 							</div>
 						) : (
 							<div></div>

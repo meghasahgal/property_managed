@@ -22,6 +22,7 @@ import BecomePMConfirmation from "./components/BecomePMConfirmation";
 import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
 import { getAllReviewsThunk } from "./store/reviews";
+import { getAllHiresThunk } from "./store/hires";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -37,6 +38,7 @@ function App() {
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
 		dispatch(getAllReviewsThunk());
+		dispatch(getAllHiresThunk())
 	});
 
 	if (!loaded) {
@@ -58,6 +60,9 @@ function App() {
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
+				</ProtectedRoute>
+				<ProtectedRoute path="/my-hires" exact={true}>
+					<GetHires />
 				</ProtectedRoute>
 
 				{/* <ProtectedRoute path="/users/reviews" exact={true}>

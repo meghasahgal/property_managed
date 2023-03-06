@@ -76,32 +76,32 @@ export const createHireThunk = (data) => async (dispatch) => {
 };
 
 // EDIT A HIRE
-export const editHireThunk = (hire) => async (dispatch) => {
-	const editedHire = JSON.stringify(hire);
-	const response = await fetch(`/api/hires/${hire.id}`, {
-		method: "PUT",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: editedHire,
-	});
+// export const editHireThunk = (hire) => async (dispatch) => {
+// 	const editedHire = JSON.stringify(hire);
+// 	const response = await fetch(`/api/hires/${hire.id}`, {
+// 		method: "PUT",
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 		body: editedHire,
+// 	});
 
 	// //(response, "response")
 	// //(editedReview, "EDITED HIRE FROM THUNK");
-	if (response.ok) {
-		const data = await response.json();
-		// //("data", data)
-		dispatch(loadHires(data));
-		return null;
-	} else if (response.status < 500) {
-		const data = await response.json();
-		if (data.errors) {
-			return data.errors;
-		}
-	} else {
-		return ["An error occurred. Please try again."];
-	}
-};
+// 	if (response.ok) {
+// 		const data = await response.json();
+// 		// //("data", data)
+// 		dispatch(loadHires(data));
+// 		return null;
+// 	} else if (response.status < 500) {
+// 		const data = await response.json();
+// 		if (data.errors) {
+// 			return data.errors;
+// 		}
+// 	} else {
+// 		return ["An error occurred. Please try again."];
+// 	}
+// };
 
 // DELETE a HIRE
 export const deleteHireThunk = (hireId) => async (dispatch) => {
@@ -111,6 +111,7 @@ export const deleteHireThunk = (hireId) => async (dispatch) => {
 	if (response.ok) {
 		dispatch(deleteHire(hireId));
 	}
+	console.log(hireId, "THIS IS THE HIRE ID IN THE THUNK")
 };
 
 //REDUCER

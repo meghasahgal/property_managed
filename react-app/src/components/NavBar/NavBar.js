@@ -87,7 +87,8 @@ const NavBar = () => {
 								<LogoutButton className="navButton" />
 							</li>
 
-							{(sessionUser?.isPm === true || currentUser?.isPm ===true) ? (
+							{sessionUser?.isPm === true ||
+							currentUser?.isPm === true ? (
 								<li className="barLink">
 									<NavLink to={`/users/${sessionUser.id}`}>
 										<button>My Profile</button>
@@ -102,6 +103,15 @@ const NavBar = () => {
 									</NavLink>
 								</li>
 							)}
+							<li className="barLink">
+								<NavLink
+									to="/my-hires"
+									exact={true}
+									activeClassName="active"
+								>
+									<button>My Hires</button>
+								</NavLink>
+							</li>
 						</>
 					) : (
 						<>

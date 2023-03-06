@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, deleteProfileThunk } from "../../store/users";
-import { getAllHiresThunk } from "../../store/hires";
+import { getAllHiresThunk, deleteHireThunk } from "../../store/hires";
 import { logout } from "../../store/session";
 import GetHires from "../GetHires";
 
@@ -35,8 +35,10 @@ const UserById = () => {
 	// console.log(user?.id, "user.id");
 	// console.log(sessionUser?.id, "sessionUser.id");
 	// console.log(user?.id !== sessionUser?.id);
-	const hiresByUser1 = Object.values(useSelector((state) => state.hires)).filter((hire)=>sessionUser.id == hire.user1Id).map((hire)=>hire.user2Id)
-	console.log(hiresByUser1, "hiresByUser1")
+	const hiresByUser1 = Object.values(useSelector((state) => state.hires))
+		.filter((hire) => sessionUser.id == hire.user1Id)
+		.map((hire) => hire.user2Id);
+	console.log(hiresByUser1, "hiresByUser1");
 
 	const handleDeleteProfile = (userId) => {
 		dispatch(deleteProfileThunk(userId));
@@ -44,7 +46,9 @@ const UserById = () => {
 		history.push(`/sign-up`);
 	};
 
-
+	const handleDeleteHire = (userId) => {
+		dispatch(deleteHireThunk(userId));
+	};
 
 	//get all reviews
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
@@ -90,10 +94,9 @@ const UserById = () => {
 		dispatch(getReviewsByUserIdThunk(userId));
 	}, [userId]);
 
-	 useEffect(() => {
-			dispatch(getAllHiresThunk());
-		}, [dispatch]);
-
+	useEffect(() => {
+		dispatch(getAllHiresThunk());
+	}, [dispatch]);
 
 	const routeChangetoCreateReviewForm = () => {
 		let path = `/users/${userId}/reviews`;
@@ -168,13 +171,15 @@ const UserById = () => {
 							</div>
 						</div>
 						<div>
-							{user.id != sessionUser?.id && (!hiresByUser1.includes(user?.id)) &&(
-								<button className="btn-secondary"
-									onClick={routeChangetoCreateHire}
+							{user.id != sessionUser?.id &&
+								!hiresByUser1.includes(user?.id) && (
+									<button
+										className="btn-secondary"
+										onClick={routeChangetoCreateHire}
 									>
-									Hire {user.username}!
-								</button>
-							)}
+										Hire {user.username}!
+									</button>
+								)}
 						</div>
 						<div>
 							{user.id === sessionUser?.id && (
@@ -201,7 +206,6 @@ const UserById = () => {
 						<div>
 							<ReviewsByUserId user={user} />
 						</div>
-
 					</div>
 					{sessionUser?.id !== user?.id &&
 						!allReviewsUserIds.includes(sessionUser.id) && (
@@ -218,7 +222,7 @@ const UserById = () => {
 							</button>
 							// }
 						)}
-						{/* <div>
+					{/* <div>
 							<GetHires user={user}/>
 						</div> */}
 				</div>

@@ -154,7 +154,7 @@ def create_hire(id):
     #pm id    print(id, "this is the id")
     #client id
     user2_id = id
-    print(id, "THIS IS THE ID IN THE BE")
+    # print(id, "THIS IS THE ID IN THE BE")
     user1_id = current_user.id
     # print(user1_id, "user 1 id")
     # print(user_id, "client id")

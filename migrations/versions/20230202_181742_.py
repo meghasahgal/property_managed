@@ -68,7 +68,14 @@ def upgrade():
     # op.add_column('hires', sa.Column('username', sa.Integer(), nullable=False))
     # op.add_column('hires', sa.Column('profile_img', sa.String(length=255), nullable=True))
 
-
+    op.create_table('loves',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user1_id', sa.Integer(), nullable=False),
+    sa.Column('user2_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user1_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user2_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
 
 
     op.create_table('messages',

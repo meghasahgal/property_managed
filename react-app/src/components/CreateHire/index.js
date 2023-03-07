@@ -15,7 +15,7 @@ const CreateHire = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	console.log(userId, "the user Id in the params");
+	// console.log(userId, "the user Id in the params");
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state.users[userId]);
 	// console.log(user, "THIS IS THE USER in THE FE")

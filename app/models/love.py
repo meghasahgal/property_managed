@@ -19,3 +19,10 @@ class Love(db.Model):
             'user1_id': self.user1_id,
             'user2_id': self.user2_id
         }
+
+    def to_dict_basic(self):
+        return {
+            'id': self.id,
+            'user1_id': self.user1_id,
+            'user2_id': self.user2_id
+        }

@@ -70,7 +70,9 @@ const GetHires = () => {
 
 	return (
 		<>
-			<div><h3>My Hires:</h3></div>
+			<div>
+				<h3>My Hires:</h3>
+			</div>
 			{sessionUser ? (
 				<div className="users-container">
 					{result?.map((user) =>
@@ -80,12 +82,18 @@ const GetHires = () => {
 								<div>
 									<div
 										style={{
-                                            backgroundImage: `url('${user?.profileImg}')`,
+											backgroundImage: `url('${user?.profileImg}')`,
 										}}
 										className="img-size-user"
-                                        ></div>
+									></div>
 								</div>
-                                        <div>{user.username}</div>
+								{/* <div>{user.username}</div> */}
+								<Link
+									className="user-link"
+									to={`/users/${user.id}`}
+								>
+									{user.username}
+								</Link>
 								{/* <button
 									onClick={() => handleDeleteHire(user?.id)}
 								>

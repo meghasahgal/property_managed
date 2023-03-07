@@ -4,6 +4,7 @@ import { NavLink, useHistory, Link } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import { login } from "../../store/session";
 import { getAllUsersThunk } from "../../store/users";
+// import { getAllLovesThunk } from "../../store/loves";
 import "./NavBar.css";
 import logo from "../NavBar/logo2.png";
 
@@ -23,6 +24,7 @@ const NavBar = () => {
 	// load all users
 	useEffect(() => {
 		dispatch(getAllUsersThunk());
+		// dispatch(getAllLovesThunk())
 		// dispatch(getReviewsByUserIdThunk())
 	},[]);
 

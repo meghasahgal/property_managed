@@ -195,4 +195,15 @@ def create_love(id):
     db.session.add(love)
     db.session.commit()
     return {love.id: love.to_dict()}
-    # return {"error": "You are not authorized to create this hire"}, 401
+    # return {"error": "You are not authorized to create this love"}, 401
+
+
+# User can get all loves on a property manager - works ok
+# GET api/users/:id/lovess
+@user_routes.route('/<int:id>/loves', methods=['GET'])
+def get_all_loves(id):
+    loves = Love.query.filter_by(user2_id=id).all()
+    print(id, 'this is the id BE')
+    print(loves, "these are the loves in the BE")
+    res = {love.id: love.to_dict() for love in loves}
+    return res

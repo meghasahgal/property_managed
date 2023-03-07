@@ -23,6 +23,7 @@ import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
 import { getAllReviewsThunk } from "./store/reviews";
 import { getAllHiresThunk } from "./store/hires";
+import {getAllLovesThunk} from "./store/loves"
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -39,6 +40,7 @@ function App() {
 		dispatch(getAllUsersThunk());
 		dispatch(getAllReviewsThunk());
 		dispatch(getAllHiresThunk())
+		dispatch(getAllLovesThunk())
 	});
 
 	if (!loaded) {

@@ -31,11 +31,15 @@ export const getAllLovesThunk = () => async (dispatch) => {
 // GET loves for a userId
 export const getLovesByUserIdThunk = (userId) => async (dispatch) => {
 	const response = await fetch(`/api/users/${userId}/loves`);
+    console.log(userId)
 	if (response.ok) {
 		const data = await response.json();
+        console.log(data, "data")
 		dispatch(loadLoves(data));
 		return data;
 	}
+    // console.log(data, "DATA in the frontend for getting loves")
+    console.log(userId)
 };
 
 //GET specific hire by loveId

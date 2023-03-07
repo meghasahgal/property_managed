@@ -36,39 +36,37 @@ const UserById = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	console.log(userId, "THIS IS THE USER ID")
+	// console.log(userId, "THIS IS THE USER ID");
 	const sessionUser = useSelector((state) => state.session.user);
+	const sessionUserId = sessionUser.id;
 	const user = useSelector((state) => state.users[userId]);
 	// need to get the hires array and filter for the hire ID where the user2Id == userId
-	const hireId = Object.values(useSelector((state) => state.hires)).filter((hire)=>hire.user2Id == userId).map((hire)=>hire.id)[0]
-	// console.log(hireId, "HIRES")
-	// const id2 = hires.first()
-	// console.log(id2, "id2")
-	// console.log(user, "user");
-	// console.log(user?.id, "user.id");
-	console.log(sessionUser?.id, "sessionUser.id");
-	// console.log(user?.id !== sessionUser?.id);
+	const hireId = Object.values(useSelector((state) => state.hires))
+		.filter((hire) => hire.user2Id == userId)
+		.map((hire) => hire.id)[0];
+
 	const hiresByUser1 = Object.values(useSelector((state) => state.hires))
 		.filter((hire) => sessionUser.id == hire.user1Id)
 		.map((hire) => hire.user2Id);
 	// console.log(hiresByUser1, "hiresByUser1");
 
-	//get loves
-	// const lovesByUser1 = Object.values(useSelector((state) => state.loves))
-	// 	.filter((love) => sessionUser.id == love.user1Id)
-	// 	.map((love) => love.user2Id);
-	// console.log(lovesByUser1, "lovesByUser1");
+	//get array of ids of user 2 loves by user1
+	const lovesByUser1 = Object.values(useSelector((state) => state.loves))
+		.filter((love) => sessionUser.id == love.user1_id)
+		.map((love) => love.user2_id);
+	console.log(lovesByUser1, "lovesByUser1");
+	// const [co, setCo] = useState("black");
 
-	// const lovesForUser2 = Object.values(useSelector((state)=>state.loves)).filter((love)=> love?.user2Id == userId)
-	// console.log(lovesForUser2, "lovesForUser2");
 
-	// get # of loves for User2/PM
-	const lovesByUser2 = Object.values(useSelector((state) => state.users[userId]?.lovesAsUserId2)).length
+	//if user1 has loved user2, then only show as a purple heart, otherwise black
 
-	console.log(lovesByUser2, "lovesForUser2");
-	// const lovesForUser2 = Object.values(
-	// 		useSelector((state) => state.loves)
-	// 	);
+
+
+	// loves
+	const lovesByUser2 = Object.values(
+		useSelector((state) => state?.users[userId]?.lovesAsUserId2)
+		);
+		// console.log(lovesByUser2, "lovesForUser2");
 
 
 	const handleDeleteProfile = (userId) => {
@@ -79,7 +77,7 @@ const UserById = () => {
 
 	const handleDeleteHire = (hireId) => {
 		dispatch(deleteHireThunk(hireId));
-		history.push('/')
+		history.push("/");
 	};
 
 	//get all reviews
@@ -155,14 +153,20 @@ const UserById = () => {
 		history.push(path);
 	};
 
+	// then(() => dispatch(loadLikesByStoryId(storyId)));
 	// love a PM
-	 const handleLove = (userId) => {
-			dispatch(createLoveThunk(userId));
-		};
+	const handleLove = (userId) => {
+		dispatch(createLoveThunk(userId));
+		dispatch(getAllLovesThunk());
+		dispatch(getLovesByUserIdThunk(userId));
+	};
 	//unlove a PM
 	const handleDeleteLove = (userId) => {
-		dispatch(deleteLoveThunk(user))
-	}
+		dispatch(deleteLoveThunk(userId));
+		dispatch(getAllLovesThunk());
+		dispatch(getLovesByUserIdThunk(userId));
+
+	};
 
 	// const review = reviews.filter((review) => review.userId == userId); // all reviews for the specific user/PM
 
@@ -179,6 +183,26 @@ const UserById = () => {
 						></div>
 
 						<div className="title-text">{user.username}</div>
+						<div className="love-icons">
+							<div
+								className="loves"
+								onClick={() => handleLove(user?.id)}
+							>
+								{!lovesByUser1?.includes(user?.id) ? (
+									// <i>
+									<AiOutlineHeart
+										style={{ color: "black" }}
+									/>
+								) : (
+									// </i>
+									// <i>
+									<AiFillHeart style={{ color: "purple" }} />
+									// </i>
+								)}
+							</div>
+
+						</div>
+
 						<div className="user-details-container">
 							<div className="user-info">
 								{/* <span className="blob">{" · "}</span> */}
@@ -230,7 +254,7 @@ const UserById = () => {
 									</button>
 								)}
 							{user.id !== sessionUser?.id &&
-								hiresByUser1.includes(user?.id) &&(
+								hiresByUser1.includes(user?.id) && (
 									<button
 										onClick={() => handleDeleteHire(hireId)}
 									>

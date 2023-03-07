@@ -3,9 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	createProfileThunk,
-	editProfileThunk,
-	getUserThunk,
+
     getAllUsersThunk
 } from "../../store/users";
 import { createHireThunk, getAllHiresThunk, deleteHireThunk } from "../../store/hires";

@@ -111,7 +111,7 @@ const NavBar = () => {
 									exact={true}
 									activeClassName="active"
 								>
-									<button>My Hires</button>
+									<button className="btn-my-hires">My Hires</button>
 								</NavLink>
 							</li>
 						</>

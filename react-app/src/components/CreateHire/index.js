@@ -40,7 +40,7 @@ const CreateHire = () => {
 
 	const handleCreateHire = (userId) => {
 		dispatch(createHireThunk(userId));
-		alert("You've successfully hired!");
+		alert(`You've successfully hired ${user.username}!`);
         routeChangetoHome()
 	};
 
@@ -59,6 +59,7 @@ const CreateHire = () => {
 						Yes!
 					</button>
 					{/* <h3>These are Your Current Hires:</h3> */}
+                    {/* <br></br> */}
 					<GetHires />
 				</div>
 				// <div>

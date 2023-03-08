@@ -75,8 +75,9 @@ def loves():
 # User can delete a lead that they posted
 # DELETE api/loves/:id - works
 @love_routes.route('/<int:id>', methods=['DELETE'])
-@login_required
+# @login_required
 def delete_love(id):
+    print(id, "this is the id in the api")
     love = Love.query.get(id)
     print(love, "THIS IS THE LOVE!!")
     print(id, "THIS IS THE ID")

@@ -27,6 +27,10 @@ nav{
 
 }
 
+.btn-my-hires:hover{
+    background-color: purple;
+}
+
 .barLink{
     display: flex;
     /* flex-direction: ; */

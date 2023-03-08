@@ -52,10 +52,10 @@ export const getLoveByLoveIdThunk = (loveId) => async (dispatch) => {
 	}
 };
 
-// CREATE A HIRE based on userId /<int:id>/loves'
+// CREATE A LOVE based on userId /<int:id>/loves'
 export const createLoveThunk = (data) => async (dispatch) => {
 	const newLove = JSON.stringify(data);
-	// //(newLove, "THIS IS THE NEW HIRE")
+	// //(newLove, "THIS IS THE NEW LOVE")
 	const response = await fetch(`/api/users/${data}/loves`, {
 		method: "POST",
 		headers: {
@@ -63,7 +63,7 @@ export const createLoveThunk = (data) => async (dispatch) => {
 		},
 		body: newLove,
 	});
-	// console.log(data, "this is the data")
+	console.log(data, "this is the data")
 
 	if (response.ok) {
 		const data = await response.json();

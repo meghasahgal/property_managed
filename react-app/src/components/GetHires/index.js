@@ -12,7 +12,7 @@ const GetHires = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const sessionUser = useSelector((state) => state.session.user);
-    const users = useSelector((state) => state.users[sessionUser.id]?.hiresAsUserId1);
+    const users = useSelector((state) => state?.users[sessionUser.id]?.hiresAsUserId1);
     const allUsers = Object.values(useSelector((state)=> state.users))
     // const users = useSelector((state) => state.users[sessionUser.id])
 
@@ -50,7 +50,7 @@ const GetHires = () => {
 	return (
 		<>
 			<div>
-				{result.length === 0 ? <h3>No Hires Yet!</h3> : <h3>My Hires</h3>}
+				{result.length === 0 ? <h3>No Hires Yet!</h3> : <h3>My Hires:</h3>}
 			</div>
 			{sessionUser ? (
 				<div className="users-container">

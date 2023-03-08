@@ -111,7 +111,20 @@ const NavBar = () => {
 									exact={true}
 									activeClassName="active"
 								>
-									<button className="btn-my-hires">My Hires</button>
+									<button className="btn-my-hires">
+										My Hires
+									</button>
+								</NavLink>
+							</li>
+							<li className="barLink">
+								<NavLink
+									to="/my-loves"
+									exact={true}
+									activeClassName="active"
+								>
+									<button className="btn-my-loves">
+										My Loves
+									</button>
 								</NavLink>
 							</li>
 						</>

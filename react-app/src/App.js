@@ -13,6 +13,7 @@ import { getAllUsersThunk } from "./store/users";
 import UserById from "./components/UserById";
 import ReviewsByUserId from "./components/ReviewsByUserId";
 import GetHires from "./components/GetHires";
+import GetLoves from "./components/GetLoves";
 import CreateHire from "./components/CreateHire"
 import EditProfile from "./components/EditProfile";
 import CreateProfile from "./components/CreateProfile";
@@ -65,6 +66,9 @@ function App() {
 				</ProtectedRoute>
 				<ProtectedRoute path="/my-hires" exact={true}>
 					<GetHires />
+				</ProtectedRoute>
+				<ProtectedRoute path="/my-loves" exact={true}>
+					<GetLoves />
 				</ProtectedRoute>
 
 				{/* <ProtectedRoute path="/users/reviews" exact={true}>

@@ -58,9 +58,9 @@ const CreateHire = () => {
 							></div>
 						</div>
 					</div>
-					<h3>
+					<h2>
 						Please confirm that you'd like to hire {user?.username}.
-					</h3>
+					</h2>
 					<div className="btn-parent">
 						<button
 							className="btn-create-hire"

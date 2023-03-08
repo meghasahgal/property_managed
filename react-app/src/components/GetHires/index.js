@@ -13,11 +13,11 @@ const GetHires = () => {
 	const history = useHistory();
 	const sessionUser = useSelector((state) => state.session.user);
     const users = useSelector((state) => state?.users[sessionUser.id]?.hiresAsUserId1);
-    const allUsers = Object.values(useSelector((state)=> state.users))
+    const allUsers = Object.values(useSelector((state)=> state?.users))
     // const users = useSelector((state) => state.users[sessionUser.id])
 
 
-    const allUsersArray = Object.values(users)
+    // const allUsersArray = Object.values(users)
     // console.log(allUsersArray, "THESE ARE ALL THE HIRES BY THE USER")
 
 

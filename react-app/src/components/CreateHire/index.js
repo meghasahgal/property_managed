@@ -47,20 +47,39 @@ const CreateHire = () => {
 	return (
 		<>
 			{user && user.id && user.id && (
-				<div className="btn-parent">
+				<div>
+					<div className="user-details-create-hire">
+						<div>
+							<div
+								style={{
+									backgroundImage: `url('${user?.profileImg}')`,
+								}}
+								className="img-size-user"
+							></div>
+						</div>
+					</div>
 					<h3>
 						Please confirm that you'd like to hire {user?.username}.
 					</h3>
+					<div className="btn-parent">
+						<button
+							className="btn-create-hire"
+							onClick={() => routeChangetoHome()}
+						>
+							No
+						</button>
 
-					<button className="btn-create-hire" onClick={() => routeChangetoHome()}>No</button>
-
-					<button className="btn-create-hire" onClick={() => handleCreateHire(user?.id)}>
-						{" "}
-						Yes!
-					</button>
+						<button
+							className="btn-create-hire"
+							onClick={() => handleCreateHire(user?.id)}
+						>
+							{" "}
+							Yes!
+						</button>
+					</div>
 					{/* <h3>These are Your Current Hires:</h3> */}
-                    {/* <br></br> */}
-					<GetHires />
+					{/* <br></br> */}
+					{/* <GetHires /> */}
 				</div>
 				// <div>
 			)}

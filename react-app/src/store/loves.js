@@ -107,7 +107,7 @@ export const createLoveThunk = (data) => async (dispatch) => {
 // 	}
 // };
 
-// DELETE a HIRE
+// DELETE a LOVE
 export const deleteLoveThunk = (loveId) => async (dispatch) => {
 	const response = await fetch(`/api/loves/${loveId}`, {
 		method: "DELETE",

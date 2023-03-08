@@ -10,6 +10,8 @@ import {
 } from "../../store/users";
 import { createHireThunk, getAllHiresThunk } from "../../store/hires";
 import GetHires from "../GetHires";
+import "./CreateHire.css";
+
 
 const CreateHire = () => {
 	const dispatch = useDispatch();
@@ -45,14 +47,14 @@ const CreateHire = () => {
 	return (
 		<>
 			{user && user.id && user.id && (
-				<div>
+				<div className="btn-parent">
 					<h3>
 						Please confirm that you'd like to hire {user?.username}.
 					</h3>
 
-					<button onClick={() => routeChangetoHome()}>No</button>
+					<button className="btn-create-hire" onClick={() => routeChangetoHome()}>No</button>
 
-					<button onClick={() => handleCreateHire(user?.id)}>
+					<button className="btn-create-hire" onClick={() => handleCreateHire(user?.id)}>
 						{" "}
 						Yes!
 					</button>

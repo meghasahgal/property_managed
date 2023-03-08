@@ -36,7 +36,7 @@ const UserById = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	// console.log(userId, "THIS IS THE USER ID");
+	console.log(userId, "THIS IS THE USER ID");
 	const sessionUser = useSelector((state) => state.session.user);
 	const sessionUserId = sessionUser.id;
 	const user = useSelector((state) => state.users[userId]);
@@ -54,18 +54,30 @@ const UserById = () => {
 	const lovesByUser1 = Object.values(useSelector((state) => state.loves))
 		.filter((love) => sessionUser.id == love.user1_id)
 		.map((love) => love.user2_id);
-	console.log(lovesByUser1, "lovesByUser1");
+	// console.log(lovesByUser1, "lovesByUser1");
 	// const [co, setCo] = useState("black");
-
+	//get the first love id of user2
+	const lovesForUser2 = Object.values(
+		useSelector((state) => state.loves)
+	).filter((love) => user.id == love.user2_id);
+	//need an if condition here
+	// const loveId = Object.values(useSelector((state)=>state.loves)).filter((love)=> user?.id == love?.user2_id)[0]['id']
+	// if (loveId == undefined){
+	// 	let path = `/users/${userId}`;
+	// 	history.push(path);
+	// }
+	// console.log(loveId, "loveId for delete")
+	// // console.log(love.user2_id, "loveuser2id")
+	// console.log(userId, "userId")
 
 	//if user1 has loved user2, then only show as a purple heart, otherwise black
-
-
+	// useState for toggling color
+	// const[color, setColor] = useState("black")
 
 	// loves
-	const lovesByUser2 = Object.values(
-		useSelector((state) => state?.users[userId]?.lovesAsUserId2)
-		);
+	// const lovesByUser2 = Object.values(
+	// 	useSelector((state) => state?.users[userId]?.lovesAsUserId2)
+	// 	);
 		// console.log(lovesByUser2, "lovesForUser2");
 
 
@@ -153,7 +165,7 @@ const UserById = () => {
 		history.push(path);
 	};
 
-	// then(() => dispatch(loadLikesByStoryId(storyId)));
+
 	// love a PM
 	const handleLove = (userId) => {
 		dispatch(createLoveThunk(userId));
@@ -161,10 +173,10 @@ const UserById = () => {
 		dispatch(getLovesByUserIdThunk(userId));
 	};
 	//unlove a PM
-	const handleDeleteLove = (userId) => {
-		dispatch(deleteLoveThunk(userId));
+	const handleDeleteLove = (loveId) => {
+		dispatch(deleteLoveThunk(loveId));
 		dispatch(getAllLovesThunk());
-		dispatch(getLovesByUserIdThunk(userId));
+		dispatch(getLovesByUserIdThunk(loveId));
 
 	};
 
@@ -184,23 +196,26 @@ const UserById = () => {
 
 						<div className="title-text">{user.username}</div>
 						<div className="love-icons">
-							<div
-								className="loves"
-								onClick={() => handleLove(user?.id)}
-							>
-								{!lovesByUser1?.includes(user?.id) ? (
+							<div className="loves">
+								{!lovesByUser1?.includes(user?.id) ||
+								lovesByUser1.length === 0 ? (
 									// <i>
 									<AiOutlineHeart
 										style={{ color: "black" }}
+										onClick={() => handleLove(user?.id)}
 									/>
 								) : (
-									// </i>
-									// <i>
-									<AiFillHeart style={{ color: "purple" }} />
-									// </i>
+
+									<i>
+									<AiFillHeart
+										style={{ color: "purple" }}
+										// onClick={() =>
+										// 	handleDeleteLove(loveId)
+										// }
+									/>
+									</i>
 								)}
 							</div>
-
 						</div>
 
 						<div className="user-details-container">
@@ -289,7 +304,7 @@ const UserById = () => {
 						</div>
 					</div>
 					{sessionUser?.id !== user?.id &&
-						!allReviewsUserIds.includes(sessionUser.id) && (
+						!allReviewsUserIds.includes(sessionUser.id) && hiresByUser1.includes(user?.id) && (
 							// review.reviewerId !== sessionUser?.id &&
 							// filteredReviews &&
 							// filteredReviews?.length == 0 &&

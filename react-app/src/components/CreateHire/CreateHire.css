@@ -1,0 +1,11 @@
+
+.btn-parent{
+    text-align: center;
+    padding: 50px;
+}
+
+.btn-create-hire{
+    display: inline-block;
+    background-color: purple;
+
+}

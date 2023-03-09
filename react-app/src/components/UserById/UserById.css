@@ -79,6 +79,10 @@ background-color: #4E7375;
     border: solid white 1px;
 }
 
+.change-profile-button:hover{
+    background-color: purple;
+}
+
 .check{
     color: #4E7375;
     margin-right: 10px;
@@ -133,7 +137,7 @@ body {
     left: calc(50% - 3em);
     top: calc(50% - 2em);
 
-    height: 4em;
+    height: 3em;
     width: 7em;
 
     background:#84A3A8;

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editReviewThunk } from "../../store/reviews";
+import { editReviewThunk, getReviewsByUserIdThunk } from "../../store/reviews";
 // have this render on the ReviewById component
 const EditReview = () => {
 	const dispatch = useDispatch();
@@ -11,14 +11,16 @@ const EditReview = () => {
 	const { userId } = useParams(); // userId of PM
 	const sessionUser = useSelector((state) => state.session.user);
 	const user = useSelector((state) => state?.users[userId]);
+
 	// console.log(user)
 	// const userReview = useSelector((state) => Object.values(user?.reviews).filter(user => user?.reviewerId == sessionUser.id));
 	// const userReview = useSelector((state) => Object.values(state?.users[userId]?.reviews).filter(user => user?.reviewerId == sessionUser?.id));
-	const userReview = useSelector((state) =>
-		Object.values(state?.users[userId]?.reviews).filter(
-			(user) => user?.reviewerId == sessionUser?.id
-		)
-	);
+		const userReview = useSelector((state) =>
+			Object.values(state?.users[userId]?.reviews).filter(
+				(user) => user?.reviewerId == sessionUser?.id
+			)
+		);
+
 
 	// console.log(userReview, "USER REVIEW")
 	//set default states!
@@ -43,6 +45,11 @@ const EditReview = () => {
 	// if (sessionUserReview) {
 	// 	seshReviewId = sessionUserReview[0]["id"];
 	// }
+	useEffect(() => {
+		dispatch(getReviewsByUserIdThunk(userId));
+	}, [userId]);
+
+
 	let userReviewId;
 	if (userReview) {
 		userReviewId = userReview[0]["id"];

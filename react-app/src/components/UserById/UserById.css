@@ -67,6 +67,7 @@ user-splash-img {
 
 .btn-secondary{
     background-color: #84A3A8;
+    animation: wiggle 2s linear infinite;
 }
 
 button{
@@ -81,4 +82,67 @@ background-color: #4E7375;
 .check{
     color: #4E7375;
     margin-right: 10px;
+}
+
+.location{
+    margin-right: 11px;
+}
+
+
+
+/* Keyframes */
+@keyframes wiggle {
+
+    0%,
+    7% {
+        transform: rotateZ(0);
+    }
+
+    15% {
+        transform: rotateZ(-15deg);
+    }
+
+    20% {
+        transform: rotateZ(10deg);
+    }
+
+    25% {
+        transform: rotateZ(-10deg);
+    }
+
+    30% {
+        transform: rotateZ(6deg);
+    }
+
+    35% {
+        transform: rotateZ(-4deg);
+    }
+
+    40%,
+    100% {
+        transform: rotateZ(0);
+    }
+}
+
+body {
+    background: #000;
+}
+
+.btn-secondary {
+    position: relative;
+    left: calc(50% - 3em);
+    top: calc(50% - 2em);
+
+    height: 4em;
+    width: 7em;
+
+    background:#84A3A8;
+    background: linear-gradient(top, #555, #333);
+    border: none;
+    border-top: 3px solid #4E7375;
+    border-radius: 0 0 0.2em 0.2em;
+    color: #fff;
+    font-family: Helvetica, Arial, Sans-serif;
+    font-size: 1em;
+    transform-origin: 50% 5em;
 }

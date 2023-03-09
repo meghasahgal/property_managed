@@ -7,6 +7,10 @@ import { getAllUsersThunk } from "../../store/users";
 // import { getAllLovesThunk } from "../../store/loves";
 import "./NavBar.css";
 import logo from "../NavBar/logo2.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -70,27 +74,35 @@ const NavBar = () => {
 	};
 
 	return (
-		<div className="header">
-			<nav>
+		// first section
+		<header>
+			{/* <div className="header"> */}
+			<div>
 				<ul>
-					<li>
-						<NavLink to="/" exact={true} activeClassName="active">
-							<img
-								className="logoImg"
-								src={logo}
-								alt="Managed Logo"
-							/>
-						</NavLink>
-					</li>
+					<div className="logo">
+						<li>
+							<NavLink
+								to="/"
+								exact={true}
+								activeClassName="active"
+							>
+								<img
+									className="logoImg"
+									src={logo}
+									alt="Managed Logo"
+								/>
+							</NavLink>
+						</li>
+					</div>
+
+
 
 					{sessionUser ? (
 						<>
-							<li className="barLink">
-								<LogoutButton className="navButton" />
-							</li>
-
+							{" "}
 							{sessionUser?.isPm === true ||
 							currentUser?.isPm === true ? (
+
 								<li className="barLink">
 									<NavLink to={`/users/${sessionUser.id}`}>
 										<button>My Profile</button>
@@ -117,6 +129,9 @@ const NavBar = () => {
 								</NavLink>
 							</li>
 							<li className="barLink">
+								<LogoutButton className="btn-logout" />
+							</li>
+							{/* <li className="barLink">
 								<NavLink
 									to="/my-loves"
 									exact={true}
@@ -126,7 +141,7 @@ const NavBar = () => {
 										My Loves
 									</button>
 								</NavLink>
-							</li>
+							</li> */}
 						</>
 					) : (
 						<>
@@ -157,8 +172,9 @@ const NavBar = () => {
 						)}
 					</li>
 				</ul>
-			</nav>
-		</div>
+			</div>
+			{/* </div> */}
+		</header>
 	);
 };
 

@@ -12,7 +12,8 @@ form {
     justify-content: center;
     /* border: 2px solid #D9A190; */
     border-radius: 10px;
-
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    margin-top: 30px;
 }
 
 label {
@@ -23,6 +24,10 @@ label {
 
 input {
     text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: purple;
+    border-radius: 5px;
 }
 
 

@@ -7,6 +7,11 @@ import {
     getAllUsersThunk
 } from "../../store/users";
 import { createHireThunk, getAllHiresThunk, deleteHireThunk } from "../../store/hires";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faHouse,
+	faWarehouse,
+} from "@fortawesome/free-solid-svg-icons";
 
 const GetHires = () => {
 	const dispatch = useDispatch();
@@ -50,7 +55,11 @@ const GetHires = () => {
 	return (
 		<>
 			<div>
-				{result.length === 0 ? <h2>No Hires Yet!</h2> : <h2>My Hires:</h2>}
+				{result.length === 0 ? (
+					<h2>No Hires Yet!</h2>
+				) : (
+					<h2>My Hires:</h2>
+				)}
 			</div>
 			{sessionUser ? (
 				<div className="users-container">
@@ -73,6 +82,22 @@ const GetHires = () => {
 								>
 									{user.username}
 								</Link>
+
+									<div>
+										{user.propertyType == "Residential" ? (
+											<FontAwesomeIcon
+												className="house"
+												icon={faHouse}
+											/>
+										) : (
+											<FontAwesomeIcon
+												className="house"
+												icon={faWarehouse}
+											/>
+										)}
+										{user.propertyType}
+									</div>
+
 								{/* <button
 									onClick={() => handleDeleteHire(user?.id)}
 								>

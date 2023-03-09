@@ -10,6 +10,11 @@ import {
 } from "../../store/reviews";
 import EditReview from "../EditReview";
 import "../ReviewsByUserId/ReviewsByUserId.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+
+	faStar,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ReviewsByUserId = () => {
 	const dispatch = useDispatch();
@@ -17,7 +22,7 @@ const ReviewsByUserId = () => {
 	const { userId } = useParams();
 	// console.log(userId, "USER ID IN THUNK")
 	const sessionUser = useSelector((state) => state.session.user);
-	const user = useSelector((state) => state.users[userId]);
+	const user = useSelector((state) => state?.users[userId]);
 	// //(user.id, "USER/PM ID IN REVIEWS BY ID")
 	const allReviews = useSelector((state) => Object.values(state?.reviews));
 	// //("***********");
@@ -28,13 +33,13 @@ const ReviewsByUserId = () => {
 	// //("***********");
 	// //(reviews, "filtered reviews");
 	const sessionUserReview = reviews.filter(
-		(review) => review.reviewerId == sessionUser.id
+		(review) => review?.reviewerId == sessionUser?.id
 	); // review by the specific session user
 	// //(sessionUserReview, "THIS IS THE SESSION USER's REVIEW");
 
 	//get all reviewerIds related to the reviews:
 	//map over reviews:
-	const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
+	// const allReviewsReviewerIds = allReviews.map((review) => review.reviewerId);
 	// //(
 	// 	allReviewsReviewerIds,
 	// 	"THESE ARE THE REVIEWER IDS of the REVIEWS"
@@ -79,7 +84,12 @@ const ReviewsByUserId = () => {
 					<div className="review-id" key={review.id}>
 						<div className="review-details">
 							<div className="review-font">
-								{review?.stars} {""} {review?.reviewBody}
+								{review?.stars} {""}
+								<FontAwesomeIcon
+									className="star"
+									icon={faStar}
+								/>
+								{review?.reviewBody}
 								{""}
 							</div>
 						</div>

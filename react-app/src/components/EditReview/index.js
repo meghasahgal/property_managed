@@ -10,13 +10,20 @@ const EditReview = () => {
 
 	const { userId } = useParams(); // userId of PM
 	const sessionUser = useSelector((state) => state.session.user);
-	const user = useSelector((state) => state?.users[userId])
+	const user = useSelector((state) => state?.users[userId]);
 	// console.log(user)
-	const userReview = useSelector((state) => Object.values(state?.users[userId]?.reviews).filter(user => user?.reviewerId == sessionUser?.id));
+	// const userReview = useSelector((state) => Object.values(user?.reviews).filter(user => user?.reviewerId == sessionUser.id));
+	// const userReview = useSelector((state) => Object.values(state?.users[userId]?.reviews).filter(user => user?.reviewerId == sessionUser?.id));
+	const userReview = useSelector((state) =>
+		Object.values(state?.users[userId]?.reviews).filter(
+			(user) => user?.reviewerId == sessionUser?.id
+		)
+	);
+
 	// console.log(userReview, "USER REVIEW")
 	//set default states!
-	const [reviewBody, setReviewBody] = useState(userReview[0]['reviewBody']);
-	const [stars, setStars] = useState(userReview[0]['stars']);
+	const [reviewBody, setReviewBody] = useState(userReview[0]["reviewBody"]);
+	const [stars, setStars] = useState(userReview[0]["stars"]);
 	const [errors, setErrors] = useState([]);
 
 	// const review = useSelector((state) => state.reviews[reviewId]);
@@ -24,9 +31,7 @@ const EditReview = () => {
 	// console.log(userReview[0]['id'], "user review id")
 	// let userReviewId = userReview[0]['id']
 
-
 	const reviews = useSelector((state) => Object.values(state.reviews));
-
 
 	// console.log(reviews, "THESE ARE THE REVIEWS")
 	//look at array of sessionUserReview
@@ -40,13 +45,12 @@ const EditReview = () => {
 	// }
 	let userReviewId;
 	if (userReview) {
-		userReviewId = userReview[0]['id'];
+		userReviewId = userReview[0]["id"];
 	}
 	// console.log(seshReviewId, "SESHReviewID")
 	// const sessionUserId = useSelector((state) => state.session?.user?.id);
-	const reviewUserId = userReview[0]['reviewerId'];
+	const reviewUserId = userReview[0]["reviewerId"];
 	// [{…}]0: {id: 5, reviewBody: 'amazing service!', reviewerId: 2, stars: '3', user: {…}, …}length: 1[[Prototype]]: Array(0) 'SESSIONUSERREVIEW'
-
 
 	const handleEdit = async (e) => {
 		e.preventDefault();
@@ -107,10 +111,7 @@ const EditReview = () => {
 				>
 					Cancel
 				</button>
-				<button
-					className="small-btn"
-					type="submit"
-				>
+				<button className="small-btn" type="submit">
 					Edit
 				</button>
 			</form>

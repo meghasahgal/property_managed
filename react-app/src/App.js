@@ -67,9 +67,9 @@ function App() {
 				<ProtectedRoute path="/my-hires" exact={true}>
 					<GetHires />
 				</ProtectedRoute>
-				<ProtectedRoute path="/my-loves" exact={true}>
+				{/* <ProtectedRoute path="/my-loves" exact={true}>
 					<GetLoves />
-				</ProtectedRoute>
+				</ProtectedRoute> */}
 
 				{/* <ProtectedRoute path="/users/reviews" exact={true}>
 					<ReviewsByUserId />

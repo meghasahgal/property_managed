@@ -11,6 +11,7 @@
     border-radius: 30px;
     row-gap: 30px;
     margin-bottom: 6%;
+    /* flex-grow: 1; */
 }
 
 .user-details{
@@ -25,7 +26,9 @@
     padding: 0 5px 0 5px;
     margin-top: 50px;
 }
-
+.img-size:hover{
+    transform: scale(1.2);
+}
 user-splash-img{
     border-radius: 10px;
     height: 100%;
@@ -34,8 +37,8 @@ user-splash-img{
 
 .img-size{
     display: flex;
-        height: 286px;
-        width: 302px;
+        height: 310px;
+        width: 387px;
         font-family: Circular,
             -apple-system,
             BlinkMacSystemFont,

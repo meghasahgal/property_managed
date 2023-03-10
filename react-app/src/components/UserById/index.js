@@ -36,7 +36,7 @@ const UserById = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { userId } = useParams(); // userId of PM
-	console.log(userId, "THIS IS THE USER ID");
+	// console.log(userId, "THIS IS THE USER ID");
 	const sessionUser = useSelector((state) => state.session.user);
 	const sessionUserId = sessionUser.id;
 	const user = useSelector((state) => state.users[userId]);
@@ -54,7 +54,7 @@ const UserById = () => {
 	const lovesByUser1 = Object.values(useSelector((state) => state.loves))
 		.filter((love) => sessionUser.id == love.user1_id)
 		.map((love) => love.user2_id);
-	console.log(lovesByUser1, "lovesByUser1");
+	// console.log(lovesByUser1, "lovesByUser1");
 	// const [co, setCo] = useState("black");
 	//get the first love id of user2
 	const lovesForUser2 = Object.values(
@@ -168,7 +168,7 @@ const UserById = () => {
 		history.push(path);
 	};
 
-	console.log(user?.id, "user?id")
+	// console.log(user?.id, "user?id")
 	// love a PM
 	const handleLove = (userId) => {
 		console.log(userId, "THIS IS THE USER ID IN HANDLE LOVE")

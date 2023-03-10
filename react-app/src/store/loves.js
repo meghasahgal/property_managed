@@ -31,15 +31,15 @@ export const getAllLovesThunk = () => async (dispatch) => {
 // GET loves for a userId
 export const getLovesByUserIdThunk = (userId) => async (dispatch) => {
 	const response = await fetch(`/api/users/${userId}/loves`);
-    console.log(userId)
+    // console.log(userId)
 	if (response.ok) {
 		const data = await response.json();
-        console.log(data, "data")
+        // console.log(data, "data")
 		dispatch(loadLoves(data));
 		return data;
 	}
     // console.log(data, "DATA in the frontend for getting loves")
-    console.log(userId)
+    // console.log(userId)
 };
 
 //GET specific hire by loveId
@@ -63,7 +63,7 @@ export const createLoveThunk = (data) => async (dispatch) => {
 		},
 		body: newLove,
 	});
-	console.log(data, "this is the data")
+	// console.log(data, "this is the data")
 
 	if (response.ok) {
 		const data = await response.json();
@@ -115,7 +115,7 @@ export const deleteLoveThunk = (loveId) => async (dispatch) => {
 	if (response.ok) {
 		dispatch(deleteLove(loveId));
 	}
-	console.log(loveId, "THIS IS THE LOVE ID IN THE THUNK");
+	// console.log(loveId, "THIS IS THE LOVE ID IN THE THUNK");
 };
 
 //REDUCER

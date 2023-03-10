@@ -19,7 +19,7 @@ const GetLoves = () => {
 	const users = useSelector(
 		(state) => state.users[sessionUser.id]?.lovesAsUserId1
 	);
-    console.log(users, "users in get loves")
+    // console.log(users, "users in get loves")
 	const allUsers = Object.values(useSelector((state) => state.users));
     const allLovesArray = useSelector((state) => {
 		if (state?.loves) {
@@ -27,7 +27,7 @@ const GetLoves = () => {
 		} else return undefined;
 	});
     const filteredLoves = allLovesArray.map((love) => love.user2_id);
-    console.log(filteredLoves, "filtered loves")
+    // console.log(filteredLoves, "filtered loves")
 
 	// console.log(filteredHires, "filteredHIRES")
 	const result = allUsers.filter(({ id }) => filteredLoves.includes(id));

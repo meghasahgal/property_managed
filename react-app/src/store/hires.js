@@ -111,7 +111,7 @@ export const deleteHireThunk = (hireId) => async (dispatch) => {
 	if (response.ok) {
 		dispatch(deleteHire(hireId));
 	}
-	console.log(hireId, "THIS IS THE HIRE ID IN THE THUNK")
+	// console.log(hireId, "THIS IS THE HIRE ID IN THE THUNK")
 };
 
 //REDUCER

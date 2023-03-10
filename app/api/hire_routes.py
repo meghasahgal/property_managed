@@ -78,8 +78,8 @@ def hires():
 @login_required
 def delete_hire(id):
     hire = Hire.query.get(id)
-    print(hire, "THIS IS THE HIRE!!")
-    print(id, "THIS IS THE ID")
+    # print(hire, "THIS IS THE HIRE!!")
+    # print(id, "THIS IS THE ID")
     # print(hire.user1_id, "user1id")
     # print(current_user.id, "current user id")
 

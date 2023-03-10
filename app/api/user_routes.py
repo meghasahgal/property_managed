@@ -180,7 +180,7 @@ def create_love(id):
     #pm id    print(id, "this is the id")
     #client id
     user2_id = id
-    print(id, "THIS IS THE ID IN THE BE")
+    # print(id, "THIS IS THE ID IN THE BE")
     user1_id = current_user.id
     # print(user1_id, "user 1 id")
     # print(user_id, "client id")
@@ -203,7 +203,7 @@ def create_love(id):
 @user_routes.route('/<int:id>/loves', methods=['GET'])
 def get_all_loves(id):
     loves = Love.query.filter_by(user2_id=id).all()
-    print(id, 'this is the id BE')
-    print(loves, "these are the loves in the BE")
+    # print(id, 'this is the id BE')
+    # print(loves, "these are the loves in the BE")
     res = {love.id: love.to_dict() for love in loves}
     return res

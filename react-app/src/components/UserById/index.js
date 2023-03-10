@@ -276,7 +276,7 @@ const UserById = () => {
 										Hire {user.username}!
 									</button>
 								)}
-							{user.id !== sessionUser?.id &&
+							{user?.id !== sessionUser?.id &&
 								hiresByUser1.includes(user?.id) && (
 									<button className="unhire-button"
 										onClick={() => handleDeleteHire(hireId)}

@@ -148,6 +148,10 @@ const UserById = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
+		dispatch(getHiresByUserIdThunk(userId));
+	}, [userId]);
+
+	useEffect(() => {
 		dispatch(getAllLovesThunk());
 	}, [dispatch]);
 

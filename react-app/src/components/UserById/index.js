@@ -39,14 +39,14 @@ const UserById = () => {
 	// console.log(userId, "THIS IS THE USER ID");
 	const sessionUser = useSelector((state) => state.session.user);
 	const sessionUserId = sessionUser.id;
-	const user = useSelector((state) => state.users[userId]);
+	const user = useSelector((state) => state?.users[userId]);
 	// need to get the hires array and filter for the hire ID where the user2Id == userId
 	const hireId = Object.values(useSelector((state) => state.hires))
 		.filter((hire) => hire.user2Id == userId)
 		.map((hire) => hire.id)[0];
 
 	const hiresByUser1 = Object.values(useSelector((state) => state.hires))
-		.filter((hire) => sessionUser.id == hire.user1Id)
+		.filter((hire) => sessionUser?.id == hire?.user1Id)
 		.map((hire) => hire.user2Id);
 	// console.log(hiresByUser1, "hiresByUser1");
 
@@ -263,7 +263,7 @@ const UserById = () => {
 							</div>
 						</div>
 						<div>
-							{user.id !== sessionUser?.id &&
+							{user?.id !== sessionUser?.id &&
 								!hiresByUser1.includes(user?.id) && (
 									<button
 										className="btn-secondary"

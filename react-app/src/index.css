@@ -10,9 +10,8 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* border: 2px solid #D9A190; */
     border-radius: 10px;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    box-shadow: 14px 14px 20px #b2abb4, -14px -14px 20px white;
     margin-top: 30px;
 }
 

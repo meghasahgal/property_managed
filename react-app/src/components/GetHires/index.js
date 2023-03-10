@@ -16,10 +16,14 @@ import forhire2 from "../GetHires/forhire2.jpeg";
 const GetHires = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	//need to get hires for sessionUser
+
 	const sessionUser = useSelector((state) => state.session.user);
+	console.log(sessionUser.id, "THIS IS THE SESSION USER ID")
 	const users = useSelector(
-		(state) => state?.users[sessionUser.id]?.hiresAsUserId1
+		(state) => state?.users[sessionUser?.id]?.hiresAsUserId1
 	);
+	console.log(users, "users")
 	const allUsers = Object.values(useSelector((state) => state?.users));
 	// const users = useSelector((state) => state.users[sessionUser.id])
 
@@ -32,9 +36,16 @@ const GetHires = () => {
 		} else return undefined;
 	});
 	// console.log(allHiresArray, "allHiresArray")
-	//get the hires for that user where user2 id is equal to the user id
-	const filteredHires = allHiresArray.map((hire) => hire.user2Id);
 
+	// get hires where userId is equal to the session user Id
+	const user1IdHires = allHiresArray.filter((hire) =>sessionUser?.id == hire.user1Id)
+	// console.log(user1IdHires, "user1IdHires")
+
+	//get the hires for that user where user2 id is equal to the user id
+	const filteredHires = user1IdHires.map((hire) => hire.user2Id);
+	// const filteredHires = allHiresArray.map((hire) => hire.user1Id);
+	// const filteredHires = allHiresArray.map((hire) => hire.user2Id);
+	// const filteredHiresForUser1 = allHiresArray.map((hire)=>hire.user1Id)
 	// console.log(filteredHires, "filteredHIRES")
 	const result = allUsers.filter(({ id }) => filteredHires.includes(id));
 	//  console.log(result, "THIS IS THE RESULT")

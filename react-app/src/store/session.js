@@ -113,45 +113,4 @@ export default function reducer(state = initialState, action) {
 }
 
 
-// CART REDUCER
-const initialState2 = {
-	items: {},
-	order: [],
-};
-export function cartReducer(state = initialState2, action) {
-	switch (action.type) {
-		case ADD_ITEM:
-			return {
-				...state,
-				items: {
-					...state.items,
-					[action.itemId]: { id: action.itemId, count: 1 },
-				},
-				order: [...state.order, action.itemId],
-			};
-		case UPDATE_COUNT:
-			return {
-				...state,
-				items: {
-					...state.items,
-					[action.itemId]: {
-						...state[action.itemId],
-						id: action.itemId,
-						count: action.count,
-					},
-				},
-			};
-		case REMOVE_ITEM:
-			const newState = { ...state, items: { ...state.items } };
-			delete newState.items[action.itemId];
-			newState.order = newState.order.filter(
-				(id) => id !== action.itemId
-			);
-			return newState;
-		case RESET_CART:
-			return initialState2;
-		default:
-			return state;
-	}
-}
 

@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Love(db.Model):
     __tablename__ = "loves"
+   
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 

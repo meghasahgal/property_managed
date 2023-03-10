@@ -39,6 +39,10 @@ const HomePage = () => {
 					user && user?.id ? (
 						<div key={user?.id}>
 							<div className="user-details">
+								<Link
+									className="user-link"
+									to={`/users/${user.id}`}
+								>
 								<div
 									style={{
 										backgroundImage: `url('${user?.profileImg}')`,
@@ -47,10 +51,6 @@ const HomePage = () => {
 								>
 
 								</div>
-								<Link
-									className="user-link"
-									to={`/users/${user.id}`}
-								>
 									{user.username}
 								</Link>
 
@@ -105,8 +105,3 @@ const HomePage = () => {
 	// );
 };
 export default HomePage;
-
-    // const alert = (e) => {
-	// 	e.preventDefault();
-	// 	window.alert("You've deleted the review!");
-	// };

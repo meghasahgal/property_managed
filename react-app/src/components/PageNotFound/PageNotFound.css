@@ -5,4 +5,20 @@
     height: 80%;
     width: 50%;
     border-radius: 10px;
+    align-items: center;
+}
+
+.page-not-found{
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.pnf-button:hover{
+    background-color: purple;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center*/
 }

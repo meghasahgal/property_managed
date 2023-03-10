@@ -78,6 +78,10 @@ background-color: #4E7375;
     border-radius: 5px;
     border: solid white 1px;
 }
+.unhire-button:hover{
+    background-color: purple;
+}
+
 
 .change-profile-button:hover{
     background-color: purple;

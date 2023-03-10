@@ -22,6 +22,7 @@ import EditReview from "./components/EditReview";
 import BecomePMConfirmation from "./components/BecomePMConfirmation";
 import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
+import Search from "./components/Search";
 import { getAllReviewsThunk } from "./store/reviews";
 import { getAllHiresThunk } from "./store/hires";
 import {getAllLovesThunk} from "./store/loves"
@@ -67,6 +68,10 @@ function App() {
 				<ProtectedRoute path="/my-hires" exact={true}>
 					<GetHires />
 				</ProtectedRoute>
+				<ProtectedRoute path="/search" exact={true}>
+					<Search />
+				</ProtectedRoute>
+
 				{/* <ProtectedRoute path="/my-loves" exact={true}>
 					<GetLoves />
 				</ProtectedRoute> */}

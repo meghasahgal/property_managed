@@ -27,10 +27,10 @@ class User(db.Model, UserMixin):
 #relationships
     reviews = db.relationship('Review', back_populates="user", cascade='all,delete')
     # leads = db.relationship('Hire', back_populates="user_leads")
-    hires_as_user1 = db.relationship('Hire', foreign_keys='Hire.user1_id', backref='user1', lazy=True)
-    hires_as_user2 = db.relationship('Hire', foreign_keys='Hire.user2_id', backref='user2', lazy=True)
-    loves_as_user1 = db.relationship('Love', foreign_keys='Love.user1_id', backref='user1', lazy=True)
-    loves_as_user2 = db.relationship('Love', foreign_keys='Love.user2_id', backref='user2', lazy=True)
+    hires_as_user1 = db.relationship('Hire', foreign_keys='Hire.user1_id', backref='user1', lazy=True, cascade='all,delete')
+    hires_as_user2 = db.relationship('Hire', foreign_keys='Hire.user2_id', backref='user2', lazy=True,cascade='all,delete')
+    loves_as_user1 = db.relationship('Love', foreign_keys='Love.user1_id', backref='user1', lazy=True, cascade='all,delete')
+    loves_as_user2 = db.relationship('Love', foreign_keys='Love.user2_id', backref='user2', lazy=True,cascade='all,delete')
     recipients = db.relationship('Message',foreign_keys='Message.sender_id', back_populates="sender") # try message.sender_id if not working
     senders = db.relationship('Message',foreign_keys='Message.recipient_id', back_populates="recipient")
 

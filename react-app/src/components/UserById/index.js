@@ -294,7 +294,7 @@ const UserById = () => {
 									Edit Profile
 								</button>
 							)}
-							{user.id === sessionUser?.id && (
+							{user?.id === sessionUser?.id && (
 								<button
 									className="change-profile-button"
 									onClick={() =>

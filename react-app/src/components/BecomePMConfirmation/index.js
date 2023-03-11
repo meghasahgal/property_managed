@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserThunk, getAllUsersThunk } from "../../store/users";
 import "./BecomePMConfirmation.css";
+import pm from "../BecomePMConfirmation/pm.jpeg";
+
 
 const BecomePMConfirmation = () => {
 	const dispatch = useDispatch();
@@ -51,6 +53,13 @@ const BecomePMConfirmation = () => {
 			>
 				Yes!
 			</button>
+			<div className="img-home">
+				<img
+					className="img-pnf"
+					src={pm}
+					alt="picture of a house that's being managed..."
+				/>
+			</div>
 		</>
 	);
 };

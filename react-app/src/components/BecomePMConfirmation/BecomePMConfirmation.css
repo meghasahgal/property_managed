@@ -17,3 +17,20 @@
 .med-title {
     color:#4E7375;
 }
+
+.img-home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+}
+.img-pnf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80%;
+    width: 50%;
+    border-radius: 10px;
+    align-items: center;
+}

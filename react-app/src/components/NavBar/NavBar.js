@@ -95,17 +95,16 @@ const NavBar = () => {
 						</li>
 					</div>
 
-
-
 					{sessionUser ? (
 						<>
 							{" "}
 							{sessionUser?.isPm === true ||
 							currentUser?.isPm === true ? (
-
 								<li className="barLink">
 									<NavLink to={`/users/${sessionUser.id}`}>
-										<button>My Profile</button>
+										<button className="pm-button">
+											My Profile
+										</button>
 									</NavLink>
 								</li>
 							) : (
@@ -113,7 +112,9 @@ const NavBar = () => {
 									<NavLink
 										to={`/users/${sessionUser.id}/confirmation`}
 									>
-										<button>Become a PM</button>
+										<button className="pm-button">
+											Become a PM
+										</button>
 									</NavLink>
 								</li>
 							)}
@@ -168,7 +169,12 @@ const NavBar = () => {
 
 					<li>
 						{!sessionUser && (
-							<button className="demo-button"onClick={handleClick}>Demo Login</button>
+							<button
+								className="demo-button"
+								onClick={handleClick}
+							>
+								Demo Login
+							</button>
 						)}
 					</li>
 				</ul>

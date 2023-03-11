@@ -19,11 +19,11 @@ const GetHires = () => {
 	//need to get hires for sessionUser
 
 	const sessionUser = useSelector((state) => state.session.user);
-	console.log(sessionUser.id, "THIS IS THE SESSION USER ID")
+	// console.log(sessionUser.id, "THIS IS THE SESSION USER ID")
 	const users = useSelector(
 		(state) => state?.users[sessionUser?.id]?.hiresAsUserId1
 	);
-	console.log(users, "users")
+	// console.log(users, "users")
 	const allUsers = Object.values(useSelector((state) => state?.users));
 	// const users = useSelector((state) => state.users[sessionUser.id])
 

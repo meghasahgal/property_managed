@@ -168,7 +168,7 @@ const NavBar = () => {
 
 					<li>
 						{!sessionUser && (
-							<button onClick={handleClick}>Demo Login</button>
+							<button className="demo-button"onClick={handleClick}>Demo Login</button>
 						)}
 					</li>
 				</ul>

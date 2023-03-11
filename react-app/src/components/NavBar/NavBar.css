@@ -63,12 +63,23 @@ header{
 }
 li{
     text-decoration: none;
+    margin-right: 60px;
 }
 
 ul{
     list-style: none;
     display: flex;
     flex-direction: row;
+    /* margin-right: 10px;
+    margin-left: 10px; */
 
 
+}
+
+.demo-button{
+    background-color:#ff6c84;
+}
+
+.btn-logout{
+        background-color: #ff6c84;
 }
